@@ -1,6 +1,9 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
+/* Force light mode only - disable dark mode entirely */
 :root {
+  color-scheme: light only;
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -12,15 +15,90 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Code block styling - single source of truth for backgrounds */
+pre {
+  background-color: #f6f8fa;
+  border: 1px solid #e1e4e8;
+  color: #24292e;
+}
+
+/* Override highlight.js theme background - let pre handle it */
+pre code,
+pre code.hljs {
+  background: transparent;
+}
+
+code {
+  font-family:
+    var(--font-geist-mono), Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+/* Inline code styling */
+:not(pre) > code {
+  background-color: #f6f8fa;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.875em;
+}
+
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+
+/* Links - global styling */
+a {
+  color: #2563eb; /* blue-600 */
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: #1d4ed8; /* blue-700 */
+}
+
+/* First heading should not have top margin */
+.prose > h1:first-child,
+.prose > h2:first-child,
+.prose > h3:first-child {
+  margin-top: 0;
+}
+
+/* Tighter list spacing */
+.prose ul,
+.prose ol {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.prose li {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+/* Tighter heading margins */
+.prose h1 {
+  margin-top: 1.75em;
+  margin-bottom: 0.5em;
+}
+
+.prose h2 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose h3 {
+  margin-top: 1.25em;
+  margin-bottom: 0.4em;
+}
+
+.prose h4 {
+  margin-top: 1em;
+  margin-bottom: 0.3em;
 }
