@@ -58,7 +58,7 @@ export default async function Home() {
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 hover:underline"
               >
-                Canvas
+                Canvas Page
               </a>
             </li>
           </ul>

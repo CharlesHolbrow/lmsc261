@@ -4,4 +4,4 @@ title: "LMSC-261 | Assignments"
 
 # Assignments
 
-Assignment pages will go here.
+1. [Your First PR](/assignments/your-first-pr/)

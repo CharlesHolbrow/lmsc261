@@ -32,12 +32,13 @@ This targets computer coding fundamentals in the context of digital interactive 
 
 In this course you will
 
-- Start withPpython, and potentially branch into other languages over the course of the semester
+- Learn the basics of Python
+- Potentially branch into other languages over the course of the semester
 - Develop simple projects
 
 ## Preamble
 
-The content and expectations of this course may change in small ways over the course of the semester.
+The content and expectations of this course may change over the course of the semester.
 
 ## Expectations
 
@@ -61,9 +62,7 @@ Upon completion of this course, students will be able to:
 - Understand the software development cycle
 - Use integrated development environments (IDEs) to build computer applications
 - Use version control to organize programming projects
-
 - Understand the basic Internet protocols such as TCP/IP and HTTP
-- Create a simple database using SQL
 - Write code to read and write data from web APIs
 - Feel competent and confident in computational problem-solving
 
@@ -149,9 +148,8 @@ The instructor will determine your final grade by considering the following comp
 
 | Description           | Grade |
 | --------------------- | ----: |
-| Syllabus Quiz         |    5% |
-| Biweekly Problem Sets | 22.5% |
-| Biweekly Quizzes      | 22.5% |
+| Biweekly Problem Sets |   25% |
+| Biweekly Quizzes      |   25% |
 | Mid-term Project      |   25% |
 | Final Project         |   25% |
 
@@ -192,8 +190,6 @@ Suppose you are going to miss a class. In that case, you need to notify your tea
 
 ## AI Tools Policy
 
-## AI Tools Policy
-
 AI tools (ChatGPT, GitHub Copilot, etc.) are permitted when used transparently. Document AI assistance through code comments or assignment reflections: specify which tools were used, how outputs were verified, and what you learned.
 
 Undisclosed AI usage is considered academic dishonesty. Some components may be designated "manual implementation required." Be prepared to explain and modify any submitted code.
@@ -217,7 +213,7 @@ Recordings of class sessions will be on [YouTube](https://www.youtube.com/playli
 ## Canvas vs. GitHub
 
 - Students must submit all problem sets and projects to [GitHub](https://github.com) with their repository.
-- All class materials will be posted on [GitHub](github.com) and not [Canvas](canvas.berklee.edu).
+- All class materials will be posted on [GitHub](https://github.com) and not [Canvas](https://canvas.berklee.edu).
 - The instructor will post grading and attendance on [Canvas](https://canvas.berklee.edu).
 - Announcements will come from [Canvas](https://canvas.berklee.edu).
 
