@@ -1,10 +1,10 @@
 ---
-title: "LMSC-261 | Your Folder"
+title: "LMSC-261 | Your First PR"
 ---
 
-# Your Folder
+# Your First PR
 
-**Due:** Thursday, 5:00 PM
+**Due:** Thursday September 17, 5:00 PM
 
 Make a folder with your name. Turn it in with a **pull request** (PR).
 
@@ -19,20 +19,23 @@ Use [GitHub Desktop](https://desktop.github.com/).
 1. **Clone** (download) the [homework repo](https://github.com/berklee-epd/lmsc261-homework)
    - File → Clone Repository → URL
    - Paste `https://github.com/berklee-epd/lmsc261-homework`
-2. Make a **branch** named `your-name`
+2. **Pull/Sync** the latest (do this before every new PR)
+   - Current Branch → `main`
+   - Fetch origin → Pull origin
+3. Make a **branch** named `your-name-hw1`
    - Current Branch → New Branch
-3. Make a folder named like `ada-lovelace` (lowercase, dash between names)
-4. Put a `README.md` in it. Copy the template below.
-5. **Commit** in GitHub Desktop — short message, then Commit
-6. **Push** (upload) to GitHub
-7. Click **Create Pull Request**
-8. Title: `Your Name`
-9. **Do not click Merge**
+4. Make a folder named like `ada-lovelace` (lowercase, dash between names)
+5. Put a `README.md` in it. Copy the template below.
+6. **Commit** in GitHub Desktop — short message, then Commit
+7. **Push** (upload) to GitHub
+8. Click **Create Pull Request**
+9. Title: `Your Name`
+10. **Do not click Merge**
 
 ## README.md
 
 ```markdown
-# Your Name
+# (Your Name Here)
 
 ## Major
 
@@ -40,10 +43,8 @@ Use [GitHub Desktop](https://desktop.github.com/).
 ## Why this class?
 
 
-## Have you coded before?
-
-
 ## What do you want to learn?
+
 ```
 
 ## Done when

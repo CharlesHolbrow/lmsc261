@@ -70,20 +70,15 @@ Upon completion of this course, students will be able to:
 
 Most class materials will be online, and no books are required in this course, but the following books may be useful to students:
 
-[**How Computers Work, Tenth Edition**](https://www.amazon.com/How-Computers-Work-Evolution-Technology/dp/078974984X/ref=sr_1_1?dchild=1&keywords=How+Computers+Work&qid=1610314319&sr=8-1)  
-Ron White  
-Que Publishing, 2014  
-ISBN 0-789-73613-6
+[**Automate the Boring Stuff with Python, Third Edition**](https://automatetheboringstuff.com/)  
+Al Sweigart  
+No Starch Press, 2025  
+ISBN 1-7185-0340-7
 
 [**Think Python: How to Think Like a Computer Scientist, Third Edition**](https://allendowney.github.io/ThinkPython/)  
 Allen B. Downey  
 Green Tea Press  
 ISBN 1-491-93941-9
-
-[**Eloquent JavaScript, Forth Edition**](https://eloquentjavascript.net/)  
-Marjin Haverbeke  
-No Starch Press, 2024  
-ISBN 1-593-27950-7
 
 ## Mid-term Project
 
