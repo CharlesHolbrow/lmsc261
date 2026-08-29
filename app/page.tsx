@@ -16,6 +16,54 @@ export default async function Home() {
           <GitHubSignInButton />
         </div>
       )}
+
+      {session && (
+        <div className="not-prose mt-8">
+          <h2 className="text-lg font-semibold text-slate-900 mb-3">Course Resources</h2>
+          <ul className="space-y-2">
+            <li>
+              <a
+                href="https://github.com/berklee-epd/lmsc261"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 hover:underline"
+              >
+                Class materials
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/berklee-epd/lmsc261-homework"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 hover:underline"
+              >
+                Homework
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.youtube.com/playlist?list=PLSeBZrCqPtmo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 hover:underline"
+              >
+                YouTube playlist
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://canvas.berklee.edu/courses/63535"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 hover:underline"
+              >
+                Canvas
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
     </article>
   )
 }

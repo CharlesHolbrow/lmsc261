@@ -192,9 +192,13 @@ Suppose you are going to miss a class. In that case, you need to notify your tea
 
 ## AI Tools Policy
 
-This course recognizes AI tools (such as ChatGPT, GitHub Copilot, etc.) as legitimate learning and development aids when used transparently and responsibly. Students are encouraged to use AI for appropriate tasks, including debugging assistance, generating boilerplate code, exploring alternative approaches, and learning new concepts. However, AI should not replace critical thinking and problem-solving skills. All AI assistance must be documented through code comments and/or assignment reflections that specify which tools were used, how outputs were verified and modified, and what was learned through the process. Students must demonstrate a thorough understanding of all submitted work and be prepared to explain, modify, or debug their code regardless of its origin.
+## AI Tools Policy
 
-Undisclosed AI usage will be treated as academic dishonesty, while transparent and thoughtful AI collaboration will be valued in assessment. Some assignment components may be designated as "manual implementation required" to ensure fundamental skill development. Grading will emphasize process, understanding, verification skills, and creative problem-solving over pure functionality. Students are expected to critically evaluate AI outputs, test thoroughly, and make informed decisions about when AI assistance is appropriate versus when manual coding is necessary. When uncertain about the boundaries of AI use, students should consult with the instructor before submission.
+AI tools (ChatGPT, GitHub Copilot, etc.) are permitted when used transparently. Document AI assistance through code comments or assignment reflections: specify which tools were used, how outputs were verified, and what you learned.
+
+Undisclosed AI usage is considered academic dishonesty. Some components may be designated "manual implementation required." Be prepared to explain and modify any submitted code.
+
+When uncertain about the boundaries of AI use, students should consult with the instructor before submission.
 
 ## Class Topics
 
