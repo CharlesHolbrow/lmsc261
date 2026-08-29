@@ -36,7 +36,7 @@ export const proxy = auth((req) => {
   return NextResponse.next()
 })
 
-// All course content requires enrollment (berklee-epd/mtec345:* tag)
+// All course content requires enrollment (berklee-epd/lmsc261:* tag)
 // Note: /admin has additional isAdmin check at page level
 export const config = {
   matcher: [

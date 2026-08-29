@@ -3,17 +3,13 @@ import { CodeBlock } from "@/components/CodeBlock";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
+    ...components,
     wrapper: ({ children }) => (
       <article className="prose prose-slate max-w-none">{children}</article>
     ),
-    code: ({ children, className }) => {
-      // Only use CodeBlock for code inside pre (code blocks), not inline code
-      const isInline = !className;
-      if (isInline) {
-        return <code>{children}</code>;
-      }
-      return <CodeBlock className={className}>{children}</CodeBlock>;
-    },
-    ...components,
+    // Fenced blocks always come through `pre`, including fences with no language.
+    // Language-based className is not a reliable inline-vs-block check.
+    pre: ({ children }) => <CodeBlock>{children}</CodeBlock>,
+    code: ({ children, className }) => <code className={className}>{children}</code>,
   };
 }

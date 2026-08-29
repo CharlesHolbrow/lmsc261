@@ -1,0 +1,258 @@
+---
+title: "MTEC-345 | Python: The Bad Parts"
+---
+
+# Python: The Bad Parts
+
+Python is a terse and powerful language, which can make the code easy to write.
+
+But, it is burdened by a complex and messy ecosystem.
+
+Let's review some of the tools you may encounter in your machine learning
+journey. Then we'll try to ease the pain of using Python in practice.
+
+## Many Environments for Running Python
+
+- `python my_script.py` in the terminal
+- `python` Read Eval Print Loop (REPL) in the terminal
+- VS Code Interactive
+- Jupyter Notebooks
+- VS Code with [Jupyter Notebooks Extension](https://code.visualstudio.com/docs/datascience/jupyter-notebooks)
+- Google Colab
+- In the Browser via [PyScript](https://pyscript.net/)
+
+## Many ways to install Python
+
+- Download from [python.org](https://www.python.org/downloads/)
+- `brew install python`
+- `conda create -n myenv python=3.11 -y`
+- `conda env create -f environment.yml`
+- `uv python pin 3.12`
+
+## Many ways to add and install dependencies
+
+- `pip install torch`
+- `pip install -r requirements.txt`
+- `pip install -e .`
+- `conda install -c pytorch pytorch`
+- `conda env create -f environment.yml`
+- `conda env update -f environment.yml`
+- `uv init && uv add torch`
+- `uv sync`
+
+# Let's Try Out Some Python Tools
+
+The following commands tell a story. Do you understand what Alice is doing?
+
+```bash
+# Create a new repo
+mkdir mtec345-class-2
+cd mtec345-class-2
+git init
+
+# Setup our python environment
+uv python pin 3.13
+uv init
+uv sync
+
+# Make our initial commit
+git add .
+git status
+git commit -m "Class 2 example"
+
+# Alice is python virtual environment expert! Instead of:
+source .venv/bin/activate
+python main.py
+deactivate
+# ... Alice just uses:
+uv run main.py
+```
+
+# Python: The Language
+
+You should be comfortable with the following before proceeding:
+
+```python
+# Variables and types
+name = "Alice"
+score = 95.5
+count = 42
+x = 10
+y = 20
+
+# Print statements and f-strings
+print(f"(x, y) = ({x}, {y})")
+
+# Lists
+numbers = [1, 2, 3, 4, 5]
+numbers.append(6)
+first = numbers[0]
+
+# Loops and conditionals
+for n in numbers:
+  if n > 3:
+    print(f"Found {n} > 3")
+```
+
+## Python Dictionaries
+
+Dictionaries store **key-value pairs**. They're everywhere in Python and machine learning—configuration, data records, and more.
+
+```python
+# Create a dictionary
+person = {"name": "Alice", "age": 25}
+
+# Access values
+print(person["name"])  # "Alice"
+
+# Add or update
+person["instrument"] = "piano"
+person["age"] = 26
+
+# Loop through
+for key, value in person.items():
+    print(f"{key}: {value}")
+```
+
+```python
+data = {}
+data[0] = "zero"
+data[1] = "one"
+data[2] = "two"
+
+# Test yourself:
+test0 = data[0]
+print(f"test0 = {test0}") # What will this print?
+
+test1 = data['one']
+print(f"test1 = {test1}") # What will this print?
+
+test2 = data['1']
+print(f"test2 = {test2}") # What will this print?
+```
+
+## Python Classes
+
+Classes bundle **data** and **functions** together. The `__init__` method runs when you create an instance, and `self` refers to that instance.
+
+```python
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def add(self, other):
+       return Vector(self.x + other.x, self.y + other.y)
+
+
+a = Vector(1, 2)
+b = Vector(3, 4)
+print("a.x =", a.x)
+print("a.y =", a.y)
+print("a.add(b) =", a.add(b))
+```
+
+## Python Operator Overloading
+
+Python lets you define certain "dunder" (double underscore) methods which have
+special meaning. The `__repr__` method is used to define the string
+representation of the object.
+
+```python
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __repr__(self):
+        return f"({self.x}, {self.y})"
+
+a = Vector(1, 2)
+b = Vector(3, 4)
+
+print("a =", a)
+print("b =", b)
+
+## Test yourself: Overload the `+` operator with the __add__ dunder method
+# print("a + b =", a + b)
+```
+
+**Callable class instances** You can make your class instances operate like a function with `__call__`.
+
+```python
+class Multiplier:
+    def __init__(self, factor):
+        self.factor = factor
+
+    def __call__(self, x):
+        return x * self.factor
+
+# You can now execute the __call__ method with `obj(...)` instead of `obj.__call__(...)`
+
+double = Multiplier(2)
+print(double(5))   # 10
+print(double(21))  # 42
+
+triple = Multiplier(3)
+print(triple(2))
+print(triple(3))
+```
+
+**Attribute interception:** You can also intercept attribute access with `__getattr__` and `__setattr__`.
+
+```python
+class Tracked:
+    def __setattr__(self, name, value):
+        print(f"Setting {name} = {value}")
+
+obj = Tracked()
+obj.x = 10  # prints "Setting x = 10"
+
+
+# Test yourself: Make a storage object class that stashes and retrieves values
+# from a self.dict when assigned and retrieved.
+#
+# obj.a = 10
+# print(obj.data['a']) # Should print 10
+```
+
+# Notebooks
+
+Jupyter Notebooks (`.ipynb` files) combine code, output, and documentation in a
+single interactive document. Code runs in **cells** that can be executed
+independently.
+
+```bash
+uv add notebook torch
+uv run jupyter notebook
+```
+
+You can also use the [Jupyter extension for VSCode](https://open-vsx.org/extension/ms-toolsai/jupyter)
+to run notebooks. If you do, it's a good idea to open the folder with the
+pyproject.toml file in VS Code. This can make it easier for the extension to
+find the correct environment.
+
+### Essential Hotkeys
+
+| Key                | Action                                        |
+| ------------------ | --------------------------------------------- |
+| `Shift + Enter`    | Run cell, move to next                        |
+| `Ctrl/Cmd + Enter` | Run cell, stay in place                       |
+| `Esc`              | Enter command mode (cell operations)          |
+| `Enter`            | Enter edit mode (typing)                      |
+| `A` / `B`          | Insert cell above / below (command mode)      |
+| `DD`               | Delete cell (command mode)                    |
+| `M` / `Y`          | Change cell to Markdown / Code (command mode) |
+
+### Basic Workflow
+
+1. Write code in a cell
+2. Run with `Shift + Enter`
+3. Output appears below the cell
+4. Variables persist across cells (run order matters!)
+
+# Resources
+
+- [LearnPython.org](https://learnpython.org/) Free interactive tutorial with in-browser coding exercises.
+- [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) Free online book teaching Python through practical projects.
+- [Coddy.tech Python Fundamentals](https://coddy.tech/journeys/python/fundamentals) Has a free trial but is commercial.
