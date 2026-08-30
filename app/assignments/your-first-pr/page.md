@@ -57,14 +57,14 @@ Your PR is open on GitHub. You did **not** merge it.
 
 This is **completion-based**. Full credit if you did the work.
 
-| Requirement                                                  |  Points |
-| ------------------------------------------------------------ | ------: |
-| Submitted: your folder and `README.md` are in a pull request |      20 |
-| Your name is in the README                                   |      20 |
-| All questions answered                                       |      20 |
-| New branch; PR is open, mergeable,                           |      20 |
-| Your PR only includes changes to the correct directory       |      20 |
-| **Total**                                                    | **100** |
+| Requirement                                                   |  Points |
+| ------------------------------------------------------------- | ------: |
+| You submitted a PR with **correctly named** files and folders |      20 |
+| Your name is in the README                                    |      20 |
+| All questions answered                                        |      20 |
+| New branch; PR is open, mergeable,                            |      20 |
+| Your PR only includes changes to the correct directory        |      20 |
+| **Total**                                                     | **100** |
 
 Do not work on `main`. Do not merge the PR. Change only files in your folder.
 
