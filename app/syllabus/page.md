@@ -10,12 +10,10 @@ title: "LMSC-261 | Syllabus"
 
 ## Class Time & Location
 
-### LMSC-261-001
-
 - Thursday, 5-7pm EST
 - 150-122
 
-## Charles Holbrow
+## Instructor: Charles Holbrow
 
 - Email: [cholbrow@berklee.edu](cholbrow@berklee.edu)
 - Office Hours: TBD

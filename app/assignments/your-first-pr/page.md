@@ -24,7 +24,7 @@ Use [GitHub Desktop](https://desktop.github.com/).
    - Fetch origin → Pull origin
 3. Make a **branch** named `your-name-hw1`
    - Current Branch → New Branch
-4. Make a folder named like `ada-lovelace` (lowercase, dash between names)
+4. Make a folder named with your name, for example `ada-lovelace` (lowercase, dash between names)
 5. Put a `README.md` in it. Copy the template below.
 6. **Commit** in GitHub Desktop — short message, then Commit
 7. **Push** (upload) to GitHub
