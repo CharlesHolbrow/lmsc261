@@ -23,22 +23,22 @@ export default async function Home() {
           <ul className="space-y-2">
             <li>
               <a
-                href="https://github.com/berklee-epd/lmsc261"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 hover:underline"
-              >
-                Class materials (GitHub)
-              </a>
-            </li>
-            <li>
-              <a
                 href="https://github.com/berklee-epd/lmsc261-homework"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 hover:underline"
               >
                 Homework Repository (GitHub)
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/berklee-epd/lmsc261"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 hover:underline"
+              >
+                Class Repository (GitHub)
               </a>
             </li>
             <li>
