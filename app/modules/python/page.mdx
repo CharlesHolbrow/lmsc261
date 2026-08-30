@@ -60,7 +60,7 @@ mkdir lmsc261-class-2
 cd lmsc261-class-2
 git init
 
-# Setup our python environment
+# Set up our Python environment
 uv python pin 3.13
 uv init
 uv sync
@@ -70,7 +70,7 @@ git add .
 git status
 git commit -m "Class 2 example"
 
-# Alice is python virtual environment expert! Instead of:
+# Alice is a Python virtual environment expert! Instead of:
 source .venv/bin/activate
 python main.py
 deactivate
@@ -187,7 +187,7 @@ print("b =", b)
 # print("a + b =", a + b)
 ```
 
-**Callable class instances** You can make your class instances operate like a function with `__call__`.
+**Callable class instances:** You can make your class instances operate like a function with `__call__`.
 
 ```python
 class Multiplier:
@@ -237,7 +237,7 @@ uv add notebook torch
 uv run jupyter notebook
 ```
 
-You can also use the [Jupyter extension for VSCode](https://open-vsx.org/extension/ms-toolsai/jupyter)
+You can also use the [Jupyter extension for VS Code](https://open-vsx.org/extension/ms-toolsai/jupyter)
 to run notebooks. If you do, it's a good idea to open the folder with the
 pyproject.toml file in VS Code. This can make it easier for the extension to
 find the correct environment.

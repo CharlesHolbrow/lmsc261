@@ -2,7 +2,7 @@
 title: "LMSC-261 | Syllabus"
 ---
 
-# LMCS-261: Introduction to Computer Programming
+# LMSC-261: Introduction to Computer Programming
 
 <!--## Class Links
 - [Canvas Link for LMSC-261-001](https://canvas.berklee.edu/courses/53378)
@@ -26,9 +26,9 @@ title: "LMSC-261 | Syllabus"
 
 In this course, students will learn the fundamentals of computer programming that will serve as a foundation for developing software applications and further exploring programming languages.
 
-This targets computer coding fundamentals in the context of digital interactive multi-media
+This course targets computer coding fundamentals in the context of digital interactive multimedia.
 
-In this course you will
+In this course you will:
 
 - Learn the basics of Python
 - Potentially branch into other languages over the course of the semester
@@ -146,7 +146,7 @@ The instructor will determine your final grade by considering the following comp
 | Mid-term Project      |   25% |
 | Final Project         |   25% |
 
-Problem sets and projects are evaluated using grading rubrics. The rubrics will typically assess the correctness, design, style, and documentation of your software programs. Keep in mind that [Canvas](https://canvas.berklee.edu) is used to give you feedback (click on the <u>Grades</u> on the left to view feedback) on your grades.
+Problem sets and projects are evaluated using grading rubrics. The rubrics will typically assess the correctness, design, style, and documentation of your software programs. Keep in mind that [Canvas](https://canvas.berklee.edu) is used to give you feedback (click <u>Grades</u> on the left to view feedback) on your grades.
 
 ## Attendance Policy
 
@@ -174,7 +174,7 @@ Suppose you are going to miss a class. In that case, you need to notify your tea
 
 1. Students are considered late if they arrive in class after attendance has been taken.
 2. A student will be marked absent if the departure is severely early (e.g., left the class right after the attendance check).
-3. Students made an early departure if they did not tell the instructor before the class started and took off before it officially ended.
+3. Students make an early departure if they do not tell the instructor before the class starts and leave before it officially ends.
 4. Three late or early departures count as one absence.
 
 ### Withdrawal Option:
