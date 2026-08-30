@@ -29,8 +29,8 @@ Use [GitHub Desktop](https://desktop.github.com/).
 6. **Commit** in GitHub Desktop — short message, then Commit
 7. **Push** (upload) to GitHub
 8. Click **Create Pull Request**
-9. Title: `Your Name`
-10. **Do not click Merge**
+9. Title: `Your Name Homework 1`
+10. **🚨 Do not click Merge 🚨**
 
 ## README.md
 
