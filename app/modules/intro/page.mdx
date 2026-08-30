@@ -24,7 +24,7 @@ title: "LMSC-261 | Intro Questions"
 
 - Understand how computers work?
 
-## Experienced with?
+## Do you have experience with...
 
 - Git / Version Control?
 
@@ -52,22 +52,23 @@ title: "LMSC-261 | Intro Questions"
 
 ## It's easier than you think
 
-- Computers use sequences of numbers to represent
-    - **inputs** like mouse and MIDI control interactions
-    - **outputs** like audio, pixels, and MIDI
-- All transform numbers into other numbers. **Thats it!**
+- Computers use **sequences of numbers** to represent:
+    - **actions** like mouse, keyboard, and MIDI events
+    - **data** like text, images, and audio
+- All of programming: transform numbers. **That's it!**
 
 ```python
-# Convert text to numbers
-a_number = ord('a')
-b_number = ord('b')
-hello_numbers = [ord(c) for c in "hello"] 
+# Transforms letters into numbers and numbers into letters
+a_number = ord("a")
+a_letter = chr(97)
 
-ord('a') == 97
-chr(97) == 'a'
+# Transform a sequence of letters into numbers
+for letter in "abcdef":
+    number = ord(letter)
+    print(number)
 ```
 
-Modern programming technology helps 
+Modern programming tools help us
 - Think **more** about abstractions
 - Think **less** about numbers
 

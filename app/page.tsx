@@ -28,7 +28,7 @@ export default async function Home() {
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 hover:underline"
               >
-                Class materials
+                Class materials (GitHub)
               </a>
             </li>
             <li>
@@ -38,7 +38,7 @@ export default async function Home() {
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 hover:underline"
               >
-                Homework
+                Homework Repository (GitHub)
               </a>
             </li>
             <li>
@@ -48,7 +48,7 @@ export default async function Home() {
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:text-blue-800 hover:underline"
               >
-                YouTube playlist
+                Lecture Videos (YouTube)
               </a>
             </li>
             <li>
