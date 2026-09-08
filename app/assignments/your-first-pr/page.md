@@ -14,9 +14,7 @@ Do [Git & GitHub setup](/git/) first.
 
 ## Steps
 
-Use [GitHub Desktop](https://desktop.github.com/).
-
-1. **Clone** (download) the [homework repo](https://github.com/berklee-epd/lmsc261-homework)
+1. Using [GitHub Desktop](https://desktop.github.com/), **clone** (download) the [homework repo](https://github.com/berklee-epd/lmsc261-homework)
    - File → Clone Repository → URL
    - Paste `https://github.com/berklee-epd/lmsc261-homework`
 2. **Pull/Sync** the latest (do this before every new PR)
