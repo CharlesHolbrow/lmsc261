@@ -1,0 +1,82 @@
+---
+title: "LMSC-261 | Python Hands-On #1"
+---
+
+# Python Hands-On
+
+In class: put a Python file in the [homework repo](https://github.com/berklee-epd/lmsc261-homework) and open a **pull request**.
+
+You should already have [Git & GitHub setup](/git/) and [Your First PR](/assignments/your-first-pr/) done.
+
+The folder with your name is yours all semester. Work **inside it**.
+
+## Python Hands-On Part 1
+
+### Part 1 Goals
+
+1. Make a new branch in the homework repository
+2. Add a python file in your folder, for example `lmsc261-homework/your-name/hands-on-1/main.py`
+3. Run the python file to verify it works
+4. Open a pull request
+
+### Part 1 Steps
+
+1. Open the homework repo in [GitHub Desktop](https://desktop.github.com/)
+2. Switch to **`main`**
+   - Current Branch → `main`
+3. **Fetch or Pull Sync** the latest version of the main branch
+   - Fetch origin → Pull origin
+4. Make a **branch** named `your-name-hands-on-1`
+   - Current Branch → New Branch
+   - Example: `ada-lovelace-hands-on-1`
+5. Open the `lmsc261-homework` folder in [Visual Studio Code](https://code.visualstudio.com/)
+   - File → Open Folder… → choose `lmsc261-homework`
+   - Or in GitHub Desktop: Repository → Open in Visual Studio Code
+6. In **your** folder, make a new directory called `hands-on-1`
+7. Put a `main.py` in it. Start with the arithmetic below (change the numbers if you want).
+8. **Run** `main.py` in VS Code
+   - Open the file, then click the ▶ play button in the top-right
+   - Output appears in a panel at the bottom
+9. **Commit** in GitHub Desktop — short message, then Commit
+10. **Push** (upload) to GitHub
+11. Click **Create Pull Request**
+12. Title: `Your Name Hands-On 1`
+13. Create the PR, but 🚨 do not click **`Merge`** 🚨
+
+### main.py
+
+```python
+beats_per_measure = 4
+measures = 8
+total_beats = beats_per_measure * measures
+print(total_beats)
+```
+
+### Done when you have added
+
+```
+your-name/
+└── hands-on-1/
+    └── main.py
+```
+
+Your PR is open on GitHub. You did **not** merge it.
+
+Do not work on `main`. Do not merge the PR. Change only files in your folder.
+
+
+## Python Hands-On Part 2
+
+### Part 2 Goals
+
+1. Get your program to print `8 measures of 4 beats contain 32 beats`
+2. Build that sentence with an [f-string](/modules/python/#strings)
+3. Push your hands-on-1 branch to GitHub to update the PR
+
+### Part 2 Steps
+
+You can figure out how to do this!
+
+Use `f"strings"` to build the sentence. See the [Python Language Overview](/modules/python/#strings) for more information.
+
+**NOTE:** Pushing to your `your-name-hands-on-1` branch will update the PR.

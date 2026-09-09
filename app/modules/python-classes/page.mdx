@@ -1,0 +1,88 @@
+---
+title: "LMSC-261 | Python Classes"
+---
+
+# Python Classes
+
+Classes bundle **data** and **functions** together. The `__init__` method runs when you create an instance, and `self` refers to that instance.
+
+```python
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def add(self, other):
+       return Vector(self.x + other.x, self.y + other.y)
+
+
+a = Vector(1, 2)
+b = Vector(3, 4)
+print("a.x =", a.x)
+print("a.y =", a.y)
+print("a.add(b) =", a.add(b))
+```
+
+# Python Operator Overloading
+
+Python lets you define certain "dunder" (double underscore) methods which have
+special meaning. The `__repr__` method is used to define the string
+representation of the object.
+
+```python
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __repr__(self):
+        return f"({self.x}, {self.y})"
+
+a = Vector(1, 2)
+b = Vector(3, 4)
+
+print("a =", a)
+print("b =", b)
+
+## Test yourself: Overload the `+` operator with the __add__ dunder method
+# print("a + b =", a + b)
+```
+
+**Callable class instances:** You can make your class instances operate like a function with `__call__`.
+
+```python
+class Multiplier:
+    def __init__(self, factor):
+        self.factor = factor
+
+    def __call__(self, x):
+        return x * self.factor
+
+# You can now execute the __call__ method with `obj(...)` instead of `obj.__call__(...)`
+
+double = Multiplier(2)
+print(double(5))   # 10
+print(double(21))  # 42
+
+triple = Multiplier(3)
+print(triple(2))
+print(triple(3))
+```
+
+**Attribute interception:** You can also intercept attribute access with `__getattr__` and `__setattr__`.
+
+```python
+class Tracked:
+    def __setattr__(self, name, value):
+        print(f"Setting {name} = {value}")
+
+obj = Tracked()
+obj.x = 10  # prints "Setting x = 10"
+
+
+# Test yourself: Make a storage object class that stashes and retrieves values
+# from a self.dict when assigned and retrieved.
+#
+# obj.a = 10
+# print(obj.data['a']) # Should print 10
+```

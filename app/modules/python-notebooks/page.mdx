@@ -1,0 +1,38 @@
+---
+title: "LMSC-261 | Notebooks"
+---
+
+# Notebooks
+
+Jupyter Notebooks (`.ipynb` files) combine code, output, and documentation in a
+single interactive document. Code runs in **cells** that can be executed
+independently.
+
+```bash
+uv add notebook torch
+uv run jupyter notebook
+```
+
+You can also use the [Jupyter extension for VS Code](https://open-vsx.org/extension/ms-toolsai/jupyter)
+to run notebooks. If you do, it's a good idea to open the folder with the
+pyproject.toml file in VS Code. This can make it easier for the extension to
+find the correct environment.
+
+### Essential Hotkeys
+
+| Key                | Action                                        |
+| ------------------ | --------------------------------------------- |
+| `Shift + Enter`    | Run cell, move to next                        |
+| `Ctrl/Cmd + Enter` | Run cell, stay in place                       |
+| `Esc`              | Enter command mode (cell operations)          |
+| `Enter`            | Enter edit mode (typing)                      |
+| `A` / `B`          | Insert cell above / below (command mode)      |
+| `DD`               | Delete cell (command mode)                    |
+| `M` / `Y`          | Change cell to Markdown / Code (command mode) |
+
+### Basic Workflow
+
+1. Write code in a cell
+2. Run with `Shift + Enter`
+3. Output appears below the cell
+4. Variables persist across cells (run order matters!)

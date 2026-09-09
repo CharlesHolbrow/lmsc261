@@ -14,9 +14,16 @@ export function CodeBlock({ children }: CodeBlockProps) {
 
   useEffect(() => {
     const code = preRef.current?.querySelector("code");
-    if (code && !code.dataset.highlighted) {
-      hljs.highlightElement(code);
-    }
+    if (!code || code.dataset.highlighted) return;
+
+    // MDX sets `language-*` only when the fence names a language
+    // (` ```python `). highlight.js auto-detects otherwise — skip that.
+    const hasLanguage = [...code.classList].some(
+      (cls) => cls.startsWith("language-") && cls !== "language-"
+    );
+    if (!hasLanguage) return;
+
+    hljs.highlightElement(code);
   }, [children]);
 
   const handleCopy = async () => {

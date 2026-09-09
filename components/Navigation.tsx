@@ -82,7 +82,7 @@ export default function Navigation({
 
   // Default: top navigation
   return (
-    <nav className="border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+    <nav className="border-b border-slate-200 bg-white">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="flex items-center justify-between h-14">
           <Link

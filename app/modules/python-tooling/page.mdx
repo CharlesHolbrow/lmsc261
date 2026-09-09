@@ -1,0 +1,90 @@
+---
+title: "LMSC-261 | Python Tooling"
+---
+
+# Python: The Bad Parts
+
+It is common to use other people's code in your own Python projects.
+
+For example, you can use libraries for things like:
+
+- Reading and MIDI files
+- Audio processing
+- Image processing
+- Video processing
+- Text processing
+- Downloading Websites
+- Creating Websites
+- Creating GUIs
+- Greating Games
+
+There are python tools for automatically downloading existing libraries. 
+
+Unforunately, these tools are old-fashined, overlapping, and are not always user friendly.
+
+## Many Environments for Running Python
+
+- `python my_script.py` in the terminal
+- `python` Read Eval Print Loop (REPL) in the terminal
+- VS Code Interactive
+- Jupyter Notebooks
+- VS Code with [Jupyter Notebooks Extension](https://code.visualstudio.com/docs/datascience/jupyter-notebooks)
+- Google Colab
+- In the Browser via [PyScript](https://pyscript.net/)
+
+## Many ways to install Python
+
+- Download from [python.org](https://www.python.org/downloads/)
+- `brew install python`
+- `conda create -n myenv python=3.11 -y`
+- `conda env create -f environment.yml`
+- `uv python pin 3.12`
+
+## Many ways to add and install dependencies
+
+- `pip install torch`
+- `pip install -r requirements.txt`
+- `pip install -e .`
+- `conda install -c pytorch pytorch`
+- `conda env create -f environment.yml`
+- `conda env update -f environment.yml`
+- `uv init && uv add torch`
+- `uv sync`
+
+# Python Tooling
+
+We will use [Astral uv](https://docs.astral.sh/uv/).
+
+You can install it now by copying this line into your terminal.
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+# Let's Try Out Some Python Tools
+
+The following commands tell a story. Do you understand what Alice is doing?
+
+```bash
+# Create a new repo
+mkdir lmsc261-class-2
+cd lmsc261-class-2
+git init
+
+# Set up our Python environment
+uv python pin 3.13
+uv init
+uv sync
+
+# Make our initial commit
+git add .
+git status
+git commit -m "Class 2 example"
+
+# Alice is a Python virtual environment expert! Instead of:
+source .venv/bin/activate
+python main.py
+deactivate
+# ... Alice just uses:
+uv run main.py
+```
