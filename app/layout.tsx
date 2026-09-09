@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { auth } from "@/auth";
 import { SessionProvider } from "@/components/SessionProvider";
 import Navigation from "@/components/Navigation";
 import "./globals.css";
@@ -19,17 +20,19 @@ export const metadata: Metadata = {
   description: "LMSC-261 Course Website",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth()
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SessionProvider>
+        <SessionProvider session={session}>
           <Navigation variant="top" />
           <main className="container mx-auto px-4 py-8 max-w-4xl">
             {children}
