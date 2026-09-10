@@ -6,9 +6,9 @@ title: "LMSC-261 | Python Basics"
 
 A **variable** stores a value under a name. Two kinds you'll use constantly are **numbers** and **strings**.
 
-# Numbers
+## Numbers
 
-Like many programming languages, in python, you can assign values to named variables with an equals sign `=`.
+Like many programming languages, in Python, you can assign values to named variables with an equals sign `=`.
  
 ```python
 beats_per_measure = 4
@@ -26,7 +26,7 @@ print(score + bonus)  # 97.5
 print(score - bonus)  # 93.5
 ```
 
-# <span id="strings">Strings</span>
+## <span id="strings">Strings</span>
 
 A **string** is text in quotes. Strings can also be assigned to variables.
 
@@ -39,7 +39,7 @@ print(name)
 print(instrument)
 ```
 
-# Formatting Strings
+## <span id="formatting-strings">Formatting Strings</span>
 
 Assign it to a name, then `print` it. Do you see the `f` before the first `"` below? 
 
@@ -53,7 +53,7 @@ message = f"{name} received a {score} on assignment #{assignment_number}"
 print(message)
 ```
 
-# Lists
+## Lists
 
 A **list** holds items in order. You look items up by **index** (counting starts at `0`) and add items with `.append()`.
 
@@ -75,7 +75,7 @@ print(len(chord))  # 4
 chord[1] = "Eb"
 ```
 
-# Dictionaries
+## Dictionaries
 
 Dictionaries store **key-value pairs**. They're everywhere in Python: configuration, data records, and more.
 
@@ -123,7 +123,7 @@ test2 = chords["am"]
 print(f"test2 = {test2}")  # What will this print?
 ```
 
-# Loops
+## Loops
 
 A `for` loop walks through every item in a list, one at a time.
 
@@ -134,23 +134,70 @@ for note in chord:
     print(note)
 ```
 
-# Conditionals
+## Conditionals
 
-An `if` statement runs code only when a condition is true. Use `elif` ("else if") and `else` for the other cases.
+An `if` statement runs code only when a condition is true. Use `==` to check equality, then `elif` ("else if") and `else` for the other cases.
 
 ```python
-score = 95.5
+beats_per_measure = 4
 
-if score >= 90:
-    print("A")
-elif score >= 80:
-    print("B")
+if beats_per_measure == 4:
+    print("common time")
+elif beats_per_measure == 3:
+    print("waltz")
 else:
-    print("needs work")
+    print("something else")
 ```
 
+## <span id="functions">Functions</span>
 
-# Resources
+A **function** packages code under a name so you can reuse it. You **define** it with `def` and **call** it with parentheses.
+
+```python
+def greet(name):
+    print(f"Hello, {name}")
+
+greet("Alice")  # Hello, Alice
+greet("Bob")    # Hello, Bob
+```
+
+The names in parentheses are **parameters**. When you call the function, you pass **arguments**.
+
+Use `return` when you want a value back instead of only printing.
+
+Functions can take lists as parameters too.
+
+```python
+def chord_size(notes):
+    return len(notes)
+
+triad = ["C", "E", "G"]
+triad_size = chord_size(triad)
+print(triad_size)  # 3
+```
+
+Below is a function that converts a note number to a note name.
+
+This function uses new `%` and `//` operators. Can you figure out what they do?
+
+```python
+def note_name(note_number):
+    notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    list_index = note_number % 12         # New operator: "modulo" "%"
+    letter = notes[list_index]
+    note_octave = (note_number // 12) - 1 # New operator: "//"
+    return f"{letter}{note_octave}"
+
+# Print the name of the note number 67
+result = note_name(67)
+print(result)  # G4
+
+# Here is a shorter way to print the name of the note number 67.
+# This method skips the assignment to the `result` variable.
+print(note_name(67))  # G4
+```
+
+## Resources
 
 - [LearnPython.org](https://learnpython.org/) Free interactive tutorial with in-browser coding exercises.
 - [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) Free online book teaching Python through practical projects.
