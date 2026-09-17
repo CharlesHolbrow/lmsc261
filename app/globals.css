@@ -63,6 +63,11 @@ a:hover {
   color: #1d4ed8; /* blue-700 */
 }
 
+/* Hide DataCamp Light source markup until the CDN script replaces it */
+[data-datacamp-exercise] {
+  visibility: hidden;
+}
+
 /* First heading should not have top margin */
 .prose > h1:first-child,
 .prose > h2:first-child,

@@ -1,0 +1,77 @@
+---
+title: "LMSC-261 | DataCamp Light Test"
+---
+
+import { DataCampExercise } from "@/components/DataCampExercise"
+
+# DataCamp Light Test
+
+This page embeds [DataCamp Light](https://github.com/datacamp/datacamp-light) with their CDN script, not an npm package.
+
+Code runs on DataCamp's servers. Students can **Run** or **Submit** in the browser.
+
+## Graded exercise
+
+Create a variable `a` equal to `5`, then print it.
+
+<DataCampExercise
+  id="python-variable-a"
+  lang="python"
+  showRunButton
+  preExerciseCode="# no pec"
+  sampleCode={`
+# Create a variable a, equal to 5
+
+# Print out a
+`}
+  solution={`
+# Create a variable a, equal to 5
+a = 5
+
+# Print out a
+print(a)
+`}
+  sct={`
+test_object("a")
+test_function("print")
+success_msg("Great job!")
+`}
+  hint="Use = to create the variable a, then call print(a)."
+/>
+
+## Playground
+
+No correctness test, so this is just a Python scratch pad. Press **Run**.
+
+<DataCampExercise
+  id="python-playground"
+  lang="python"
+  height={360}
+  sampleCode={`
+notes = ["C", "E", "G"]
+for note in notes:
+    print(note)
+`}
+/>
+
+## Class-flavored exercise
+
+Build a C major triad as a list named `chord`.
+
+<DataCampExercise
+  id="python-chord-list"
+  lang="python"
+  showRunButton
+  sampleCode={`
+# Create a list called chord with the notes C, E, and G
+
+`}
+  solution={`
+chord = ["C", "E", "G"]
+`}
+  sct={`
+test_object("chord")
+success_msg("Nice triad!")
+`}
+  hint='A list uses square brackets and quoted strings: ["C", "E", "G"].'
+/>

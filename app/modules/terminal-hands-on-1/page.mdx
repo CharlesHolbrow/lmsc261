@@ -1,0 +1,81 @@
+---
+title: "LMSC-261 | Terminal Hands-On #1"
+---
+
+# Terminal Hands-On
+
+In class: walk around your computer with `cd` and `cd ..`, then open the folder you landed in with Finder.
+
+You should already have read [The Terminal](/modules/terminal/).
+
+## Terminal Hands-On Part 1
+
+### Part 1 Goals
+
+1. See where you are (`pwd`) and what's in the folder (`ls`)
+2. Move into a folder with `cd` and back out with `cd ..`
+3. Open the current folder in Finder with `open .`
+
+### Part 1 Steps
+
+1. Open **Terminal**
+   - `Cmd + Space` → type `Terminal` → Enter
+   - Or in VS Code: Toggle Terminal (`` Ctrl + ` ``)
+2. Go **home**, then type these **one at a time**. After each one, read what the computer says back.
+
+```
+cd ~
+pwd
+ls
+cd Documents
+pwd
+ls
+open .
+cd ..
+pwd
+```
+
+3. After `pwd`, you should see something like `/Users/your-name`. That folder is **home**. `cd ~` takes you there even if the terminal opened somewhere else.
+4. After `ls`, you should see folders like `Desktop`, `Documents`, `Downloads`.
+5. After `cd Documents`, the next `pwd` should end with `/Documents`.
+6. `open .` opens **this** folder in Finder. `.` means this folder. Look at Finder and at `pwd`. They match.
+7. `cd ..` goes **up** one folder. The last `pwd` should be `/Users/your-name` again.
+8. Practice. Pick another folder (`Desktop`, `Downloads`, …). `cd` in, `pwd`, `ls`, `open .`, then `cd ..` to come back.
+
+If a name has a space, wrap it in quotes: `cd "Screen Recordings"`.
+
+Lost? `cd ~` takes you home. Then `pwd`.
+
+### Commands
+
+```
+pwd          # where am I?
+ls           # what's in this folder?
+cd Documents # go into Documents
+cd ..        # go up one folder
+cd ~         # go home
+open .       # open this folder in Finder
+```
+
+- `..` = up one folder
+- `~` = home
+- `.` = this folder
+
+Your home folder looks like this. `cd` moves you around it.
+
+```
+/Users/your-name     ← home (~)
+├── Desktop
+├── Documents        ← cd Documents
+└── Downloads
+```
+
+When you are in `Documents`, `cd ..` goes up to `/Users/your-name`.
+
+### Done when
+
+You can:
+
+- `cd` into a folder and `cd ..` back out
+- Use `pwd` to say where you are
+- Use `open .` and see that folder in Finder

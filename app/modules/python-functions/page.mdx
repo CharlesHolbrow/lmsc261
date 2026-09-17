@@ -1,0 +1,84 @@
+---
+title: "LMSC-261 | Python Functions"
+---
+
+# Python Functions
+
+Functions are configurable chunks of code that are **designed to be re-used**.
+
+We've seen some functions already: `print`, `len`, `type`, `.append`.
+
+```python
+data = [1, 20, 300]
+data.append(4000)
+data_type = type(data)
+data_length = len(data)
+print(f"The `data` variable is a {data_type} with {data_length} items.")
+```
+
+`len(data)` means: *Run some code that is defined elsewhere*.
+
+- `len` is the name of the function you want to run
+- `data` is a value or variable that the function operates on. This is called an **argument**.
+
+The parentheses `()` tell Python to run the function.
+
+You can provide data to the function inside the parentheses.
+
+## Defining Functions
+
+Functions like `print` and `len` are built into Python. You can also define your own custom functions.
+
+To create your own function **define** it with the `def` keyword.
+
+```python
+def greet(name):
+    print(f"Hello, {name}")
+    print(f"{name} is a great name!")
+
+# after using "def" to "define" the function we can run the function with parentheses
+greet("Alice")
+greet("Bob")
+```
+
+The names in parentheses when you define a function are **parameters**. When you call it, you pass **arguments**.
+
+## Lists as Parameters
+
+Functions can take lists as parameters. This one uses `return` so you get a value back.
+
+```python
+def chord_size(notes):
+    return len(notes)
+
+triad = ["C", "E", "G"]
+triad_size = chord_size(triad)
+print(triad_size)  # 3
+```
+
+## Return
+
+`return` sends a value back to the caller instead of only printing.
+
+Below is a function that converts a note number to a note name.
+
+This function uses new `%` and `//` operators. Can you figure out what they do?
+
+```python
+def note_name(note_number):
+    notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    list_index = note_number % 12         # New operator: "modulo" "%"
+    letter = notes[list_index]
+    note_octave = (note_number // 12) - 1 # New operator: "//"
+    return f"{letter}{note_octave}"
+
+# Print the name of the note number 67
+result = note_name(67)
+print(result)  # G4
+
+# Here is a shorter way to print the name of the note number 67.
+# This method skips the assignment to the `result` variable.
+print(note_name(67))  # G4
+```
+
+Complete the exercises at <a href="https://learnpython.org/en/Functions" target="_blank" rel="noopener noreferrer">learnpython.org/en/Functions</a>
