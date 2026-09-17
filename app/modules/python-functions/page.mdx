@@ -10,13 +10,17 @@ Functions are configurable chunks of code that are **designed to be re-used**.
 
 We've seen some functions already: `print`, `len`, `type`, `.append`.
 
-```python
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={8}
+  initialCode={`
 data = [1, 20, 300]
 data.append(4000)
 data_type = type(data)
 data_length = len(data)
-print(f"The `data` variable is a {data_type} with {data_length} items.")
-```
+print(f"The data variable is a {data_type} with {data_length} items.")
+`}
+/>
 
 `len(data)` means: *Run some code that is defined elsewhere*.
 
@@ -35,7 +39,10 @@ Functions like `print` and `len` are built into Python.
 
 To create your own function **define** it with the `def` keyword.
 
-```python
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={10}
+  initialCode={`
 def greet(name):
     print(f"Hello, {name}")
     print(f"{name} is a great name!")
@@ -43,7 +50,8 @@ def greet(name):
 # after using "def" to "define" the function we can run the function with parentheses
 greet("Alice")
 greet("Bob")
-```
+`}
+/>
 
 The names in parentheses when you define a function are **parameters**. When you call it, you pass **arguments**.
 
@@ -51,14 +59,18 @@ The names in parentheses when you define a function are **parameters**. When you
 
 Functions can take lists as parameters. This one uses `return` so you get a value back.
 
-```python
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={10}
+  initialCode={`
 def chord_size(notes):
     return len(notes)
 
 triad = ["C", "E", "G"]
 triad_size = chord_size(triad)
 print(triad_size)  # 3
-```
+`}
+/>
 
 ## <span id="return">Return</span>
 
@@ -66,9 +78,12 @@ print(triad_size)  # 3
 
 Below is a function that converts a note number to a note name.
 
-This function uses new `%` and `//` operators. Hands-On 4 and 5 will help you figure out what they do. Hands-On 6 shows why `note_name` uses `%` with a list.
+This function uses new `%` and `//` operators.
 
-```python
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={16}
+  initialCode={`
 def note_name(note_number):
     notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
     list_index = note_number % 12         # New operator: "modulo" "%"
@@ -81,245 +96,13 @@ result = note_name(67)
 print(result)  # G4
 
 # Here is a shorter way to print the name of the note number 67.
-# This method skips the assignment to the `result` variable.
+# This method skips the assignment to the result variable.
 print(note_name(67))  # G4
-```
-
-Complete the exercises at <a href="https://learnpython.org/en/Functions" target="_blank" rel="noopener noreferrer">learnpython.org/en/Functions</a>
-
-## Hands-On 1: Edit the `note_name` function
-
-<Goal>Change the <code>note_name</code> function so it uses <strong>flats</strong> instead of sharps.</Goal>
-
-<PyScriptEditor
-  kind="py-editor"
-  rows={18}
-  initialCode={`
-def note_name(note_number):
-    notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
-    list_index = note_number % 12
-    letter = notes[list_index]
-    note_octave = (note_number // 12) - 1
-    return f"{letter}{note_octave}"
-
-def print_note_name(note_number):
-    result = note_name(note_number)
-    print(f"MIDI note number {note_number} is a {result}")
-
-print_note_name(60)
-print_note_name(63)
-print_note_name(67)
 `}
 />
 
-## Hands-On 2: Write a for loop
+## Resources
 
-<Goal>Print the melody of "Mary Had a Little Lamb" using a for loop.</Goal>
+- [LearnPython.org Functions](https://learnpython.org/en/Functions) Free interactive exercises on defining and calling functions.
 
-If you forget the syntax, check the [for loop](/modules/python/#loops) section of the basics page.
-
-<PyScriptEditor
-  kind="py-editor"
-  rows={20}
-  initialCode={`
-def note_name(note_number):
-    notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
-    list_index = note_number % 12
-    letter = notes[list_index]
-    note_octave = (note_number // 12) - 1
-    return f"{letter}{note_octave}"
-
-mary_had_a_little_lamb = [64, 62, 60, 62, 64, 64, 64, 62, 62, 62, 64, 67, 67]
-
-# Here's a bad way to print the melody:
-print(mary_had_a_little_lamb[0])
-print(mary_had_a_little_lamb[1])
-print(mary_had_a_little_lamb[2])
-print(mary_had_a_little_lamb[3])
-print(mary_had_a_little_lamb[4])
-print(mary_had_a_little_lamb[5])
-print(mary_had_a_little_lamb[6])
-# ... and so on... Rewrite this using a for loop.
-`}
-/>
-
-## Hands-On 3: Return vs print
-
-<Goal>Fix the <code>note_name</code> function so the output says <strong>Middle C is C4</strong>.</Goal>
-
-Run this code as-is first. See how the output says **"Middle C is None"**. Can you figure out why?
-
-Change the function so the output is just a single line that says `Middle C is C4`. If you get stuck, re-read the [Return](#return) section above.
-
-<PyScriptEditor
-  kind="py-editor"
-  rows={16}
-  initialCode={`
-def note_name(note_number):
-    notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
-    list_index = note_number % 12
-    letter = notes[list_index]
-    note_octave = (note_number // 12) - 1
-    print(f"{letter}{note_octave}")
-
-middle_c = note_name(60)
-print(f"Middle C is {middle_c}")
-`}
-/>
-
-`print` writes something to the screen. `return` sends a value **back** to whoever called the function, so you can store it in a variable and use it later.
-
-## Hands-On 4: The modulo operator `%`
-
-We've seen symbols that operate on two numbers before, like `+`, `-`, and `*`. For example:
-
-```python
-beats_per_measure = 4
-measures = 8
-print(beats_per_measure * measures)  # 32
-print(10 - 2)                        # 8
-print(3 + 4)                         # 7
-```
-
-`%` also operates on two numbers. This function takes **one** argument. A `for` loop inside it applies that argument to every number from `0` to `12` and prints the result.
-
-<Goal>Change <code>show_modulo(6)</code> to other numbers until you can explain what <code>%</code> does. Write your explanation as a comment.</Goal>
-
-Try `12`, `5`, and `2`. You can also add numbers to the list. What pattern do you notice?
-
-<PyScriptEditor
-  kind="py-editor"
-  rows={12}
-  initialCode={`
-def show_modulo(right):
-    numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    for n in numbers:
-      result = n % right
-      print(f"{n} % {right} is {result}")
-
-# Change the argument to experiment.
-show_modulo(6)
-`}
-/>
-
-## Hands-On 5: Wrap around a list
-
-`note_name` uses `%` so the index stays inside the `notes` list. Run this as-is first. Then change **only** `modulo`.
-
-<Goal>Get the output below by changing only the <code>modulo</code> value.</Goal>
-
-```
-A
-B
-C
-D
-A
-B
-C
-D
-```
-
-<PyScriptEditor
-  kind="py-editor"
-  rows={12}
-  initialCode={`
-notes = ["A", "B", "C", "D"]
-
-# Change this to experiment. What's the correct value?
-modulo = 2
-
-for n in [0, 1, 2, 3, 4, 5, 6, 7]:
-    result = notes[n % modulo]
-    print(result)
-`}
-/>
-
-Once you find the correct value for `modulo`, can you explain why it works?
-
-Can you see why we used `% 12` in the `note_name` function?
-
-Hint: there is a better way to write this code using the `len()` function. Can you figure it out?
-
-## Hands-On 6: Integer division `//`
-
-`//` also operates on two numbers. Same setup: one argument, and a `for` loop over `0` to `12`.
-
-<Goal>Change <code>show_integer_division(6)</code> to other numbers until you can explain what <code>//</code> does. Write your explanation as a comment.</Goal>
-
-Try `12`, `5`, and `2`. Add larger numbers to the list, like `60` or `67`, if you want another clue.
-
-<PyScriptEditor
-  kind="py-editor"
-  rows={12}
-  initialCode={`
-def show_integer_division(right):
-    numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    for n in numbers:
-      result = n // right
-      print(f"{n} // {right} is {result}")
-
-# Change the argument to experiment.
-show_integer_division(6)
-`}
-/>
-
-## Hands-On 7: Open a pull request
-
-Put a Python file in the [homework repo](https://github.com/berklee-epd/lmsc261-homework) and open a **pull request**.
-
-Work **inside** your named folder. The directory name is **`hands-on-2`**.
-
-<Goal>Write a for loop in <code>hands-on-2/main.py</code> that prints the lines below, through 15.</Goal>
-
-```
-1 / 5 is 0 remainder 1
-2 / 5 is 0 remainder 2
-3 / 5 is 0 remainder 3
-...
-15 / 5 is 3 remainder 0
-```
-
-Use `//` and `%`.
-
-### Steps
-
-1. Open the homework repo in [GitHub Desktop](https://desktop.github.com/)
-2. Switch to **`main`**
-   - Current Branch → `main`
-3. **Fetch or Pull Sync** the latest version of the main branch
-   - Fetch origin → Pull origin
-4. Make a **branch** named `your-name-hands-on-2`
-   - Current Branch → New Branch
-   - Example: `ada-lovelace-hands-on-2`
-5. Open the `lmsc261-homework` folder in [Visual Studio Code](https://code.visualstudio.com/)
-   - File → Open Folder… → choose `lmsc261-homework`
-   - Or in GitHub Desktop: Repository → Open in Visual Studio Code
-6. In **your** folder, make a new directory called `hands-on-2`
-7. Put a `main.py` in it. Start with the code below.
-8. **Run** `main.py` in VS Code
-   - Open the file, then click the ▶ play button in the top-right
-   - Output appears in a panel at the bottom
-9. **Commit** in GitHub Desktop — short message, then Commit
-10. **Push** (upload) to GitHub
-11. Click **Create Pull Request**
-12. Title: `Your Name Hands-On 2`
-13. Create the PR, but 🚨 do not click **`Merge`** 🚨
-
-### main.py
-
-```python
-divisor = 5
-numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-```
-
-### Done when you have added
-
-```
-your-name/
-└── hands-on-2/
-    └── main.py
-```
-
-Your PR is open on GitHub. You did **not** merge it.
-
-Do not work on `main`. Do not merge the PR. Change only files in your folder.
+Practice next: [Python Functions: Hands-On](/modules/python-functions-hands-on/).

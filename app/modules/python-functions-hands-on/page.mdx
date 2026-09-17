@@ -1,0 +1,273 @@
+---
+title: "LMSC-261 | Python Functions Hands-On"
+---
+
+import { PyScriptEditor } from "@/components/PyScriptEditor"
+
+# Python Functions Hands-On
+
+In class: work through the editors below, then put a Python file in the [homework repo](https://github.com/berklee-epd/lmsc261-homework) and open a **pull request**.
+
+You should already have read [Python Functions](/modules/python-functions/).
+
+The folder with your name is yours all semester. Work **inside it**.
+
+## Part 1: Edit the `note_name` function
+
+<Goal>Change the <code>note_name</code> function so it uses <strong>flats</strong> instead of sharps.</Goal>
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={18}
+  initialCode={`
+def note_name(note_number):
+    notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    list_index = note_number % 12
+    letter = notes[list_index]
+    note_octave = (note_number // 12) - 1
+    return f"{letter}{note_octave}"
+
+def print_note_name(note_number):
+    result = note_name(note_number)
+    print(f"MIDI note number {note_number} is a {result}")
+
+print_note_name(60)
+print_note_name(63)
+print_note_name(67)
+`}
+/>
+
+## Part 2: Write a for loop
+
+<Goal>Print the melody of "Mary Had a Little Lamb" using a for loop.</Goal>
+
+If you forget the syntax, check the [for loop](/modules/python/#loops) section of the basics page.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={20}
+  initialCode={`
+def note_name(note_number):
+    notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    list_index = note_number % 12
+    letter = notes[list_index]
+    note_octave = (note_number // 12) - 1
+    return f"{letter}{note_octave}"
+
+mary_had_a_little_lamb = [64, 62, 60, 62, 64, 64, 64, 62, 62, 62, 64, 67, 67]
+
+# Here's a bad way to print the melody:
+print(mary_had_a_little_lamb[0])
+print(mary_had_a_little_lamb[1])
+print(mary_had_a_little_lamb[2])
+print(mary_had_a_little_lamb[3])
+print(mary_had_a_little_lamb[4])
+print(mary_had_a_little_lamb[5])
+print(mary_had_a_little_lamb[6])
+# ... and so on... Rewrite this using a for loop.
+`}
+/>
+
+## Part 3: Return vs print
+
+<Goal>Fix the <code>note_name</code> function so the output says <strong>Middle C is C4</strong>.</Goal>
+
+Run this code as-is first. See how the output says **"Middle C is None"**. Can you figure out why?
+
+Change the function so the output is just a single line that says `Middle C is C4`. If you get stuck, re-read the [Return](/modules/python-functions/#return) section.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={16}
+  initialCode={`
+def note_name(note_number):
+    notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    list_index = note_number % 12
+    letter = notes[list_index]
+    note_octave = (note_number // 12) - 1
+    print(f"{letter}{note_octave}")
+
+middle_c = note_name(60)
+print(f"Middle C is {middle_c}")
+`}
+/>
+
+`print` writes something to the screen. `return` sends a value **back** to whoever called the function, so you can store it in a variable and use it later.
+
+## Part 4: The modulo operator `%`
+
+We've seen symbols that operate on two numbers before, like `+`, `-`, and `*`. For example:
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  initialCode={`
+beats_per_measure = 4
+measures = 8
+print(beats_per_measure * measures)  # 32
+print(10 - 2)                        # 8
+print(3 + 4)                         # 7
+`}
+/>
+
+`%` also operates on two numbers. This function takes **one** argument. A `for` loop inside it applies that argument to every number from `0` to `12` and prints the result.
+
+<Goal>Build confidence that you understand the <code>%</code> operator.</Goal>
+
+Change <code>show_modulo(6)</code> to other numbers until you can explain what <code>%</code> does.
+
+Try `12`, `5`, and `2`. You can also add numbers to the list. What pattern do you notice?
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  initialCode={`
+def show_modulo(right):
+    numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    for n in numbers:
+      result = n % right
+      print(f"{n} % {right} is {result}")
+
+# Change the argument to experiment.
+show_modulo(6)
+`}
+/>
+
+## Part 5: Wrap around a list
+
+`note_name` uses `%` so the index stays inside the `notes` list. Run this as-is first. Then change **only** `modulo`.
+
+<Goal>Get the output below by changing only the <code>modulo</code> value.</Goal>
+
+```
+A
+B
+C
+D
+A
+B
+C
+D
+```
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  initialCode={`
+notes = ["A", "B", "C", "D"]
+
+# Change this to experiment. What's the correct value?
+modulo = 2
+
+for n in [0, 1, 2, 3, 4, 5, 6, 7]:
+    result = notes[n % modulo]
+    print(result)
+`}
+/>
+
+Once you find the correct value for `modulo`, can you explain why it works?
+
+Can you see why we used `% 12` in the `note_name` function?
+
+Hint: there is a better way to write this code using the `len()` function. Can you figure it out?
+
+## Part 6: Integer division `//`
+
+`//` also operates on two numbers. Same setup: one argument, and a `for` loop over `0` to `12`.
+
+<Goal>Change <code>show_integer_division(6)</code> to other numbers until you can explain what <code>//</code> does. Write your explanation as a comment.</Goal>
+
+Try `12`, `5`, and `2`. Add larger numbers to the list, like `60` or `67`, if you want another clue.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  initialCode={`
+def show_integer_division(right):
+    numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    for n in numbers:
+      result = n // right
+      print(f"{n} // {right} is {result}")
+
+# Change the argument to experiment.
+show_integer_division(6)
+`}
+/>
+
+## Part 7: Open a pull request
+
+<Goal>Finish the editor so it prints the lines below, through 15.</Goal>
+
+```
+1 / 5 is 0 remainder 1
+2 / 5 is 0 remainder 2
+3 / 5 is 0 remainder 3
+...
+15 / 5 is 3 remainder 0
+```
+
+Use `//` and `%`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={16}
+  initialCode={`
+def show_division(divisor):
+    numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    # loop through each number in the list
+    # calculate the quotient
+    # calculate the remainder
+    # use an f-string to print the result
+
+show_division(5)
+`}
+/>
+
+When the output matches, copy the code into a **pull request**.
+
+Work **inside** your named folder. The directory name is **`hands-on-2`**.
+
+### Goals
+
+1. Make a new branch in the homework repository
+2. Add a Python file in your folder, for example `lmsc261-homework/your-name/hands-on-2/main.py`
+3. Paste your working editor code into `main.py` and run it
+4. Open a pull request
+
+### Steps
+
+1. Open the homework repo in [GitHub Desktop](https://desktop.github.com/)
+2. Switch to **`main`**
+   - Current Branch → `main`
+3. **Fetch or Pull Sync** the latest version of the main branch
+   - Fetch origin → Pull origin
+4. Make a **branch** named `your-name-hands-on-2`
+   - Current Branch → New Branch
+   - Example: `ada-lovelace-hands-on-2`
+5. Open the `lmsc261-homework` folder in [Visual Studio Code](https://code.visualstudio.com/)
+   - File → Open Folder… → choose `lmsc261-homework`
+   - Or in GitHub Desktop: Repository → Open in Visual Studio Code
+6. In **your** folder, make a new directory called `hands-on-2`
+7. Put a `main.py` in it. Copy your working code from the editor above.
+8. **Run** `main.py` in VS Code
+   - Open the file, then click the ▶ play button in the top-right
+   - Output appears in a panel at the bottom
+9. **Commit** in GitHub Desktop — short message, then Commit
+10. **Push** (upload) to GitHub
+11. Click **Create Pull Request**
+12. Title: `Your Name Hands-On 2`
+13. Create the PR, but 🚨 do not click **`Merge`** 🚨
+
+### Done when you have added
+
+```
+your-name/
+└── hands-on-2/
+    └── main.py
+```
+
+Your PR is open on GitHub. You did **not** merge it.
+
+Do not work on `main`. Do not merge the PR. Change only files in your folder.
+
+Finished early? Start studying for the next assignment: [Basic Chords](/assignments/basic-chords/).
