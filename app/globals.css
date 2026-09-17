@@ -124,8 +124,15 @@ a:hover {
 }
 
 .pyscript-playground-output:empty::before {
-  content: "Output will appear here.";
+  content: attr(data-empty-hint);
   color: #64748b;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.875rem;
+  white-space: normal;
+}
+
+.pyscript-playground-output[data-running]:empty::before {
+  content: "Running...";
 }
 
 /* First heading should not have top margin */

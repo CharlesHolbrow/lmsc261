@@ -50,19 +50,54 @@ export function PyScriptEditor({
     host.appendChild(script);
 
     const timeoutId = window.setTimeout(ensurePyScriptAssets, 50);
+    const output = () => document.getElementById(outputId);
+    const markRunning = () => {
+      const el = output();
+      if (!el) return;
+      // Keep the node empty so the CSS :empty hint can show "Running..."
+      // PyScript also clears this element, then appends stdout when done.
+      el.replaceChildren();
+      el.setAttribute("data-running", "");
+      el.setAttribute("aria-busy", "true");
+    };
     const onRun = (event: Event) => {
       const target = event.target;
       if (!(target instanceof Element)) return;
-      if (!target.closest(".py-editor-run-button, .mpy-editor-run-button")) return;
-      const output = document.getElementById(outputId);
-      if (output) output.textContent = "";
+      const button = target.closest(
+        ".py-editor-run-button, .mpy-editor-run-button",
+      );
+      // The stop button reuses this control; don't flash "Running..." for that.
+      if (!button || button.classList.contains("running")) return;
+      markRunning();
     };
+    const onDone = () => {
+      const el = output();
+      if (!el) return;
+      el.removeAttribute("data-running");
+      el.removeAttribute("aria-busy");
+    };
+    // Capture clicks so this runs before PyScript's handler. Hotkeys
+    // (⌘/Ctrl/Shift+Enter) programmatically click the same run button.
     host.addEventListener("click", onRun, true);
+    host.addEventListener("py-editor:done", onDone);
 
     return () => {
       window.clearTimeout(timeoutId);
       host.removeEventListener("click", onRun, true);
-      script.remove();
+      host.removeEventListener("py-editor:done", onDone);
+      // PyScript rewrites the script type to `${kind}-active` and inserts a
+      // <py-editor>/<mpy-editor> sibling, then moves our output <pre> into it.
+      // Removing only the script leaves that custom element, so Fast Refresh
+      // appends a second editor on top of the first.
+      (
+        script as HTMLScriptElement & { xworker?: { terminate: () => void } }
+      ).xworker?.terminate();
+      const playground = host.parentElement;
+      const output = document.getElementById(outputId);
+      if (output && playground && output.parentElement !== playground) {
+        playground.appendChild(output);
+      }
+      host.replaceChildren();
     };
   }, [code, kind, outputId, rows]);
 
@@ -71,6 +106,7 @@ export function PyScriptEditor({
       <div ref={hostRef} />
       <pre
         id={outputId}
+        data-empty-hint="Click Run, or press ⌘+Enter / Ctrl+Enter with the cursor in the editor."
         className="pyscript-playground-output m-0 min-h-24 whitespace-pre-wrap border-0 border-t border-slate-200 bg-white p-3 font-mono text-sm text-slate-800"
       />
     </div>

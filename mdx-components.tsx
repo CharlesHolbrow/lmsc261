@@ -1,9 +1,11 @@
 import type { MDXComponents } from "mdx/types";
 import { CodeBlock } from "@/components/CodeBlock";
+import { Goal } from "@/components/Goal";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...components,
+    Goal,
     wrapper: ({ children }) => (
       <article className="prose prose-slate max-w-none">{children}</article>
     ),
