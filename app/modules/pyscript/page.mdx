@@ -6,22 +6,16 @@ import { PyScriptEditor } from "@/components/PyScriptEditor"
 
 # PyScript
 
-[PyScript](https://pyscript.net/) is **not** the same thing as [Pyodide](https://pyodide.org/). It is a layer on top.
+[PyScript](https://pyscript.net/) is a layer on top of [Pyodide](https://pyodide.org/).
 
-- **Pyodide** is CPython compiled to WebAssembly. That is what [Local Python](/modules/local-python/) talks to directly.
-- **PyScript** is HTML tags and helpers. `type="py"` and `type="py-editor"` run **Pyodide**. `type="mpy"` and `type="mpy-editor"` run **MicroPython**, a smaller interpreter.
+- **Pyodide** is CPython compiled to WebAssembly.
+- **PyScript** is HTML tags and helpers. `type="py"` and `type="py-editor"` run **Pyodide**.
 
-Official embed (no useful npm install for this site; `@pyscript/core` is a different, older package):
-
-- CSS: `https://pyscript.net/releases/2026.7.3/core.css`
-- Module: `https://pyscript.net/releases/2026.7.3/core.js`
-- Then a `script` tag with `type="py-editor"` (Pyodide) or `type="mpy-editor"` (MicroPython)
-
-Press **Run**, or **⌘Enter** / **Ctrl+Enter** in the editor. The interpreter downloads the first time you run.
+Press **Run**, or **⌘+Enter** / **Ctrl+Enter** in the editor. The interpreter downloads the first time you run.
 
 ## Pyodide editor (`py-editor`)
 
-Same engine as the Local Python page, but PyScript draws the editor.
+PyScript draws a CodeMirror editor and runs the code with Pyodide.
 
 <PyScriptEditor
   kind="py-editor"
@@ -35,7 +29,7 @@ for note in notes:
 
 ## MicroPython editor (`mpy-editor`)
 
-This one is actually different: MicroPython, not Pyodide. It is smaller and usually starts faster.
+MicroPython is smaller than Pyodide and usually starts faster.
 
 <PyScriptEditor
   kind="mpy-editor"

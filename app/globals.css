@@ -63,12 +63,7 @@ a:hover {
   color: #1d4ed8; /* blue-700 */
 }
 
-/* Hide DataCamp Light source markup until the CDN script replaces it */
-[data-datacamp-exercise] {
-  visibility: hidden;
-}
-
-/* PyScript editor: keep CodeMirror highlighting, match Local Python chrome */
+/* PyScript editor */
 .pyscript-playground .py-editor-box,
 .pyscript-playground .mpy-editor-box {
   padding: 0;
