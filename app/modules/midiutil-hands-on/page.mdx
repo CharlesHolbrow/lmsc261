@@ -1,0 +1,80 @@
+---
+title: "LMSC-261 | MIDIUtil Hands-On"
+---
+
+# MIDIUtil Hands-On
+
+In class: write a `.mid` file with MIDIUtil and open a **pull request**.
+
+Finish [Python Tooling](/modules/python-tooling/) and [MIDIUtil](/modules/midiutil/) first.
+
+Work **inside** your named folder. The directory name is **`hands-on-3`**.
+
+## Goals
+
+1. Make a new branch in the homework repository
+2. Set up a `uv` project in your folder, for example `lmsc261-homework/your-name/hands-on-3/`
+3. Write a `main.py` that saves a `.mid` file
+4. Open a pull request
+
+## Steps
+
+1. Open the homework repo in [GitHub Desktop](https://desktop.github.com/)
+2. Switch to **`main`**
+   - Current Branch → `main`
+3. **Fetch or Pull Sync** the latest version of the main branch
+   - Fetch origin → Pull origin
+4. Make a **branch** named `your-name-hands-on-3`
+   - Current Branch → New Branch
+   - Example: `ada-lovelace-hands-on-3`
+5. In the terminal, `cd` into **your** folder in the homework repo
+6. Set up the project
+
+   ```bash
+   uv init --no-package hands-on-3
+   cd hands-on-3
+   uv add MIDIUtil
+   ```
+
+7. Open the `hands-on-3` folder in [Visual Studio Code](https://code.visualstudio.com/)
+   - File → Open Folder… → choose `hands-on-3`
+   - Or in GitHub Desktop: Repository → Open in Visual Studio Code, then open `hands-on-3`
+   - 🚨 Open `hands-on-3`, the folder created by `uv init` — not the parent homework folder. 🚨
+8. Replace `main.py` with a script from the [MIDIUtil](/modules/midiutil/) page. Start with three notes:
+
+   ```python
+   from midiutil import MIDIFile
+
+   midi = MIDIFile(1)
+   midi.addTempo(0, 0, 120)
+
+   midi.addNote(0, 0, 60, 0, 1, 100)  # C4
+   midi.addNote(0, 0, 62, 1, 1, 100)  # D4
+   midi.addNote(0, 0, 64, 2, 1, 100)  # E4
+
+   with open("three_notes.mid", "wb") as output_file:
+       midi.writeFile(output_file)
+   ```
+
+9. **Run** it
+   - In the terminal: `uv run main.py`
+   - Or open `main.py` and click the ▶ play button in the top-right
+10. Open `three_notes.mid` in a DAW or a media player. You should hear three notes.
+11. **Commit** in GitHub Desktop — short message, then Commit
+12. **Push** (upload) to GitHub
+13. Click **Create Pull Request**
+14. Title: `Your Name Hands-On 3`
+15. Create the PR, but 🚨 do not click **`Merge`** 🚨
+
+## Done when you have added
+
+```
+your-name/
+└── hands-on-3/
+    ├── main.py
+    └── pyproject.toml
+```
+
+Your PR is open on GitHub. You did **not** merge it.
+
+Do not work on `main`. Do not merge the PR. Change only files in your folder.

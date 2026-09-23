@@ -1,0 +1,90 @@
+---
+title: "LMSC-261 | MIDIUtil"
+---
+
+# MIDIUtil
+
+**MIDIUtil** writes `.mid` files from Python. You add notes with times in **beats**, then save the file.
+
+Set up a project first by following the instructions on the [Python Tooling](/modules/python-tooling/) page.
+
+<div className="text-xl font-bold text-center my-8">
+🚨 The folder created by <code>uv init</code> must be the one open in Visual Studio Code. 🚨
+</div>
+
+## Three Notes
+
+Copy this into a Python file and run it. You should get a `three_notes.mid` file you can open in a DAW or a media player.
+
+```python
+from midiutil import MIDIFile
+
+midi = MIDIFile(1)
+midi.addTempo(0, 0, 120)
+
+midi.addNote(0, 0, pitch=60, time=0, duration=1, volume=100)  # C4
+midi.addNote(0, 0, pitch=62, time=1, duration=1, volume=100)  # D4
+midi.addNote(0, 0, pitch=64, time=2, duration=1, volume=100)  # E4
+
+with open("three_notes.mid", "wb") as output_file:
+    midi.writeFile(output_file)
+```
+
+`addNote(track, channel, pitch, time, duration, volume)`
+
+- **pitch** — MIDI note number. `60` is C4, `62` is D4, `64` is E4.
+- **time** — when the note starts, in beats
+- **duration** — how long it lasts, in beats
+- **volume** — `0` to `127`. Required; MIDIUtil has no default.
+
+`addTempo` sets the speed in beats per minute.
+
+`writeFile` writes the `.mid` file. `"wb"` means **write bytes**.
+
+## More Detail
+
+`time`, `duration`, and `volume` can be more interesting than `0`, `1`, and `100`. Notes that share a start time overlap — that is a chord. Times can be fractions of a beat.
+
+```python
+# C major chord: three notes start together and last 2 beats
+midi.addNote(0, 0, pitch=60, time=0, duration=2, volume=80)
+midi.addNote(0, 0, pitch=64, time=0, duration=2, volume=80)
+midi.addNote(0, 0, pitch=67, time=0, duration=2, volume=80)
+
+# Short, loud C5 on the and of beat 1
+midi.addNote(0, 0, pitch=72, time=1.5, duration=0.5, volume=120)
+```
+
+Drop those lines into the first example in place of the three single notes.
+
+## Random Notes from a Key
+
+Copy this into `main.py` and run it. You should get a `random_notes.mid` file.
+
+`random.choice` picks one pitch from the scale each time through the loop.
+
+```python
+import random
+from midiutil import MIDIFile
+
+midi = MIDIFile(1)
+midi.addTempo(0, 0, 100)
+
+# C major, two octaves
+c_major = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76]
+
+for beat in range(16):
+    pitch = random.choice(c_major)
+    midi.addNote(0, 0, pitch=pitch, time=beat, duration=1, volume=100)
+
+with open("random_notes.mid", "wb") as output_file:
+    midi.writeFile(output_file)
+```
+
+Change the numbers in `c_major` to write in a different key.
+
+## Resources
+
+- [MIDIUtil documentation](https://midiutil.readthedocs.io/)
+
+Practice next: [MIDIUtil: Hands-On](/modules/midiutil-hands-on/).

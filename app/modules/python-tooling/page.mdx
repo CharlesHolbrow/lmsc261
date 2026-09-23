@@ -2,35 +2,35 @@
 title: "LMSC-261 | Python Tooling"
 ---
 
-# Python: The Bad Parts
+# Python Tooling
 
 It is common to use other people's code in your own Python projects.
 
 For example, you can use libraries for things like:
 
-- Reading and MIDI files
+- Reading and writing MIDI files
 - Audio processing
 - Image processing
 - Video processing
 - Text processing
-- Downloading Websites
-- Creating Websites
+- Downloading websites
+- Creating websites
 - Creating GUIs
-- Greating Games
+- Creating games
 
-There are python tools for automatically downloading existing libraries. 
+There are Python tools for automatically downloading existing libraries.
 
-Unforunately, these tools are old-fashined, overlapping, and are not always user friendly.
+Unfortunately, these tools are old-fashioned, overlapping, and not always user-friendly.
 
 ## Many Environments for Running Python
 
 - `python my_script.py` in the terminal
-- `python` Read Eval Print Loop (REPL) in the terminal
+- the `python` Read-Eval-Print Loop (REPL) in the terminal
 - VS Code Interactive
 - Jupyter Notebooks
 - VS Code with [Jupyter Notebooks Extension](https://code.visualstudio.com/docs/datascience/jupyter-notebooks)
 - Google Colab
-- In the Browser via [PyScript](https://pyscript.net/)
+- In the browser via [PyScript](https://pyscript.net/)
 
 ## Many ways to install Python
 
@@ -51,9 +51,12 @@ Unforunately, these tools are old-fashined, overlapping, and are not always user
 - `uv init && uv add torch`
 - `uv sync`
 
-# Python Tooling
+# Python Tool: `uv`
 
-We will use [Astral uv](https://docs.astral.sh/uv/).
+For this class, we will use [Astral uv](https://docs.astral.sh/uv/).
+
+`uv` is a modern command-line tool that mitigates some of the problems caused by
+older tools like `pip` and `venv`.
 
 You can install it now by copying this line into your terminal.
 
@@ -61,30 +64,62 @@ You can install it now by copying this line into your terminal.
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-# Let's Try Out Some Python Tools
+## Set Up a Python Project with `uv`
 
-The following commands tell a story. Do you understand what Alice is doing?
+`cd` into your folder in the homework repo.
 
 ```bash
-# Create a new repo
-mkdir lmsc261-class-2
-cd lmsc261-class-2
-git init
+cd ~/Documents/GitHub/lmsc261-homework
+cd your-name
+```
 
+Use `uv` to set up a project named `hands-on-2`.
+
+```bash
 # Set up our Python environment
-uv python pin 3.13
-uv init
-uv sync
-
-# Make our initial commit
-git add .
-git status
-git commit -m "Class 2 example"
-
-# Alice is a Python virtual environment expert! Instead of:
-source .venv/bin/activate
-python main.py
-deactivate
-# ... Alice just uses:
+uv init --no-package hands-on-2
+cd hands-on-2
 uv run main.py
 ```
+
+What are the commands above doing?
+
+- `uv init` creates a new directory with helper files for a new Python project
+- `cd` (change directory) moves into the new project directory
+- `uv run main.py` runs the default `main.py` file created by `uv init`
+
+If it is working correctly, the `uv run` command will print `Hello from
+hands-on-2!` in the terminal.
+
+## Adding an external library
+
+The `uv add` terminal command will download code for writing MIDI files to your
+computer. This will let you call its functions from your new `hands-on-2` project.
+
+```bash
+uv add MIDIUtil
+```
+
+Here, `MIDIUtil` is the name of a code library we want to add. We will use this
+library in the next module.
+
+## Running in VS Code
+
+**Iimportant!** The `uv init` command creates a **project folder**
+(`hands-on-2`) with its own Python environment and helper files. Visual Studio
+Code only uses that environment if *that* folder is the one you have open — not
+the parent homework folder.
+
+<div className="text-xl font-bold text-center text-teal-600 my-8">
+<div>
+🚨 Open the folder created by <code>uv init</code> in Visual Studio Code 🚨
+</div>
+<div>
+...or the Run button will not work.
+</div>
+</div>
+
+Use **File → Open Folder…** and choose `hands-on-2` — not the parent homework folder.
+
+If the wrong folder is open, the Run button will not work reliably. It will not
+find the Python you just set up, nor the libraries you added with `uv add`.
