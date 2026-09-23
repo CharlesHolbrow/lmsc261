@@ -110,8 +110,8 @@ The instructor will post the problem set and project descriptions on the class m
 
 - Students must submit their problem sets and projects using [GitHub](https://github.com) and not [Canvas](https://canvas.berklee.edu).
 - Late problem sets will incur a penalty of 5 points each day.
-- Problem sets and projects are due on the date specified before the class. If your class starts at 9:00 am, you must submit them before that class time.
-- Your problem sets/projects are one day late if you submit them after the class starts on the date specified. For example, if your class begins at 9:00 am, and you submit your problem set at 9:01 am, your problem set is one day late, and you will lose 5 points.
+- Problem sets and projects are due on the date specified before the class. If your class starts at 5:00 PM, you must submit them before that class time.
+- Your problem sets/projects are one day late if you submit them after the class starts on the date specified. For example, if your class begins at 5:00 PM, and you submit your problem set at 5:01 PM, your problem set is one day late, and you will lose 5 points.
 - After the next class cycle (two days after the due date), your assignments/projects will be two days late, and you will lose 10 points.
 - The instructor will not accept problem sets one week after the due date (cut-off day).
 - After the cut-off day, you will receive a grade of 0.
