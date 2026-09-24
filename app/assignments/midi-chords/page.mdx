@@ -44,7 +44,7 @@ Work **inside** your named folder.
 
 ## main.py
 
-Notes that share a start time play together. That is a chord. `time` and `duration` are in beats.
+To make a chord, start multiple notes at the same time. `time` and `duration` are in beats.
 
 ```python
 from midiutil import MIDIFile
@@ -62,13 +62,15 @@ with open("progression.mid", "wb") as output_file:
     midi.writeFile(output_file)
 ```
 
-The example writes one chord. Take your chord progression from [Basic Chords](/assignments/basic-chords/) and generate a MIDI file that contains at least that progression. Longer or more elaborate is fine. 
+The example writes one chord. Take your chord progression from [Basic
+Chords](/assignments/basic-chords/) and generate a MIDI file that contains at
+least that progression. Longer or more elaborate is fine. 
 
 Put the chords in a list, then iterate over the list. Each call to `add_chord` needs a later `time` than the one before it, or the chords stack on top of each other.
 
 ## README.md
 
-Use these headings. Short answers. GitHub should render them as a title and three sections.
+Document your work using these headings. GitHub should render them as a title and three sections.
 
 ```markdown
 # Assignment 3: MIDI Chords
@@ -97,8 +99,6 @@ Your PR is open on GitHub. You did **not** merge it.
 
 ## Grading
 
-This is **completion-based**. Full credit if you did the work.
-
 | Requirement                                                                              |  Points |
 | ---------------------------------------------------------------------------------------- | ------: |
 | **Correctly named** files in correct folder only; nothing outside it changed or removed  |      15 |
@@ -111,11 +111,15 @@ This is **completion-based**. Full credit if you did the work.
 
 Do not work on `main`. Do not merge the PR. Change only files in your folder.
 
-## Thinking ahead
+## Thinking Ahead to the Midterm Project
 
-Not graded. Your midterm will need more than sixteen chords in a row.
+If you do not have another idea, you may continue to work on your composition software for the midterm project. 
 
-Right now every chord is the same length and the same volume. A piece needs more control than that.
+However, the midterm is expected to demonstrate learning and understanding beyond what we have covered so far. 
+
+If you want to continue to develop your composition software, think about what
+features you would want to add. Right now every chord is the same length and the
+same volume. A piece needs more control than that.
 
 - How would you make the progression play in a **rhythmic pattern**?
 - How would you add **dynamics**?
