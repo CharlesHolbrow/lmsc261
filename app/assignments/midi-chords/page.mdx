@@ -1,0 +1,125 @@
+---
+title: "LMSC-261 | MIDI Chords"
+---
+
+# MIDI Chords
+
+**Due:** Thursday October 1, 5:00 PM
+
+Write your chord progression from class 1 into a `.mid` file, then turn it in with a **pull request**.
+
+That progression is the **16 chords** from [Basic Chords](/assignments/basic-chords/). Finish [Python Tooling](/modules/python-tooling/) and [MIDIUtil](/modules/midiutil/) first.
+
+Work **inside** your named folder.
+
+## Steps
+
+1. Using [GitHub Desktop](https://desktop.github.com/), open the [homework repo](https://github.com/berklee-epd/lmsc261-homework)
+2. **Pull/Sync** the latest (do this before every new PR)
+   - Current Branch → `main`
+   - Fetch origin → Pull origin
+3. Make a **branch** named `your-name-assignment-3`
+   - Example: `ada-lovelace-assignment-3`
+4. In the terminal, `cd` into **your** folder in the homework repo
+5. Set up the project
+
+   ```bash
+   uv init --no-package assignment-3
+   cd assignment-3
+   uv add MIDIUtil
+   ```
+
+6. Open the `assignment-3` folder in [Visual Studio Code](https://code.visualstudio.com/)
+   - File → Open Folder… → choose `assignment-3`
+   - 🚨 Open `assignment-3`, the folder created by `uv init` — not the parent homework folder. 🚨
+7. Replace `main.py` with a script that writes your **16 chords** to a `.mid` file. Start from the example below. Use the note numbers from your [Basic Chords](/assignments/basic-chords/) `main.py`.
+8. **Run** it: `uv run main.py`
+9. Open `progression.mid` in a DAW or a media player. You should hear your progression.
+10. Copy the `README.md` template below. Fill in every heading.
+11. **Commit** in GitHub Desktop — short message, then Commit. Include `progression.mid`. Do not commit `.venv`.
+12. **Push** (upload) to GitHub
+13. Click **Create Pull Request**
+14. Title: `Your Name Homework 3`
+15. **🚨 Do not click Merge 🚨**
+
+## main.py
+
+Notes that share a start time play together. That is a chord. `time` and `duration` are in beats.
+
+```python
+from midiutil import MIDIFile
+
+midi = MIDIFile(1)
+midi.addTempo(0, 0, 120)
+
+def add_chord(note_numbers, time, duration):
+    for note_number in note_numbers:
+        midi.addNote(0, 0, pitch=note_number, time=time, duration=duration, volume=100)
+
+add_chord([60, 64, 67], 0, 2)
+
+with open("progression.mid", "wb") as output_file:
+    midi.writeFile(output_file)
+```
+
+That call plays one chord at beat 0. Yours needs **16 chords**, in the same order as your class 1 progression.
+
+Put the chords in a list, then iterate over the list. Each call to `add_chord` needs a later `time` than the one before it, or the chords stack on top of each other.
+
+## README.md
+
+Use these headings. Short answers. GitHub should render them as a title and three sections.
+
+```markdown
+# Assignment 3: MIDI Chords
+
+## What the file contains
+
+## What I still don't understand
+
+## AI
+```
+
+Under **What the file contains**, name the progression (the key, or the chord roots in order). Under **AI**, it must be extremely clear what (if anything) was written with AI. If you used none, write `None`. AI can help you add complexity, but you do not get extra points for a more elaborate program. The goal is to demonstrate what you learned.
+
+## Done when
+
+```
+your-name/
+└── assignment-3/
+    ├── main.py
+    ├── pyproject.toml
+    ├── progression.mid
+    └── README.md
+```
+
+Your PR is open on GitHub. You did **not** merge it.
+
+## Grading
+
+This is **completion-based**. Full credit if you did the work.
+
+| Requirement                                                                              |  Points |
+| ---------------------------------------------------------------------------------------- | ------: |
+| **Correctly named** files in correct folder only; nothing outside it changed or removed  |      15 |
+| `main.py` runs and writes `progression.mid`                                              |      20 |
+| `progression.mid` is your **16-chord** progression from class 1, in order                |      25 |
+| README uses at least three headings, with answers under each                             |      15 |
+| The **AI** heading says what was written with AI (`None` is OK)                          |      10 |
+| New branch; PR is open and mergeable                                                     |      15 |
+| **Total**                                                                                | **100** |
+
+Do not work on `main`. Do not merge the PR. Change only files in your folder.
+
+## Thinking ahead
+
+Not graded. Your midterm will need more than sixteen chords in a row.
+
+Right now every chord is the same length and the same volume. A piece needs more control than that.
+
+- How would you make the progression play in a **rhythmic pattern**?
+- How would you add **dynamics**?
+- How would you insert sections — verse, chorus, breakdown, bridge — and choose where each one goes?
+- What other controls would you want as a composer?
+
+You do not need to build any of this yet.

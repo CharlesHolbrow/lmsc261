@@ -4,7 +4,7 @@ title: "LMSC-261 | Terminal Hands-On #1"
 
 # Terminal Hands-On
 
-In class: walk around your computer with `cd` and `cd ..`, then open the folder you landed in with Finder.
+In class: walk around your computer with `cd` and `cd ..`, then open the folder you landed in with Finder. When that feels easy, keep going on your own with Part 2.
 
 You should already have read [The Terminal](/modules/terminal/).
 
@@ -58,6 +58,7 @@ open .       # open this folder in Finder
 ```
 
 - `..` = up one folder
+- `../..` = up two folders
 - `~` = home
 - `.` = this folder
 
@@ -79,3 +80,132 @@ You can:
 - `cd` into a folder and `cd ..` back out
 - Use `pwd` to say where you are
 - Use `open .` and see that folder in Finder
+
+Then keep going with [Part 2](#terminal-hands-on-part-2).
+
+## <span id="terminal-hands-on-part-2">Terminal Hands-On Part 2</span>
+
+### Part 2 Goals
+
+1. Try commands you have not used yet
+2. Notice whether each one wants a **file**, a **folder**, a **program name**, or just **text**
+3. Explain what each one does, in your own words
+
+For each command: run the example. Read what comes back. Then say what you think it does.
+
+If a path does not work, pick another file you can see with `ls`. Use names that exist on your computer.
+
+### mkdir
+
+`mkdir` is run on a folder name. Try it in a folder of yours (`Documents`, your homework folder, …).
+
+```
+mkdir practice
+```
+
+Then `ls`. Is it there? `cd` into it.
+
+### touch
+
+`touch` creates an empty file. Give it a name.
+
+```
+touch notes.txt
+```
+
+Then `ls`. Run `cat` on it.
+
+### which
+
+`which` is run on a program name, not a file.
+
+```
+which python3
+which git
+```
+
+What did it print? What is `which` telling you?
+
+### echo
+
+`echo` is not run on a file. Type some text after it.
+
+```
+echo hello
+echo $HOME
+```
+
+What did each one print? What does `echo` do?
+
+### More `ls`
+
+You already know `ls`. A letter after a hyphen is a **flag**. Try these **one at a time**.
+
+```
+ls -l
+ls -a
+ls -h
+ls -lh
+```
+
+What does each letter change? Why might `-h` look different when combined with `-l` than it does alone?
+
+### du
+
+`du` is run on a file or folder.
+
+```
+du -h .
+```
+
+If that prints a lot, you are in a big folder. Try a smaller one, or add `-s`.
+
+What is `du` measuring? Hint: `du` stands for "disk usage".
+
+### cat
+
+`cat` prints the contents of a file. Run it on a text file you can see with `ls`.
+
+```
+cat filename.txt
+```
+
+### head
+
+`head` is run on a file. Same kind of argument as `cat`.
+
+```
+head ~/.zshrc
+```
+
+How is that different from `cat`?
+
+### file
+
+`file` is run on a file.
+
+```
+file ~/.zshrc
+file /usr/bin/python3
+```
+
+What is it telling you about each path?
+
+### man
+
+`man` is run on a command name. It opens a manual. Press **`q`** to quit.
+
+```
+man ls
+```
+
+Use `man` on any command from this page when you want more detail.
+
+### Done when
+
+You can explain, in your own words, what `which`, `echo`, `ls -l`, `ls -a`, `ls -h`, `du`, `head`, `file`, `man`, and `mkdir` do. You have run `cat` on a text file and used `touch` to make one.
+
+## Resources
+
+- [Beginner's Guide to the Bash Terminal](https://www.youtube.com/watch?v=oxuRxtrO2Ag) Video crash course.
+- [Command Line](https://labex.io/linuxjourney/courses/command-line) Text lessons from Linux Journey.
