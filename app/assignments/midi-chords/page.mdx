@@ -62,7 +62,7 @@ with open("progression.mid", "wb") as output_file:
     midi.writeFile(output_file)
 ```
 
-That call plays one chord at beat 0. Yours needs **16 chords**, in the same order as your class 1 progression.
+The example writes one chord. Take your chord progression from [Basic Chords](/assignments/basic-chords/) and generate a MIDI file that contains at least that progression. Longer or more elaborate is fine. 
 
 Put the chords in a list, then iterate over the list. Each call to `add_chord` needs a later `time` than the one before it, or the chords stack on top of each other.
 
@@ -103,7 +103,7 @@ This is **completion-based**. Full credit if you did the work.
 | ---------------------------------------------------------------------------------------- | ------: |
 | **Correctly named** files in correct folder only; nothing outside it changed or removed  |      15 |
 | `main.py` runs and writes `progression.mid`                                              |      20 |
-| `progression.mid` is your **16-chord** progression from class 1, in order                |      25 |
+| `progression.mid` contains your class 1 progression, in order, at minimum                |      25 |
 | README uses at least three headings, with answers under each                             |      15 |
 | The **AI** heading says what was written with AI (`None` is OK)                          |      10 |
 | New branch; PR is open and mergeable                                                     |      15 |
