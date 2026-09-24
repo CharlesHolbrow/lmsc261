@@ -73,12 +73,12 @@ cd ~/Documents/GitHub/lmsc261-homework
 cd your-name
 ```
 
-Use `uv` to set up a project named `hands-on-2`.
+Use `uv` to set up a project named `assignment-3`.
 
 ```bash
 # Set up our Python environment
-uv init --no-package hands-on-2
-cd hands-on-2
+uv init --no-package assignment-3
+cd assignment-3
 uv run main.py
 ```
 
@@ -89,12 +89,12 @@ What are the commands above doing?
 - `uv run main.py` runs the default `main.py` file created by `uv init`
 
 If it is working correctly, the `uv run` command will print `Hello from
-hands-on-2!` in the terminal.
+assignment-3!` in the terminal.
 
 ## Adding an external library
 
 The `uv add` terminal command will download code for writing MIDI files. This
-will let you run functions from the `MIDIUtil` library in your new `hands-on-2`
+will let you run functions from the `MIDIUtil` library in your new `assignment-3`
 project.
 
 ```bash
@@ -107,7 +107,7 @@ library in the next module.
 ## Running in VS Code
 
 **Iimportant!** The `uv init` command creates a **project folder**
-(`hands-on-2`) with its own Python environment and helper files. Visual Studio
+(`assignment-3`) with its own Python environment and helper files. Visual Studio
 Code only uses that environment if *that* folder is the one you have open — not
 the parent homework folder.
 
@@ -120,7 +120,7 @@ the parent homework folder.
 </div>
 </div>
 
-Use **File → Open Folder…** and choose `hands-on-2` — not the parent homework folder.
+Use **File → Open Folder…** and choose `assignment-3` — not the parent homework folder.
 
 If the wrong folder is open, the Run button will not work reliably. It will not
 find the Python you just set up, nor the libraries you added with `uv add`.
