@@ -89,7 +89,7 @@ export default function Navigation({
             href="/"
             className="font-semibold text-slate-900 hover:text-slate-600 transition-colors"
           >
-            http://lmsc261.vercel.app
+            lmsc261.vercel.app
           </Link>
           <div className="flex items-center gap-6">
             {navLinks
