@@ -1,0 +1,53 @@
+---
+title: "LMSC-261 | pygame-ce: Animation"
+---
+
+# pygame-ce: Animation
+
+So far we have drawn a picture once, then left it on the screen. Animation
+means drawing a new picture every frame.
+
+Use the `pygame-sketches` project from the previous module. Replace `main.py`
+with the sketch below, then run it with `uv run main.py`.
+
+## Sketch 1: A moving line
+
+A horizontal line walks down the window and wraps back to the top. Close the
+window to stop.
+
+```python
+import pygame
+
+# Setup (Don't worry if you don't understand this yet)
+pygame.init()
+screen = pygame.display.set_mode((400, 400), vsync=1)
+
+# Game loop (Don't worry if you don't understand this yet)
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    time = pygame.time.get_ticks() / 1000
+    x = time
+
+    # Draw a black background
+    screen_color = (0, 0, 0)
+    screen.fill(screen_color)
+
+    # Draw a red line
+    draw_color = (255, 0, 0)
+    start = (x, 0)
+    end = (x, 400)
+    pygame.draw.line(screen, draw_color, start, end)
+    pygame.display.flip()
+
+pygame.quit()
+```
+
+The line moves, but slowly. Why is that? What can we do to make it faster?
+
+## Resources
+
+- [pygame-ce documentation](https://pyga.me/docs/)
