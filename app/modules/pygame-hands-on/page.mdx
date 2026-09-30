@@ -1,0 +1,180 @@
+---
+title: "LMSC-261 | pygame-ce Hands-On"
+---
+
+# pygame-ce Hands-On
+
+## Part 1
+
+### Goals
+
+1. Create a new branch for your work
+1. Create a new Python project folder with `uv` and add the `pygame-ce` library
+1. Open the project folder in Visual Studio Code
+1. Copy the example code into your project
+1. Verify that the code runs and `pygame-ce` is installed correctly
+
+### Steps
+
+1. In GitHub Desktop:
+    - checkout the `main` branch of the homework repo
+    - fetch/sync/pull the most recent changes
+    - create a new branch for your work, `pygame-hands-on-<your-name>`
+1. Open the terminal (`⌘ + Space` → type `Terminal` → Enter)
+    - `cd` into the homework repo
+        ```bash
+        cd ~/Documents/GitHub/lmsc261-homework/
+        ```
+    - `cd` into your directory, replacing `<your-name>` below
+        ```bash
+        cd <your-name>
+        ```
+    - use `uv` to create a new project folder named `pygame-hands-on`
+        ```bash
+        uv init --no-package pygame-hands-on
+        cd pygame-hands-on
+        ```
+    - add the `pygame-ce` library
+        ```bash
+        uv add pygame-ce
+        ```
+1. Open the `pygame-hands-on` folder in Visual Studio Code.
+    - File → Open Folder… → choose `pygame-hands-on`
+    - 🚨 **Do not open the parent homework folder!** 🚨
+    - Opening the correct folder helps VS Code find the `pygame-ce` library and
+      other project files.
+1. Copy the following example code into the `main.py` file.
+    ```python
+    import pygame
+
+    # Setup (Don't worry if you don't understand this yet)
+    pygame.init()
+    screen = pygame.display.set_mode((400, 400))
+    clock = pygame.time.Clock()
+
+    # Draw a black background
+    screen_color = (0, 0, 0)
+    screen.fill(screen_color)
+
+    # Draw a red line
+    draw_color = (255, 0, 0)
+    start = (0, 0)
+    end = (400, 400)
+    pygame.draw.line(screen, draw_color, start, end)
+
+    # Update the display
+    pygame.display.flip()
+
+    # Game loop (Don't worry if you don't understand this yet)
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        clock.tick(60)
+
+    pygame.quit()
+    ```
+1. Verify that your project is set up correctly by running the code. You can:
+    - Press the Run (▶) button in VS Code while `main.py` is open
+    - Or in the terminal, run `uv run main.py`
+
+If your project is set up correctly, you will see a black window with a red line
+from the top left to the bottom right. When you have this working, continue to Part 2.
+
+## Part 2
+
+Keep the `main.py` from Part 1. For each prompt, put the snippet in the drawing
+section of `main.py` (after setup, before the game loop), run it, and write your
+answer in `README.md`.
+
+Copy this text into a `README.md` file in your `pygame-hands-on` project folder:
+
+````markdown
+# What line of code draws a circle directly at the center of the screen?
+
+```python
+pygame.draw.circle(screen, draw_color, (0, 0), 10) # Incorrect! Fix this.
+```
+
+# Compare the order of draw calls
+
+Compare the output of the following two code blocks.
+
+```python
+pygame.draw.circle(screen, (255, 0, 0), (100, 100), 30)
+pygame.draw.circle(screen, (0, 255, 0), (120, 120), 30)
+```
+**vs.**
+```python
+pygame.draw.circle(screen, (0, 255, 0), (120, 120), 30)
+pygame.draw.circle(screen, (255, 0, 0), (100, 100), 30)
+```
+
+How does changing the order of the draw calls affect the output?
+
+**Your answer here**
+
+# What does the 5th argument to `draw.line()` do?
+
+We've seen the first 4 arguments to `draw.line()`.
+
+```python
+pygame.draw.line(surface, color, start_pos, end_pos)
+```
+
+The function accepts an optional 5th argument. What does it do?
+
+```python
+pygame.draw.line(screen, (127, 127, 255), (0, 0), (400, 400), 4)
+```
+
+**Your answer here**
+
+# Compare `draw.line()` with `draw.aaline()`
+
+Compare the output of the following two function calls.
+
+```python
+pygame.draw.line(screen, (255, 0, 0), (100, 0), (120, 400), 3)
+pygame.draw.aaline(screen, (0, 255, 0), (110, 0), (130, 400), 3)
+```
+
+Describe all the differences in your own words.
+
+1. **Your answer here**
+2. **Your answer here**
+3. ...
+
+# What is the `type()` of the `start` variable?
+
+```python
+start = (100, 0)
+```
+
+**Your answer here**
+
+**Hint: Use the `print()` function and inspect the terminal output.**
+
+# Draw a stick figure with lines
+
+```python
+# Your code here
+```
+
+# Other drawing functions
+
+Pygame has additional drawing functions.
+
+```python
+# Your code here
+```
+
+````
+
+You may refer to the [pygame `draw` API documentation](https://pyga.me/docs/ref/draw.html).
+
+## Complete when
+
+Make a pull request with however far you got during class.

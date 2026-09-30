@@ -1,0 +1,115 @@
+---
+title: "LMSC-261 | pygame-ce"
+---
+
+# pygame-ce
+
+Pygame Community Edition [pygame-ce](https://pyga.me/) is a python library for making games and
+interactive programs.
+
+We will use it for opening a window, drawing shapes, and reading the mouse and keyboard input.
+
+## Set up a project
+
+`cd` into your folder in the homework repo.
+
+```bash
+cd ~/Documents/GitHub/lmsc261-homework
+cd your-name
+```
+
+Create a new project and move into it.
+
+```bash
+uv init --no-package pygame-sketches
+cd pygame-sketches
+uv run main.py
+```
+
+`uv init` makes a project folder with a starter `main.py`. `uv run main.py`
+should print `Hello from pygame-sketches!`
+
+Add the library, then run `main.py` again whenever you change it.
+
+```bash
+uv add pygame-ce
+```
+
+## Sketch 1: Lines from a list
+
+Replace the starter `main.py` with this. Close the window when you are done
+looking.
+
+```python
+import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((400, 400))
+screen.fill((255, 255, 255))
+
+data = [76, 160, 300, 304, 360]
+for x in data:
+    pygame.draw.line(screen, (0, 0, 0), (x, 0), (x, 400))
+
+pygame.display.flip()
+
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+pygame.quit()
+```
+
+`set_mode` opens the window. `fill` paints the background. Colors are
+`(red, green, blue)` tuples from `0` to `255`.
+
+`pygame.draw.line` takes the screen, a color, and two `(x, y)` points.
+
+`flip()` copies what you drew onto the real window. The `while` loop keeps the
+window open until you close it. Without that loop, the window would appear and
+immediately disappear.
+
+Change a number in `data` and run it again.
+
+## Sketch 2: A moving line
+
+A horizontal line walks down the window and wraps. Close the window to stop.
+
+```python
+import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((400, 400))
+clock = pygame.time.Clock()
+
+def draw_frame():
+    screen.fill((204, 204, 204))
+    pygame.draw.line(screen, (0, 0, 0), (0, y), (400, y))
+    y = y + 2
+    if y >= 400:
+        y = 0
+
+y = 0
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    draw_frame()
+
+    pygame.display.flip()
+    clock.tick(60)
+
+pygame.quit()
+```
+
+Each time through the loop, pygame wipes the screen, draws the line at the
+current `y`, then moves `y` down. `clock.tick(60)` asks for about 60 frames per
+second so the motion stays even.
+
+## Resources
+
+- [pygame-ce documentation](https://pyga.me/docs/)
