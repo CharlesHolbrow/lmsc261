@@ -213,13 +213,15 @@ Fill in `???`:
 ```python
     for i in range(LENGTH):
         pos = history[???]
-        pygame.draw.aacircle(screen, (255, 0, 0), pos, i // 2 + 1)
+        size = (LENGTH - i) // 2
+        pygame.draw.aacircle(screen, (255, 0, 0), pos, size)
 ```
 
 Leave `screen.fill` in. If you comment it out, leftover pixels look like a
 trail even when the list is wrong.
 
-Move the mouse. You should get a trail of circles.
+Move the mouse. You should get a trail of circles. The newest circle (at the
+mouse) is large, and they shrink along the trail.
 
 **Run** the code and confirm the trail. Then **Commit** — `Part 4: mouse trail`
 
@@ -231,12 +233,12 @@ Pick a window size you like, and color the trail yourself.
 `main.py`. `800` by `600` is a reasonable starting point.
 
 The second argument to `aacircle` is the color: `(red, green, blue)`, each from
-`0` to `255`. In the draw loop, `i` is `0` for the newest point and grows
-toward the oldest. You can use `i` in the color so the trail changes along its
-length. Example:
+`0` to `255`. Keep the `size` line from Part 4. In the draw loop, `i` is `0`
+for the newest point and grows toward the oldest. You can use `i` in the color
+so the trail changes along its length. Example:
 
 ```python
-pygame.draw.aacircle(screen, (255, i * 4, 0), pos, i // 2 + 1)
+pygame.draw.aacircle(screen, (255, i * 4, 0), pos, size)
 ```
 
 That example is red-to-orange. Use your own numbers. The circles should not all
@@ -245,7 +247,8 @@ be the same color.
 **Run** the code and confirm a window size and colors you chose. Then
 **Commit** — `Part 5: color and window size`
 
-Optional: only `insert` when a mouse button is down.
+After that, customize as much as you like: different shapes, extra drawing, or
+only `insert` when a mouse button is down. Further customization is optional.
 
 ## README.md
 
