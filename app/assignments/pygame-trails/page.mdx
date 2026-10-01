@@ -130,20 +130,22 @@ data = [40, 80, 50, 120, 90, 160, 70]
 ```
 
 Replace everything **between** `# Drawing` and `# End drawing` with the loop
-below. Fill in `???`. Match the indent of `screen.fill`. Leave
-`pygame.display.flip()` alone.
+below. 
+
+Set the y-coordinate of the line by retrieving the "`i`th" element of the `data`
+list. Match the indent of `screen.fill`.
 
 ```python
     for i in range(len(data)):
         x = i * 50
-        y = data[???]  # fill in: which index?
+        y = ???  # Fill this in! Get the i-th element the data list.
         pygame.draw.line(screen, (255, 0, 0), (x, 0), (x, y))
 ```
 
-You should get seven red lines. Change one number in `data` and run it again —
+You should get seven red lines when you run the code. Change one number in `data` and run it again —
 that line's height should change.
 
-**Run** the code and confirm the seven lines. Then **Commit** — `Part 2: draw from a list`
+Once you have verified the code works, **Commit** — `Part 2: draw from a list`
 
 ## Part 3: Follow the mouse
 
@@ -252,14 +254,20 @@ heading. You can include it in your Part 5 commit, or make a sixth commit.
 
 ## What I still don't understand
 
-## Where the history list lives, and why
+**your answer here**
+
+## Why did we create `history` outside the `while` loop?
+
+**your answer here**
 
 ## AI
+
+**your answer here**
 ```
 
-Under **Where the history list lives, and why**, say whether `history` is
-created inside or outside the `while` loop, and what would go wrong if you
-moved it. Under **AI**, it must be extremely clear what (if anything) was
+Under **Why did we create `history` outside the `while` loop?**, say what
+would go wrong if that line moved inside the loop. Under **AI**, it must
+be extremely clear what (if anything) was
 written with AI. If you used none, write `None`. AI can help you add
 complexity, but you do not get extra points for a more elaborate program. The
 goal is to demonstrate what you learned.
