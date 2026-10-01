@@ -5,15 +5,14 @@ title: "LMSC-261 | pygame-ce: Animation"
 # pygame-ce: Animation
 
 So far we have drawn a picture once, then left it on the screen. Animation
-means drawing a new picture every frame.
+means drawing a new picture every frame - often 60 times per second.
 
 Use the `pygame-sketches` project from the previous module. Replace `main.py`
 with the sketch below, then run it with `uv run main.py`.
 
 ## Sketch 1: A moving line
 
-A horizontal line walks down the window and wraps back to the top. Close the
-window to stop.
+A vertical line moves slowly to the right. Close the window to stop.
 
 ```python
 import pygame
@@ -22,7 +21,7 @@ import pygame
 pygame.init()
 screen = pygame.display.set_mode((400, 400), vsync=1)
 
-# Game loop (Don't worry if you don't understand this yet)
+# Render loop. We will draw inside the loop.
 running = True
 while running:
     for event in pygame.event.get():
@@ -48,6 +47,81 @@ pygame.quit()
 
 The line moves, but slowly. Why is that? What can we do to make it faster?
 
+TODOs:
+- Make the line move faster
+- Make the line oscillate back and forth
+- Animate colors with respect to time
+- Add multiple lines
+- Try commenting out `screen.fill()`
+
+## Sketch 2: Moving many lines with the mouse
+
+Replace `main.py` with this. Short rays start at the top-left and meet in the
+center. `time` is set up the same way as Sketch 1, but we are not using it yet.
+
+```python
+import pygame
+
+# Let's put our constants in variables
+WIDTH = 800
+HEIGHT = 600
+
+# Setup (Don't worry if you don't understand this yet)
+pygame.init()
+screen = pygame.display.set_mode((WIDTH, HEIGHT), vsync=1)
+
+# Where will our rays point to?
+target_x = WIDTH / 2
+target_y = HEIGHT / 2
+
+# Game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.MOUSEMOTION:
+            print("mouse moved to", event.pos)
+
+    time = pygame.time.get_ticks() / 1000
+
+    # Draw a black background
+    screen_color = (0, 0, 0)
+    screen.fill(screen_color)
+
+    # Draw many lines
+    offsets = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    for x_offset in offsets:
+        start = (x_offset, 0)
+        end = (target_x, target_y)
+        draw_color = (255, 0, 0)
+        pygame.draw.aaline(screen, draw_color, start, end, 2)
+
+    pygame.display.flip()
+
+pygame.quit()
+```
+
+TODOs:
+- Spread the lines out evenly across the window
+- Have the lines point to the mouse position
+- Animate the color with respect to time
+- Add lines from all directions
+- ...
+
 ## Resources
 
 - [pygame-ce documentation](https://pyga.me/docs/)
+
+The official docs link to these tutorials (and many more):
+
+- [Master Python by making 5 games](https://www.youtube.com/watch?v=8OMghdHP-zs) — YouTube video by Clear Code
+- [Pygame in 18 Minutes](https://www.youtube.com/watch?v=blLLtdv4tvo) — YouTube video by DaFluffyPotato
+- [Introduction to Pygame-ce, 2D game programming](https://github.com/adamsralf/pygame_book/blob/main/00%20pygamece.pdf) — Book by Ralf Adams
+- [Newbie Guide](https://pyga.me/docs/tutorials/en/newbie-guide.html) — Thirteen tips for getting comfortable with pygame
+- [Import and Initialize](https://pyga.me/docs/tutorials/en/import-init.html) — How to import pygame and call `pygame.init()`
+- [How do I move an Image?](https://pyga.me/docs/tutorials/en/move-it.html) — Drawing, clearing, and 2D animation
+- [Chimp Tutorial, Line by Line](https://pyga.me/docs/tutorials/en/chimp-explanation.html) — Walkthrough of the classic fist-and-chimp example
+- [Camera Module Introduction](https://pyga.me/docs/tutorials/en/intro-to-camera.html) — Capture stills, live video, and simple computer vision
+
