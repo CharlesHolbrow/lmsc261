@@ -1,0 +1,302 @@
+---
+title: "LMSC-261 | Pygame Trails"
+---
+
+# Pygame Trails
+
+**Due:** Thursday October 8, 5:00 PM
+
+Set up a pygame project, then build a mouse trail by storing past positions
+**outside** the render loop. Turn it in with a **pull request**.
+
+Finish [Pygame](/modules/pygame/), [Pygame: Hands-On](/modules/pygame-hands-on/),
+and [Pygame: Animation](/modules/pygame-animation/) first.
+
+Work **inside** your named folder.
+
+## Commits
+
+This assignment is graded on **git history**. After you finish each part,
+**run the program and check that it works**, then make a **commit in GitHub
+Desktop before you start the next part.** The rubric requires a separate commit
+for Part 1, Part 2, Part 3, Part 4, and Part 5.
+
+Suggested messages:
+
+- `Part 1: pygame project setup`
+- `Part 2: draw from a list`
+- `Part 3: follow the mouse`
+- `Part 4: mouse trail`
+- `Part 5: color and window size`
+
+You will make a pull request once you have completed all parts.
+
+## Part 1
+
+### Goals
+
+1. Create a new branch for your work
+1. Create a new Python project folder with `uv` and add the `pygame-ce` library
+1. Open the project folder in Visual Studio Code
+1. Copy the example code into your project
+1. Verify that the code runs and `pygame-ce` is installed correctly
+
+### Steps
+
+1. Using [GitHub Desktop](https://desktop.github.com/), open the [homework repo](https://github.com/berklee-epd/lmsc261-homework)
+1. **Pull/Sync** the latest (do this before every new PR)
+   - Current Branch → `main`
+   - Fetch origin → Pull origin
+1. Make a **branch** named `your-name-assignment-4`
+   - Example: `ada-lovelace-assignment-4`
+1. Open the terminal (`⌘ + Space` → type `Terminal` → Enter)
+   - `cd` into the homework repo. The default path is:
+     ```bash
+     cd ~/Documents/GitHub/lmsc261-homework/
+     ```
+   - `cd` into your directory, replacing `<your-name>` below
+     ```bash
+     cd <your-name>
+     ```
+   - use `uv` to create a new project folder named `assignment-4`
+     ```bash
+     uv init --no-package assignment-4
+     cd assignment-4
+     ```
+   - Download the `pygame-ce` library and add it to the project
+     ```bash
+     uv add pygame-ce
+     ```
+   - `uv init` also creates `pyproject.toml`, an empty `README.md`, `uv.lock`, and a `.venv` folder. Leave those. You will replace `README.md` at the end. Do not commit `.venv`.
+1. Open the `assignment-4` folder in [Visual Studio Code](https://code.visualstudio.com/)
+   - File → Open Folder… → choose `assignment-4`
+   - 🚨 **Do not open the parent homework folder!** 🚨
+   - **Note:** Opening the correct folder helps VS Code find the `pygame-ce` library
+1. Copy the following example code into the `main.py` file.
+
+   ```python
+   import pygame
+
+   WIDTH = 400
+   HEIGHT = 400
+
+   # Setup (Don't worry if you don't understand this yet)
+   pygame.init()
+   screen = pygame.display.set_mode((WIDTH, HEIGHT), vsync=1)
+
+   # State (add variables here in later parts)
+
+   # Game loop
+   running = True
+   while running:
+       for event in pygame.event.get():
+           if event.type == pygame.QUIT:
+               running = False
+
+       # Draw a black background
+       screen_color = (0, 0, 0)
+       screen.fill(screen_color)
+
+       # Drawing (replace this block in later parts)
+       start = (0, 0)
+       end = (WIDTH, HEIGHT)
+       pygame.draw.line(screen, (255, 0, 0), start, end)
+       # End drawing
+
+       pygame.display.flip()
+
+   pygame.quit()
+   ```
+
+1. Verify that your project is set up correctly by running the code. You can:
+   - Press the Run (▶) button in VS Code while `main.py` is open
+   - Or in the terminal, run `uv run main.py`
+
+If your project is set up correctly, you will see a black window with a red line
+from the top left to the bottom right.
+
+**Run** the code (`▶` or `uv run main.py`) and confirm that window. Then
+**Commit** in GitHub Desktop — `Part 1: pygame project setup` — then continue to
+Part 2. Do not commit `.venv`.
+
+## Part 2: Draw from a list
+
+Draw seven vertical lines. Each height comes from one number in a list.
+
+Add this list **above** the `while` loop, under `# State`:
+
+```python
+data = [40, 80, 50, 120, 90, 160, 70]
+```
+
+Replace everything **between** `# Drawing` and `# End drawing` with the loop
+below. Fill in `???`. Match the indent of `screen.fill`. Leave
+`pygame.display.flip()` alone.
+
+```python
+# Drawing (replace this block in later parts)
+for i in range(len(data)):
+    x = i * 50
+    y = data[???]  # fill in: which index?
+    pygame.draw.line(screen, (255, 0, 0), (x, 0), (x, y))
+# End drawing
+```
+
+You should get seven red lines. Change one number in `data` and run it again —
+that line's height should change.
+
+**Run** the code and confirm the seven lines. Then **Commit** — `Part 2: draw from a list`
+
+## Part 3: Follow the mouse
+
+Draw a circle at the mouse. Store the position in `pos` above the loop. Each
+frame, update `pos` from the mouse, then draw.
+
+1. Under `# State`, add:
+
+   ```python
+   pos = (WIDTH // 2, HEIGHT // 2)
+   ```
+
+   You can leave `data` or delete it.
+
+1. After the event loop, before `screen.fill`, add:
+
+   ```python
+   pos = pygame.mouse.get_pos()
+   ```
+
+1. Replace the code **between** `# Drawing` and `# End drawing` with this line.
+   Keep the two comments.
+
+   ```python
+   pygame.draw.aacircle(screen, (255, 0, 0), pos, 20)
+   ```
+
+Move the mouse. The circle should track the cursor.
+
+**Run** the code and confirm the circle follows the mouse. Then **Commit** —
+`Part 3: follow the mouse`
+
+## Part 4: Mouse trail
+
+Keep the last 50 mouse positions and draw a circle at each one. Put the list
+**above** the loop so it is not recreated every frame.
+
+Under `# State`, replace `pos` with:
+
+```python
+LENGTH = 50
+history = [(0, 0)] * LENGTH  # shortcut: a list of 50 copies of (0, 0)
+```
+
+`[(0, 0)] * LENGTH` is the same as appending `(0, 0)` fifty times.
+
+Delete `pos = pygame.mouse.get_pos()` from Part 3. You will read the mouse when
+you insert into `history`.
+
+After the event loop, before `screen.fill` (same indent as `screen.fill`):
+
+```python
+history.insert(0, pygame.mouse.get_pos())
+history.pop()
+```
+
+That puts the newest point at index `0` and drops the oldest off the end.
+
+Replace the code **between** `# Drawing` and `# End drawing`. Keep the comments.
+Fill in `???`:
+
+```python
+for i in range(LENGTH):
+    pos = history[???]
+    pygame.draw.aacircle(screen, (255, 0, 0), pos, i // 2 + 1)
+```
+
+Leave `screen.fill` in. If you comment it out, leftover pixels look like a
+trail even when the list is wrong.
+
+Move the mouse. You should get a trail of circles.
+
+**Run** the code and confirm the trail. Then **Commit** — `Part 4: mouse trail`
+
+## Part 5: Color and window size
+
+Pick a window size you like, and color the trail yourself.
+
+`WIDTH` and `HEIGHT` are the window size in pixels. Change them at the top of
+`main.py`. `800` by `600` is a reasonable starting point.
+
+The third argument to `aacircle` is the color: `(red, green, blue)`, each from
+`0` to `255`. In the draw loop, `i` is `0` for the newest point and grows
+toward the oldest. You can use `i` in the color so the trail changes along its
+length. Example:
+
+```python
+pygame.draw.aacircle(screen, (255, i * 4, 0), pos, i // 2 + 1)
+```
+
+That example is red-to-orange. Use your own numbers. The circles should not all
+be the same color.
+
+**Run** the code and confirm a window size and colors you chose. Then
+**Commit** — `Part 5: color and window size`
+
+Optional: only `insert` when a mouse button is down.
+
+## README.md
+
+Copy this into a `README.md` in your `assignment-4` folder. Fill in every
+heading. You can include it in your Part 5 commit, or make a sixth commit.
+
+```markdown
+# Assignment 4: Pygame Trails
+
+## What I still don't understand
+
+## Where the history list lives, and why
+
+## AI
+```
+
+Under **Where the history list lives, and why**, say whether `history` is
+created inside or outside the `while` loop, and what would go wrong if you
+moved it. Under **AI**, it must be extremely clear what (if anything) was
+written with AI. If you used none, write `None`. AI can help you add
+complexity, but you do not get extra points for a more elaborate program. The
+goal is to demonstrate what you learned.
+
+## Submit
+
+1. **Push** (upload) to GitHub
+1. Click **Create Pull Request**
+1. Title: `Your Name Homework 4`
+1. **🚨 Do not click Merge 🚨**
+
+## Done when
+
+```
+your-name/
+└── assignment-4/
+    ├── main.py
+    ├── pyproject.toml
+    └── README.md
+```
+
+Your PR is open on GitHub. You did **not** merge it.
+
+## Grading
+
+| Requirement                                                                                                       |  Points |
+| ----------------------------------------------------------------------------------------------------------------- | ------: |
+| Correct folder/files only (`assignment-4`); PR open, not merged                                                   |      15 |
+| Five commits on the branch, one per part (messages can be imperfect; empty or single-dump history does not count) |      20 |
+| Part 1: `uv` project runs and opens a pygame window                                                               |      10 |
+| Part 2 still visible in history: list + loop drawing with `data[i]` (placeholder filled)                          |      10 |
+| Part 4: history list **outside** the loop, `insert`/`pop` pasted in, `history[i]` drawn, background cleared each frame |      20 |
+| Part 5: window size and trail colors chosen by you (not the Part 4 red)                                            |      10 |
+| README headings filled in; AI heading is explicit (`None` OK)                                                     |      15 |
+| **Total**                                                                                                         | **100** |
+
+Do not work on `main`. Do not merge the PR. Change only files in your folder.
+Do not commit `.venv`.

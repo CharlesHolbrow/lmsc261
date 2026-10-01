@@ -56,8 +56,9 @@ TODOs:
 
 ## Sketch 2: Moving many lines with the mouse
 
-Replace `main.py` with this. Short rays start at the top-left and meet in the
-center. `time` is set up the same way as Sketch 1, but we are not using it yet.
+Replace `main.py` with this. Short rays start at the top-left. Each frame,
+`pygame.mouse.get_pos()` tells you where the mouse is, and the rays follow it.
+`time` is set up the same way as Sketch 1, but we are not using it yet.
 
 ```python
 import pygame
@@ -65,14 +66,12 @@ import pygame
 # Let's put our constants in variables
 WIDTH = 800
 HEIGHT = 600
+CENTER_X = WIDTH / 2
+CENTER_Y = HEIGHT / 2
 
 # Setup (Don't worry if you don't understand this yet)
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT), vsync=1)
-
-# Where will our rays point to?
-target_x = WIDTH / 2
-target_y = HEIGHT / 2
 
 # Game loop
 running = True
@@ -80,10 +79,10 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.MOUSEMOTION:
-            print("mouse moved to", event.pos)
 
     time = pygame.time.get_ticks() / 1000
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+    print("Mouse position:", mouse_x, mouse_y)
 
     # Draw a black background
     screen_color = (0, 0, 0)
@@ -94,7 +93,7 @@ while running:
 
     for x_offset in offsets:
         start = (x_offset, 0)
-        end = (target_x, target_y)
+        end = (CENTER_X, CENTER_Y)
         draw_color = (255, 0, 0)
         pygame.draw.aaline(screen, draw_color, start, end, 2)
 
