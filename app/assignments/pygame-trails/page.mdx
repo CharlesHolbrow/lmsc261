@@ -67,7 +67,7 @@ You will make a pull request once you have completed all parts.
      ```bash
      uv add pygame-ce
      ```
-   - `uv init` also creates `pyproject.toml`, an empty `README.md`, `uv.lock`, and a `.venv` folder. Leave those. You will replace `README.md` at the end. Do not commit `.venv`.
+   - `uv init` creates `main.py`, `pyproject.toml`, and an empty `README.md`. `uv add` also creates `uv.lock` and a `.venv` folder. Leave those. You will replace `README.md` at the end.
 1. Open the `assignment-4` folder in [Visual Studio Code](https://code.visualstudio.com/)
    - File → Open Folder… → choose `assignment-4`
    - 🚨 **Do not open the parent homework folder!** 🚨
@@ -134,12 +134,10 @@ below. Fill in `???`. Match the indent of `screen.fill`. Leave
 `pygame.display.flip()` alone.
 
 ```python
-# Drawing (replace this block in later parts)
-for i in range(len(data)):
-    x = i * 50
-    y = data[???]  # fill in: which index?
-    pygame.draw.line(screen, (255, 0, 0), (x, 0), (x, y))
-# End drawing
+    for i in range(len(data)):
+        x = i * 50
+        y = data[???]  # fill in: which index?
+        pygame.draw.line(screen, (255, 0, 0), (x, 0), (x, y))
 ```
 
 You should get seven red lines. Change one number in `data` and run it again —
@@ -163,14 +161,14 @@ frame, update `pos` from the mouse, then draw.
 1. After the event loop, before `screen.fill`, add:
 
    ```python
-   pos = pygame.mouse.get_pos()
+       pos = pygame.mouse.get_pos()
    ```
 
 1. Replace the code **between** `# Drawing` and `# End drawing` with this line.
    Keep the two comments.
 
    ```python
-   pygame.draw.aacircle(screen, (255, 0, 0), pos, 20)
+       pygame.draw.aacircle(screen, (255, 0, 0), pos, 20)
    ```
 
 Move the mouse. The circle should track the cursor.
@@ -198,8 +196,8 @@ you insert into `history`.
 After the event loop, before `screen.fill` (same indent as `screen.fill`):
 
 ```python
-history.insert(0, pygame.mouse.get_pos())
-history.pop()
+    history.insert(0, pygame.mouse.get_pos())
+    history.pop()
 ```
 
 That puts the newest point at index `0` and drops the oldest off the end.
@@ -208,9 +206,9 @@ Replace the code **between** `# Drawing` and `# End drawing`. Keep the comments.
 Fill in `???`:
 
 ```python
-for i in range(LENGTH):
-    pos = history[???]
-    pygame.draw.aacircle(screen, (255, 0, 0), pos, i // 2 + 1)
+    for i in range(LENGTH):
+        pos = history[???]
+        pygame.draw.aacircle(screen, (255, 0, 0), pos, i // 2 + 1)
 ```
 
 Leave `screen.fill` in. If you comment it out, leftover pixels look like a
@@ -227,7 +225,7 @@ Pick a window size you like, and color the trail yourself.
 `WIDTH` and `HEIGHT` are the window size in pixels. Change them at the top of
 `main.py`. `800` by `600` is a reasonable starting point.
 
-The third argument to `aacircle` is the color: `(red, green, blue)`, each from
+The second argument to `aacircle` is the color: `(red, green, blue)`, each from
 `0` to `255`. In the draw loop, `i` is `0` for the newest point and grows
 toward the oldest. You can use `i` in the color so the trail changes along its
 length. Example:
