@@ -21,7 +21,7 @@ title: "LMSC-261 | Pygame: Hands-On"
     - fetch/sync/pull the most recent changes
     - create a new branch for your work, `pygame-hands-on-<your-name>`
 1. Open the terminal (`⌘ + Space` → type `Terminal` → Enter)
-    - `cd` into the homework repo
+    - `cd` into the homework repo. The default path is:
         ```bash
         cd ~/Documents/GitHub/lmsc261-homework/
         ```
@@ -34,15 +34,14 @@ title: "LMSC-261 | Pygame: Hands-On"
         uv init --no-package pygame-hands-on
         cd pygame-hands-on
         ```
-    - add the `pygame-ce` library
+    - Download the `pygame-ce` library and add it to the project
         ```bash
         uv add pygame-ce
         ```
 1. Open the `pygame-hands-on` folder in Visual Studio Code.
     - File → Open Folder… → choose `pygame-hands-on`
     - 🚨 **Do not open the parent homework folder!** 🚨
-    - Opening the correct folder helps VS Code find the `pygame-ce` library and
-      other project files.
+    - **Note:** Opening the correct folder helps VS Code find the `pygame-ce` library
 1. Copy the following example code into the `main.py` file.
     ```python
     import pygame
@@ -56,11 +55,10 @@ title: "LMSC-261 | Pygame: Hands-On"
     screen_color = (0, 0, 0)
     screen.fill(screen_color)
 
-    # Draw a red line
-    draw_color = (255, 0, 0)
+    # Drawing (replace this block for each Part 2 prompt)
     start = (0, 0)
     end = (400, 400)
-    pygame.draw.line(screen, draw_color, start, end)
+    pygame.draw.line(screen, (255, 0, 0), start, end)
 
     # Update the display
     pygame.display.flip()
@@ -85,9 +83,9 @@ from the top left to the bottom right. When you have this working, continue to P
 
 ## Part 2
 
-Keep the `main.py` from Part 1. For each prompt, put the snippet in the drawing
-section of `main.py` (after setup, before the game loop), run it, and write your
-answer in `README.md`.
+Keep the `main.py` from Part 1. For each prompt, replace the drawing block, run
+it, and write your answer in `README.md`. Leave setup, the background fill,
+`flip()`, and the game loop alone.
 
 Copy this text into a `README.md` file in your `pygame-hands-on` project folder:
 
@@ -95,7 +93,7 @@ Copy this text into a `README.md` file in your `pygame-hands-on` project folder:
 # What line of code draws a circle directly at the center of the screen?
 
 ```python
-pygame.draw.circle(screen, draw_color, (0, 0), 10) # Incorrect! Fix this.
+pygame.draw.circle(screen, (255, 0, 0), (0, 0), 10) # Incorrect! Fix this.
 ```
 
 # Compare the order of draw calls
@@ -127,7 +125,7 @@ pygame.draw.line(surface, color, start_pos, end_pos)
 The function accepts an optional 5th argument. What does it do?
 
 ```python
-pygame.draw.line(screen, (127, 127, 255), (0, 0), (400, 400), 4)
+pygame.draw.line(screen, (127, 127, 255), (0, 0), (400, 400), 10)
 ```
 
 **Your answer here**

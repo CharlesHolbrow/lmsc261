@@ -45,8 +45,8 @@ All students in LMSC-261 must submit their problem sets and the final project us
 You are also expected to:
 
 - attend 12 lectures,
-- take four quizzes,
-- solve four problem sets,
+- solve assigned problem sets,
+- take quizzes,
 - complete a mid-term project, and
 - design and implement a final project.
 
@@ -100,7 +100,7 @@ In this course, students are required to work on a final project. The project of
 
 ## Quizzes
 
-You must take four quizzes throughout the semester, covering lecture information, supplemental recordings, and possibly assigned readings. Students will have at least two weeks (14 days) to complete each quiz. Once the due date for a quiz passes, students will no longer be able to access or take it. Once you start the quiz, you will have one hour to complete it. You can take each quiz up to twice to maximize your grade.
+You will take quizzes throughout the semester, covering lecture information, supplemental recordings, and possibly assigned readings. Students will have at least two weeks (14 days) to complete each quiz. Once the due date for a quiz passes, students will no longer be able to access or take it. Once you start the quiz, you will have one hour to complete it. You can take each quiz up to twice to maximize your grade.
 
 ## Problem Sets and Project Submission Policy
 
@@ -141,8 +141,8 @@ The instructor will determine your final grade by considering the following comp
 
 | Description           | Grade |
 | --------------------- | ----: |
-| Biweekly Problem Sets |   25% |
-| Biweekly Quizzes      |   25% |
+| Problem Sets          |   25% |
+| Quizzes               |   25% |
 | Mid-term Project      |   25% |
 | Final Project         |   25% |
 
