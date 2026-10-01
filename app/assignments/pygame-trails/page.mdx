@@ -129,11 +129,14 @@ Add this list **above** the `while` loop, under `# State`:
 data = [40, 80, 50, 120, 90, 160, 70]
 ```
 
-Replace everything **between** `# Drawing` and `# End drawing` with the loop
-below. 
+Copy the code block below into your `main.py` file and replace everything
+**between** `# Drawing` and `# End drawing`. Make sure the indentation is
+correct after the copy/paste (the `for i in range(...)` loop should match the
+indent of `screen.fill`).
 
-Set the y-coordinate of the line by retrieving the "`i`th" element of the `data`
-list. Match the indent of `screen.fill`.
+Note: the code block below is incomplete! You need to fill in the `???` with the
+correct code. Set the y-coordinate of the line by retrieving the "`i`th" element
+of the `data` list. 
 
 ```python
     for i in range(len(data)):
@@ -142,8 +145,8 @@ list. Match the indent of `screen.fill`.
         pygame.draw.line(screen, (255, 0, 0), (x, 0), (x, y))
 ```
 
-You should get seven red lines when you run the code. Change one number in `data` and run it again —
-that line's height should change.
+You should get seven red lines when you run the code. Change one number in
+`data` and run it again — that line's height should change.
 
 Once you have verified the code works, **Commit** — `Part 2: draw from a list`
 
