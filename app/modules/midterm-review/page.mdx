@@ -6,10 +6,9 @@ import { PyScriptEditor } from "@/components/PyScriptEditor"
 
 # Midterm Review
 
-```python
-# create a list containing the `4`, `5` and `"seven" in that order and assign it to a variable named 
-my_list = ???
-```
+The following topics are likely to be on the midterm.
+
+Use the interactive snippets below to identify what topics to study.
 
 ## Python
 
@@ -21,31 +20,33 @@ my_list = ???
   - Get the length of a list
   - Iterate with a for loop
 
-- Functions
-  - Define
-  - Call with variables as arguments
-  - Call with literal values as arguments
-  - Understand difference between printing, and returning values
-
 - Variables
   - Assign values to variables
   - Identify type
+    - recognize literals
+      - `int`
+      - `float`
+      - `string`
+      - `tuple`
+      - `list`
+      - `None`
+    - Use `type()`
 
-- Types
-  - `int`
-  - `float`
-  - `string`
-  - `tuple`
-  - `list`
-  - `None`
-
-- Arithmatic on numbers (`int` and `float`)
+- Arithmetic on numbers (`int` and `float`)
   - `+`
   - `-`
   - `*`
   - `/`
-  - `%`
-  - `//`
+  - `%` (modulo operator)
+  - `//` (integer division)
+
+- Functions
+  - Define
+  - Define functions with multiple arguments
+  - Call with variables as arguments
+  - Call with literal values as arguments: `print(len(my_list))` vs `print(my_list_length)` vs `print(3)`
+  - Understand difference between printing, and returning values
+
 
 ## Terminal 
  
@@ -76,6 +77,7 @@ You should be able to figure out:
     Iteration onward keeps `names` / `my_list` in initialCode so loop variable names are obvious.
   - Do not leak answers in starter code (e.g. no append of the last value right before
     `last_element = ???`). Prompts can name targets; hidden data should not spell them out.
+  - No dummy lists (`['a'] * N` or repeating a long literal to hide the answer).
   - Copy-via-loop: verify `copy == names` and `copy is not names` (not `copy = names`).
   - Teach loop + append with a plain copy exercise before doubling.
   - Inside initialCode template strings, avoid unescaped backticks (they break the MDX literal).
@@ -157,7 +159,7 @@ Change the second element of `my_list` to `"seven"`.
 my_list = [1, 2, 3]
 `}
   initialCode={`
-# Set the element at index 1 to "seven"
+# Change the element at index 1 (the second item)
 
 print("before:", my_list)
 
@@ -166,9 +168,7 @@ print("before:", my_list)
 print("after: ", my_list)
 `}
   verifyCode={`
-
 assert my_list == [1, "seven", 3], f"Expected 'seven' at index 1, got {my_list[1]!r}"
-
 print("✓ Correct!")
 `}
 />
@@ -193,11 +193,39 @@ print("✓ Correct!")
 `}
 />
 
+## Two kinds of functions:
+
+These two patterns look similar, but the **order of the pieces** is different. ([Why?](https://stackoverflow.com/questions/83983/why-isnt-the-len-function-inherited-by-dictionaries-and-lists-in-python))
+
+- **How many items?** `len(my_list)`. This is called a "global" function. 
+- **Add to this list?** `my_list.append(7)`
+
+The code below mixes up those patterns. Fix it so `my_list_length` is how many items are in `my_list`, and `my_list` ends with `4` on the end.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={2}
+  initialCode={`
+my_list = [1, 2, 3]
+my_list_length = my_list.len()  # Wrong!
+append(my_list, 4)              # Wrong!
+
+print("length:", my_list_length)
+print("list:", my_list)
+`}
+  verifyCode={`
+assert my_list_length == 3, f"Expected length 3, got {my_list_length!r}"
+assert my_list == [1, 2, 3, 4], f"Expected [1, 2, 3, 4], got {my_list!r}"
+print("✓ Correct!")
+`}
+/>
+
 ## List Length
 
 Store how many items are in `other_list` in a variable named `count`.
 
-If you forget how to do this, review [Python Basics: Lists](/modules/python#lists)
+If you forgot how, check [Python Basics: Lists](/modules/python#lists)
 
 <PyScriptEditor
   kind="py-editor"
@@ -217,20 +245,18 @@ print("✓ Correct!")
 `}
 />
 
-Get the last element of `other_list`
+Get the last element of `other_list`.
 
 <PyScriptEditor
   kind="py-editor"
   rows={8}
   outputRows={1}
   setup={`
-other_list = [12, 34, 56, 78, 444, '1', 'b', 'ok', 1, 2, 3] * 22
-other_list[-1] = other_list[100 % len(other_list)]
+other_list = [12, 34, 56, 78]
 `}
   initialCode={`
 # Find the value of the last element of other_list
-# Hint: You can use the length function OR
-# Hint: You can use negative indices count from the end
+# Hint: negative indices count from the end
 
 last_element = ???
 `}
@@ -244,7 +270,7 @@ print("✓ Correct!")
 
 Use a `for` loop to build a new list `copy` that contains the same items as `names`, in the same order. 
 
-Start with `copy = []` and append each item inside the loop
+Start with `copy = []` and append each item inside the loop.
 
 <PyScriptEditor
   kind="py-editor"
@@ -266,7 +292,9 @@ print("✓ Correct!")
 `}
 />
 
-Use a `for` loop to build a new list `doubled` where each item is **twice** the corresponding item in `my_list`. (Start with `doubled = []` and `.append()` inside the loop.)
+Use a `for` loop to build a new list `doubled` where each item is **twice** the
+corresponding item in `my_list`. (Start with `doubled = []` and `append`
+inside the loop.)
 
 <PyScriptEditor
   kind="py-editor"
@@ -290,7 +318,7 @@ print("✓ Correct!")
 
 ## Avoid off-by-one errors
 
-It's easy to get this wrong!
+Calculate 3 times the **third list element**.
 
 <PyScriptEditor
   kind="py-editor"
@@ -299,11 +327,13 @@ It's easy to get this wrong!
   initialCode={`
 my_list = [10, 20, 30, 40, 50]
 
-# What is 3 times the third list element
-answer = 3 * ???
+# What is 3 times the third list element (replace ??? below)
+answer = 3 * my_list[ ??? ]
+
+print(answer)
 `}
   verifyCode={`
-expected = 3 * 30
+expected = 3 * my_list[2]
 assert answer == expected, f"Expected {expected!r}, got {answer!r}"
 print("✓ Correct!")
 `}
