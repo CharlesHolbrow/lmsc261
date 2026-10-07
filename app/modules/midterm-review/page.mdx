@@ -16,10 +16,10 @@ my_list = ???
 - Lists
   - Create a list
   - Append
-  - Set an element a speciffic index
-  - Get an element at a speciffic index
-  - iterate with a for loop
-  - get the length
+  - Set an element at a specific index
+  - Get an element at a specific index
+  - Get the length of a list
+  - Iterate with a for loop
 
 - Functions
   - Define
@@ -69,6 +69,19 @@ You should be able to figure out:
 
 # Exercises
 
+{/*
+  PyScriptEditor exercise notes (maintainers):
+  - Pre-built lists: use `setup` (onbeforerun) so literals are not in the visible editor
+    for List Mutation through List Length. List Creation has students build the list; List
+    Iteration onward keeps `names` / `my_list` in initialCode so loop variable names are obvious.
+  - Do not leak answers in starter code (e.g. no append of the last value right before
+    `last_element = ???`). Prompts can name targets; hidden data should not spell them out.
+  - Copy-via-loop: verify `copy == names` and `copy is not names` (not `copy = names`).
+  - Teach loop + append with a plain copy exercise before doubling.
+  - Inside initialCode template strings, avoid unescaped backticks (they break the MDX literal).
+  - verifyCode runs after the student’s run in the same worker; setup runs before each Run.
+*/}
+
 ## List Creation
 
 Create a list containing the `1`, `2` and `3` in that order and assign it to a variable named `my_list`.
@@ -108,7 +121,7 @@ print("✓ Correct!")
 
 ## List Mutation
 
-Add a `7` onto the end of `my_list` (assume `my_list` already exists).
+Add a `7` onto the end of `my_list`.
 
 If you forgot how, check [Python Basics](/modules/python/)
 
@@ -117,17 +130,181 @@ If you forgot how, check [Python Basics](/modules/python/)
   rows={8}
   outputRows={1}
   setup={`
-my_list = [4, 5, 'six']
+my_list = [400, 500, "six"]
 `}
   initialCode={`
-# Add 7 to the end of \`my_list\`
+# Add 7 to the end of my_list
 
 ???
-
-print(my_list)
 `}
   verifyCode={`
-assert my_list == [4, 5, "six", 7], f"Expected [4, 5, 'six', 7], got {my_list!r}"
+assert my_list[-1] == 7, f"Expected last element to be 7, got {my_list[-1]!r}"
+assert len(my_list) == 4, f"Expected length 4, got {len(my_list)}"
+assert my_list[0] == 400 and my_list[1] == 500 and my_list[2] == "six"
+print("✓ Correct!")
+`}
+/>
+
+## List Element Access
+
+Change the second element of `my_list` to `"seven"`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+my_list = [1, 2, 3]
+`}
+  initialCode={`
+# Set the element at index 1 to "seven"
+
+print("before:", my_list)
+
+# ...your code here...
+
+print("after: ", my_list)
+`}
+  verifyCode={`
+
+assert my_list == [1, "seven", 3], f"Expected 'seven' at index 1, got {my_list[1]!r}"
+
+print("✓ Correct!")
+`}
+/>
+
+Store the **first** element of `my_list` in a variable named `first`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+my_list = [400, 500, 600]
+`}
+  initialCode={`
+# Get the element at my_list index 0 and assign it to first
+
+first = ???
+`}
+  verifyCode={`
+assert first == my_list[0], f"Expected {my_list[0]}, got {first!r}"
+print("✓ Correct!")
+`}
+/>
+
+## List Length
+
+Store how many items are in `other_list` in a variable named `count`.
+
+If you forget how to do this, review [Python Basics: Lists](/modules/python#lists)
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+other_list = ["do", "re", "mi", "fa", "sol", "la", "ti"]
+`}
+  initialCode={`
+# Assign the length of other_list to count
+
+count = ???
+`}
+  verifyCode={`
+assert count == len(other_list), f"Expected {len(other_list)}, got {count!r}"
+print("✓ Correct!")
+`}
+/>
+
+Get the last element of `other_list`
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+other_list = [12, 34, 56, 78, 444, '1', 'b', 'ok', 1, 2, 3] * 22
+other_list[-1] = other_list[100 % len(other_list)]
+`}
+  initialCode={`
+# Find the value of the last element of other_list
+# Hint: You can use the length function OR
+# Hint: You can use negative indices count from the end
+
+last_element = ???
+`}
+  verifyCode={`
+assert last_element == other_list[-1], f"Expected {other_list[-1]!r}, got {last_element!r}"
+print("✓ Correct!")
+`}
+/>
+
+## List Iteration
+
+Use a `for` loop to build a new list `copy` that contains the same items as `names`, in the same order. 
+
+Start with `copy = []` and append each item inside the loop
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  outputRows={2}
+  initialCode={`
+names = ["Ada", "Bob", "Cy"]
+copy = []
+
+# Loop over names and append each item to copy
+
+print("names", names)
+print("copy", copy)
+`}
+  verifyCode={`
+assert copy == names, f"Expected {names!r}, got {copy!r}"
+assert copy is not names, "copy should be a new list, not the same object as names"
+print("✓ Correct!")
+`}
+/>
+
+Use a `for` loop to build a new list `doubled` where each item is **twice** the corresponding item in `my_list`. (Start with `doubled = []` and `.append()` inside the loop.)
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={13}
+  outputRows={2}
+  initialCode={`
+my_list = [10, 20, 30, 40, 55, 99199128, 4.123, "A", [10], 1.388e12, 1_800]
+doubled = []
+
+# Loop over my_list and append each value times 2 to doubled
+
+print("my_list", my_list)
+print("doubled", doubled)
+`}
+  verifyCode={`
+expected = [n * 2 for n in my_list]
+assert doubled == expected, f"Expected {expected!r}, got {doubled!r}"
+print("✓ Correct!")
+`}
+/>
+
+## Avoid off-by-one errors
+
+It's easy to get this wrong!
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={13}
+  outputRows={2}
+  initialCode={`
+my_list = [10, 20, 30, 40, 50]
+
+# What is 3 times the third list element
+answer = 3 * ???
+`}
+  verifyCode={`
+expected = 3 * 30
+assert answer == expected, f"Expected {expected!r}, got {answer!r}"
 print("✓ Correct!")
 `}
 />

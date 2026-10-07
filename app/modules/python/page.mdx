@@ -53,9 +53,13 @@ message = f"{name} received a {score} on assignment #{assignment_number}"
 print(message)
 ```
 
-## Lists
+## <span id="lists">Lists</span>
 
-A **list** holds items in order. You look items up by **index** (counting starts at `0`) and add items with `.append()`.
+A **list** holds items in order.
+
+- You look items up by **index** in square brackets `my_list[2]` (counting starts at `0`)
+- Add items to the end of the list with with `my_list.append()`.
+- Get the length of the list with `len(my_list)`
 
 ```python
 # A C major triad
@@ -68,8 +72,9 @@ print(chord[2])  # "G"
 # Add the seventh
 chord.append("B")
 
-# How many notes are in the chord?
-print(len(chord))  # 4
+# How many notes are in the chord? / How many elements are in the list
+note_count = len(chord)
+print(note_count)  # 4
 
 # Change the third
 chord[1] = "Eb"
