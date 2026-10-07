@@ -77,9 +77,16 @@ You should be able to figure out:
     Iteration onward keeps `names` / `my_list` in initialCode so loop variable names are obvious.
   - Do not leak answers in starter code (e.g. no append of the last value right before
     `last_element = ???`). Prompts can name targets; hidden data should not spell them out.
+  - Do not interpolate the expected value into assert messages when the point is an
+    expression (`len`, `//`, indexing, f-strings). Students will copy the literal from
+    “Expected 4”. Literal-as-the-task (create this list) can still show the target.
   - No dummy lists (`['a'] * N` or repeating a long literal to hide the answer).
   - Copy-via-loop: verify `copy == names` and `copy is not names` (not `copy = names`).
   - Teach loop + append with a plain copy exercise before doubling.
+  - Tuples: assert `type(...) is tuple` so a list of the same values fails.
+  - Tuple recognition: `assert pair is b` so students must pick the existing tuple, not rebuild it.
+  - Strings escalate: plain literal → f-string with one name → f-string with a name and a number.
+  - print vs return: starter uses print in the function body; verify `result`, not stdout.
   - Inside initialCode template strings, avoid unescaped backticks (they break the MDX literal).
   - verifyCode runs after the student’s run in the same worker; setup runs before each Run.
 */}
@@ -188,7 +195,7 @@ my_list = [400, 500, 600]
 first = ???
 `}
   verifyCode={`
-assert first == my_list[0], f"Expected {my_list[0]}, got {first!r}"
+assert first == my_list[0], f"first is {first!r}; it should be the first element of my_list"
 print("✓ Correct!")
 `}
 />
@@ -240,7 +247,7 @@ other_list = ["do", "re", "mi", "fa", "sol", "la", "ti"]
 count = ???
 `}
   verifyCode={`
-assert count == len(other_list), f"Expected {len(other_list)}, got {count!r}"
+assert count == len(other_list), f"count is {count!r}; it should be how many items are in other_list"
 print("✓ Correct!")
 `}
 />
@@ -261,7 +268,7 @@ other_list = [12, 34, 56, 78]
 last_element = ???
 `}
   verifyCode={`
-assert last_element == other_list[-1], f"Expected {other_list[-1]!r}, got {last_element!r}"
+assert last_element == other_list[-1], f"last_element is {last_element!r}; it should be the last element of other_list"
 print("✓ Correct!")
 `}
 />
@@ -286,7 +293,7 @@ print("names", names)
 print("copy", copy)
 `}
   verifyCode={`
-assert copy == names, f"Expected {names!r}, got {copy!r}"
+assert copy == names, f"copy is {copy!r}; it should contain the same items as names, in the same order"
 assert copy is not names, "copy should be a new list, not the same object as names"
 print("✓ Correct!")
 `}
@@ -311,7 +318,7 @@ print("doubled", doubled)
 `}
   verifyCode={`
 expected = [n * 2 for n in my_list]
-assert doubled == expected, f"Expected {expected!r}, got {doubled!r}"
+assert doubled == expected, f"doubled is {doubled!r}; each item should be twice the corresponding item in my_list"
 print("✓ Correct!")
 `}
 />
@@ -334,7 +341,264 @@ print(answer)
 `}
   verifyCode={`
 expected = 3 * my_list[2]
-assert answer == expected, f"Expected {expected!r}, got {answer!r}"
+assert answer == expected, f"answer is {answer!r}; it should be 3 times the third list element"
+print("✓ Correct!")
+`}
+/>
+
+## Variables
+
+Assign `8` to a variable named `measures`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+# Assign 8 to measures
+???
+`}
+  verifyCode={`
+assert measures == 8, f"Expected 8, got {measures!r}"
+print("✓ Correct!")
+`}
+/>
+
+The example below looks like it is saying that *1 equals 50*. Obviously *1 is not 50*. 
+
+Can you predict what it will print? Do you understand what it is ACTUALLY saying?
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+a = 1
+b = 50
+a = b
+print(a)
+print(b)
+`}
+/>
+
+If you want to *compare* two numbers, see [Python Basics: Conditionals](/modules/python/#conditionals). (Comparisons will not be on the midterm)
+
+## Tuples
+
+A **tuple** is like a list, but you write it with parentheses: `(1, 2, 3)` instead of `[1, 2, 3]`.
+
+Create a tuple containing `1`, `2` and `3` in that order and assign it to a variable named `my_tuple`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+# Create a tuple containing 1, 2, 3
+my_tuple = ???
+`}
+  verifyCode={`
+assert type(my_tuple) is tuple, f"Expected a tuple, got {type(my_tuple)}"
+assert my_tuple == (1, 2, 3), f"Expected (1, 2, 3), got {my_tuple!r}"
+print("✓ Correct!")
+`}
+/>
+
+Which of these values is a tuple? Assign that value to a variable named `pair`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  initialCode={`
+a = [4, 5]
+b = (4, 5)
+c = "4, 5"
+
+# Which one is a tuple? Assign it to pair
+pair = ???
+`}
+  verifyCode={`
+assert pair is b, "Assign pair to the variable that already holds a tuple"
+assert type(pair) is tuple, f"Expected a tuple, got {type(pair)}"
+print("✓ Correct!")
+`}
+/>
+
+**Test your knowledge:** What is the difference between `[4, 5]` and `(4, 5)`? How could you check with `type()`?
+
+Use `type()` to store the type of `value` in a variable named `value_type`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+value = (400, 500, "six")
+`}
+  initialCode={`
+# Use type() to find out what kind of value this is
+
+value_type = ???
+`}
+  verifyCode={`
+assert value_type is type(value), f"Expected {type(value)}, got {value_type!r}"
+print("✓ Correct!")
+`}
+/>
+
+## Arithmetic
+
+`//` is integer division (how many whole groups). `%` is remainder (what is left over).
+
+How many complete measures of `4` beats fit into `17` beats? Store that in `complete_measures`. Store the leftover beats in `leftover`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  initialCode={`
+beats = 17
+beats_per_measure = 4
+
+# How many complete measures? How many beats left over?
+complete_measures = ???
+leftover = ???
+`}
+  verifyCode={`
+assert complete_measures == beats // beats_per_measure, f"complete_measures is {complete_measures!r}"
+assert leftover == beats % beats_per_measure, f"leftover is {leftover!r}"
+print("✓ Correct!")
+`}
+/>
+
+## Strings
+
+Assign the text `Hello` to a variable named `greeting`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+# Assign the text Hello to greeting
+greeting = ???
+`}
+  verifyCode={`
+assert greeting == "Hello", f"Expected 'Hello', got {greeting!r}"
+print("✓ Correct!")
+`}
+/>
+
+Use an **f-string** to put `name` into a greeting. `greeting` should be `Hello, Ada`.
+
+If you forgot how, check [Python Basics: Formatting Strings](/modules/python#formatting-strings)
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+name = "Ada"
+
+# Use an f-string: Hello, then the name
+greeting = ???
+`}
+  verifyCode={`
+assert greeting == f"Hello, {name}", f"greeting is {greeting!r}; use an f-string with name"
+print("✓ Correct!")
+`}
+/>
+
+Build this sentence with an f-string (do not worry about extra number formatting): `Ada scored 95.5`
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  initialCode={`
+name = "Ada"
+score = 95.5
+
+# Use an f-string with both name and score
+message = ???
+`}
+  verifyCode={`
+assert message == f"{name} scored {score}", f"message is {message!r}; use an f-string with name and score"
+print("✓ Correct!")
+`}
+/>
+
+## Functions
+
+If you forgot how, check [Python Functions](/modules/python-functions/)
+
+Define a function named `double` that takes one argument `n` and **returns** `n * 2`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  initialCode={`
+# Define double so it returns twice its argument
+
+???
+`}
+  verifyCode={`
+assert double(3) == 6, f"Expected double(3) to be 6, got {double(3)!r}"
+assert double(0) == 0, f"Expected double(0) to be 0, got {double(0)!r}"
+print("✓ Correct!")
+`}
+/>
+
+Define a function named `total_beats` that takes **two** arguments, `measures` and `beats_per_measure`, and returns their product.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  initialCode={`
+# Define total_beats(measures, beats_per_measure)
+
+???
+`}
+  verifyCode={`
+assert total_beats(8, 4) == 32, f"Expected total_beats(8, 4) to be 32, got {total_beats(8, 4)!r}"
+assert total_beats(3, 3) == 9, f"Expected total_beats(3, 3) to be 9, got {total_beats(3, 3)!r}"
+print("✓ Correct!")
+`}
+/>
+
+You can pass a **variable** or a **literal** as an argument. Both of these calls return the same number:
+
+```python
+person = "Cy"
+
+from_variable = len(person)
+from_literal = len("Cy")
+```
+
+**Test your knowledge:** Do you understand the difference between `len(person)` and `len("Cy")`? Does `len` care which one you used?
+
+**Test your knowledge:** What is the difference between `print(len(my_list))`, `print(my_list_length)`, and `print(3)`? Each one can print a number. What is being passed as the argument in each case?
+
+`print` shows a value on the screen. `return` sends a value back to the caller so you can store it. Fix `area` so `result` is `20`, not `None`.
+
+If you forgot how, check [Python Functions: Return](/modules/python-functions#return)
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  outputRows={2}
+  initialCode={`
+def area(width, height):
+    print(width * height)  # This shows a number, but does not return it
+
+result = area(4, 5)
+print("result:", result)
+`}
+  verifyCode={`
+assert result == 20, f"Expected result to be 20, got {result!r}. Did area return, or only print?"
 print("✓ Correct!")
 `}
 />

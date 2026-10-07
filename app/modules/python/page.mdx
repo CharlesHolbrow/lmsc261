@@ -139,9 +139,22 @@ for note in chord:
     print(note)
 ```
 
-## Conditionals
+## <span id="conditionals">Conditionals</span>
 
-An `if` statement runs code only when a condition is true. Use `==` to check equality, then `elif` ("else if") and `else` for the other cases.
+To *compare* two values, use comparison operators. These expressions are `True` or `False`:
+
+| Operator | Meaning |
+| --- | --- |
+| `==` | equal |
+| `!=` | not equal |
+| `>` | greater than |
+| `<` | less than |
+| `>=` | greater than or equal |
+| `<=` | less than or equal |
+
+`=` assigns. `==` compares. `a = b` copies `b` into `a`. `a == b` asks whether they have the same value.
+
+An `if` statement runs code only when a condition is true. Use `elif` ("else if") and `else` for the other cases.
 
 ```python
 beats_per_measure = 4
@@ -152,6 +165,17 @@ elif beats_per_measure == 3:
     print("waltz")
 else:
     print("something else")
+```
+
+```python
+bpm = 120
+
+if bpm > 140:
+    print("fast")
+elif bpm >= 100:
+    print("medium")
+else:
+    print("slow")
 ```
 
 ## Resources
