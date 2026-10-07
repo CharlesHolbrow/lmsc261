@@ -13,29 +13,13 @@ my_list = ???
 
 ## Python
 
-### Lists
-
-Create a list containing the `4`, `5` and `"seven"` in that order and assign it to a variable named `my_list`.
-
-<PyScriptEditor
-  kind="py-editor"
-  rows={8}
-  initialCode={`
-# Create a list 
-my_list = ???
-`}
-  verifyCode={`
-assert my_list == [4, 5, "six"], f"Expected [4, 5, 'six'], got {my_list!r}"
-print("✓ Correct!")
-`}
-/>
-
 - Lists
   - Create a list
   - Append
   - Set an element a speciffic index
   - Get an element at a speciffic index
   - iterate with a for loop
+  - get the length
 
 - Functions
   - Define
@@ -81,3 +65,69 @@ You should be able to figure out:
 - Setup a project
 - Draw circles and lines
 - Animate circles
+
+
+# Exercises
+
+## List Creation
+
+Create a list containing the `1`, `2` and `3` in that order and assign it to a variable named `my_list`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+# Create a list containing 1, 2, 3
+my_list = ???
+`}
+  verifyCode={`
+assert my_list == [1, 2, 3], f"Expected [1, 2, 3], got {my_list!r}"
+print("✓ Correct!")
+`}
+/>
+
+
+Create a list containing the `4`, `5` and `"six"` in that order and assign it to a variable named `my_list`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+# Create a list containing 4, 5, 'six'
+my_list = ???
+`}
+  verifyCode={`
+assert my_list == [4, 5, "six"], f"Expected [4, 5, 'six'], got {my_list!r}"
+print("✓ Correct!")
+`}
+/>
+
+**Test your knowledge:** What is the difference between `'six'` and `"six"`? Are they the same?
+
+## List Mutation
+
+Add a `7` onto the end of `my_list` (assume `my_list` already exists).
+
+If you forgot how, check [Python Basics](/modules/python/)
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+my_list = [4, 5, 'six']
+`}
+  initialCode={`
+# Add 7 to the end of \`my_list\`
+
+???
+
+print(my_list)
+`}
+  verifyCode={`
+assert my_list == [4, 5, "six", 7], f"Expected [4, 5, 'six', 7], got {my_list!r}"
+print("✓ Correct!")
+`}
+/>

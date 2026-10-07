@@ -39,18 +39,25 @@ function ensurePyScriptAssets() {
 export function PyScriptEditor({
   initialCode,
   verifyCode,
+  setup: setupCode,
   kind = "py-editor",
   rows,
+  outputRows = 6,
 }: {
   initialCode: string;
+  /** Hidden Python executed before the student's code on every Run (`onbeforerun`). */
+  setup?: string;
   /** Hidden Python run in the same worker after the student's code finishes. */
   verifyCode?: string;
   kind?: PyScriptKind;
   rows?: number;
+  /** Minimum height of the stdout area, in lines of text. */
+  outputRows?: number;
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
   const outputId = `pyscript-output-${useId().replaceAll(":", "")}`;
   const code = trimCode(initialCode);
+  const setup = setupCode ? trimCode(setupCode) : undefined;
   const verify = verifyCode ? trimCode(verifyCode) : undefined;
 
   useEffect(() => {
@@ -62,6 +69,7 @@ export function PyScriptEditor({
     script.textContent = code;
     script.setAttribute("output", outputId);
     if (rows) script.setAttribute("rows", String(rows));
+    if (setup) script.setAttribute("onbeforerun", setup);
     host.appendChild(script);
 
     const timeoutId = window.setTimeout(ensurePyScriptAssets, 50);
@@ -116,7 +124,7 @@ export function PyScriptEditor({
       }
       host.replaceChildren();
     };
-  }, [code, kind, outputId, rows, verify]);
+  }, [code, kind, outputId, rows, setup, verify]);
 
   return (
     <div className="pyscript-playground not-prose my-6 overflow-hidden rounded border border-slate-200">
@@ -124,7 +132,8 @@ export function PyScriptEditor({
       <pre
         id={outputId}
         data-empty-hint="Click Run, or press ⌘+Enter / Ctrl+Enter with the cursor in the editor."
-        className="pyscript-playground-output m-0 min-h-24 whitespace-pre-wrap border-0 border-t border-slate-200 bg-white p-3 font-mono text-sm text-slate-800"
+        className="pyscript-playground-output m-0 whitespace-pre-wrap border-0 border-t border-slate-200 bg-white p-3 font-mono text-sm text-slate-800"
+        style={{ minHeight: `calc(${outputRows} * 1lh + 1.5rem)` }}
       />
     </div>
   );
