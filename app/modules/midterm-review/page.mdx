@@ -2,15 +2,39 @@
 title: "LMSC-261 | Midterm Review"
 ---
 
+import { PyScriptEditor } from "@/components/PyScriptEditor"
+
 # Midterm Review
 
+```python
+# create a list containing the `4`, `5` and `"seven" in that order and assign it to a variable named 
+my_list = ???
+```
+
 ## Python
+
+### Lists
+
+Create a list containing the `4`, `5` and `"seven"` in that order and assign it to a variable named `my_list`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  initialCode={`
+# Create a list 
+my_list = ???
+`}
+  verifyCode={`
+assert my_list == [4, 5, "six"], f"Expected [4, 5, 'six'], got {my_list!r}"
+print("✓ Correct!")
+`}
+/>
 
 - Lists
   - Create a list
   - Append
-  - Set at a speciffic index
-  - Access at a speciffic index
+  - Set an element a speciffic index
+  - Get an element at a speciffic index
   - iterate with a for loop
 
 - Functions
@@ -44,7 +68,6 @@ title: "LMSC-261 | Midterm Review"
 - `cd`
 - `ls`
 
-
 ## uv
 
 - `uv add`
@@ -54,7 +77,7 @@ title: "LMSC-261 | Midterm Review"
 ## Pygame
 
 You should be able to figure out:
-
+ 
 - Setup a project
 - Draw circles and lines
 - Animate circles

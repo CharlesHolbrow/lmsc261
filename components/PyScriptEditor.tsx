@@ -8,6 +8,17 @@ export const PYSCRIPT_CORE_CSS = `https://pyscript.net/releases/${PYSCRIPT_VERSI
 
 type PyScriptKind = "py-editor" | "mpy-editor";
 
+type PyEditorScript = HTMLScriptElement & {
+  xworker?: {
+    sync: { runAsync: (code: string) => Promise<unknown> };
+    terminate: () => void;
+  };
+};
+
+function trimCode(code: string) {
+  return code.replace(/^\n/, "").replace(/\n$/, "");
+}
+
 function ensurePyScriptAssets() {
   if (!document.getElementById("pyscript-css")) {
     const link = document.createElement("link");
@@ -27,22 +38,26 @@ function ensurePyScriptAssets() {
 
 export function PyScriptEditor({
   initialCode,
+  verifyCode,
   kind = "py-editor",
   rows,
 }: {
   initialCode: string;
+  /** Hidden Python run in the same worker after the student's code finishes. */
+  verifyCode?: string;
   kind?: PyScriptKind;
   rows?: number;
 }) {
   const hostRef = useRef<HTMLDivElement>(null);
   const outputId = `pyscript-output-${useId().replaceAll(":", "")}`;
-  const code = initialCode.replace(/^\n/, "").replace(/\n$/, "");
+  const code = trimCode(initialCode);
+  const verify = verifyCode ? trimCode(verifyCode) : undefined;
 
   useEffect(() => {
     const host = hostRef.current;
     if (!host) return;
 
-    const script = document.createElement("script");
+    const script = document.createElement("script") as PyEditorScript;
     script.type = kind;
     script.textContent = code;
     script.setAttribute("output", outputId);
@@ -70,11 +85,15 @@ export function PyScriptEditor({
       if (!button || button.classList.contains("running")) return;
       markRunning();
     };
-    const onDone = () => {
+    const onDone = async () => {
       const el = output();
-      if (!el) return;
-      el.removeAttribute("data-running");
-      el.removeAttribute("aria-busy");
+      if (el) {
+        el.removeAttribute("data-running");
+        el.removeAttribute("aria-busy");
+      }
+      if (verify && script.xworker?.sync) {
+        await script.xworker.sync.runAsync(verify);
+      }
     };
     // Capture clicks so this runs before PyScript's handler. Hotkeys
     // (⌘/Ctrl/Shift+Enter) programmatically click the same run button.
@@ -89,9 +108,7 @@ export function PyScriptEditor({
       // <py-editor>/<mpy-editor> sibling, then moves our output <pre> into it.
       // Removing only the script leaves that custom element, so Fast Refresh
       // appends a second editor on top of the first.
-      (
-        script as HTMLScriptElement & { xworker?: { terminate: () => void } }
-      ).xworker?.terminate();
+      script.xworker?.terminate();
       const playground = host.parentElement;
       const output = document.getElementById(outputId);
       if (output && playground && output.parentElement !== playground) {
@@ -99,7 +116,7 @@ export function PyScriptEditor({
       }
       host.replaceChildren();
     };
-  }, [code, kind, outputId, rows]);
+  }, [code, kind, outputId, rows, verify]);
 
   return (
     <div className="pyscript-playground not-prose my-6 overflow-hidden rounded border border-slate-200">
