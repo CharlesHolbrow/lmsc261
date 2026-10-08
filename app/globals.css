@@ -63,6 +63,12 @@ a:hover {
   color: #1d4ed8; /* blue-700 */
 }
 
+.toggle-trigger {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 /* PyScript editor */
 .pyscript-playground .py-editor-box,
 .pyscript-playground .mpy-editor-box {

@@ -17,21 +17,25 @@ export default function Toggle({
 
   return (
     <div className={className}>
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="flex items-center gap-2 select-none cursor-pointer"
-        aria-expanded={open}
-      >
-        <span
-          className={`transition-transform inline-block ${open ? "rotate-90" : "rotate-0"}`}
-          aria-hidden
+      <div className="grid grid-cols-[auto_1fr] gap-x-2 items-start">
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          className="col-span-2 grid grid-cols-subgrid items-center text-left select-none cursor-pointer"
+          aria-expanded={open}
         >
-          ▶
-        </span>
-        <span className="font-medium">{title}</span>
-      </button>
-      {open ? <div className="mt-2">{children}</div> : null}
+          <span
+            className={`transition-transform inline-block ${open ? "rotate-90" : "rotate-0"}`}
+            aria-hidden
+          >
+            ▶
+          </span>
+          <span className="font-medium toggle-trigger">{title}</span>
+        </button>
+        {open ? (
+          <div className="col-start-2 mt-2 min-w-0">{children}</div>
+        ) : null}
+      </div>
     </div>
   );
 }

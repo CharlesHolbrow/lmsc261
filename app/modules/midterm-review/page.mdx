@@ -3,6 +3,7 @@ title: "LMSC-261 | Midterm Review"
 ---
 
 import { PyScriptEditor } from "@/components/PyScriptEditor"
+import Toggle from "@/components/Toggle"
 
 # Midterm Review
 
@@ -50,23 +51,15 @@ Use the interactive snippets below to identify what topics to study.
 
 ## Terminal 
  
-- `cd`
+- `pwd`
 - `ls`
+- `cd` with `/`, `~`, and `..`
 
 ## uv
 
 - `uv add`
 - `uv init` with `--no-package`
 - `uv run`
-
-## Pygame
-
-You should be able to figure out:
- 
-- Setup a project
-- Draw circles and lines
-- Animate circles
-
 
 # Python Exercises
 
@@ -75,6 +68,9 @@ You should be able to figure out:
   - Pre-built lists: use `setup` (onbeforerun) so literals are not in the visible editor
     for List Mutation through List Length. List Creation has students build the list; List
     Iteration onward keeps `names` / `my_list` in initialCode so loop variable names are obvious.
+  - Placeholders: `???` for a single obvious slot (`name = ???`, one statement). Use
+    `# ... your code here ...` when students add a block (loop body, function) and the
+    shape is not obvious from one line alone.
   - Do not leak answers in starter code (e.g. no append of the last value right before
     `last_element = ???`). Prompts can name targets; hidden data should not spell them out.
   - Do not interpolate the expected value into assert messages when the point is an
@@ -89,7 +85,7 @@ You should be able to figure out:
   - print vs return: starter uses print in the function body; verify `result`, not stdout.
   - Inside initialCode template strings, avoid unescaped backticks (they break the MDX literal).
   - verifyCode runs after the student’s run in the same worker; setup runs before each Run.
-  - Terminal/uv: answers are command strings. Do not put the command in the assert
+  - uv: answers are command strings. Do not put the command in the assert
     message (students will copy it). Accept extra spaces; for uv init accept the
     --no-package flag before or after the folder name.
 */}
@@ -173,7 +169,7 @@ my_list = [1, 2, 3]
 
 print("before:", my_list)
 
-# ...your code here...
+# ... your code here ...
 
 print("after: ", my_list)
 `}
@@ -292,6 +288,8 @@ copy = []
 
 # Loop over names and append each item to copy
 
+# ... your code here ...
+
 print("names", names)
 print("copy", copy)
 `}
@@ -316,6 +314,8 @@ doubled = []
 
 # Loop over my_list and append each value times 2 to doubled
 
+# ... your code here ...
+
 print("my_list", my_list)
 print("doubled", doubled)
 `}
@@ -328,7 +328,7 @@ print("✓ Correct!")
 
 ## Avoid off-by-one errors
 
-Calculate 3 times the **third list element**.
+Multiply the **third list element** by **3**.
 
 <PyScriptEditor
   kind="py-editor"
@@ -359,7 +359,7 @@ Assign `8` to a variable named `measures`.
   outputRows={1}
   initialCode={`
 # Assign 8 to measures
-???
+measures = ???
 `}
   verifyCode={`
 assert measures == 8, f"Expected 8, got {measures!r}"
@@ -545,7 +545,7 @@ Define a function named `double` that takes one argument `n` and **returns** `n 
   initialCode={`
 # Define double so it returns twice its argument
 
-???
+# ... your code here ...
 `}
   verifyCode={`
 assert double(3) == 6, f"Expected double(3) to be 6, got {double(3)!r}"
@@ -563,7 +563,7 @@ Define a function named `total_beats` that takes **two** arguments, `measures` a
   initialCode={`
 # Define total_beats(measures, beats_per_measure)
 
-???
+# ... your code here ...
 `}
   verifyCode={`
 assert total_beats(8, 4) == 32, f"Expected total_beats(8, 4) to be 32, got {total_beats(8, 4)!r}"
@@ -606,171 +606,161 @@ print("✓ Correct!")
 `}
 />
 
+{/*
+  Terminal exercise notes (maintainers):
+  - Q1 option 4 was a duplicate of option 2; replaced with `cd assignment-4` (wrong from lmsc261-homework).
+  - Q5–Q6 assume `uv init` is run from inside `ada-lovelace` after `cd ada-lovelace`.
+  - Accept `uv init --no-package quiz-1` as well as `uv init quiz-1 --no-package`.
+*/}
+
 # Terminal Exercises
 
-Type each answer as a **string**: the exact command you would type in Terminal.
+Check your knowledge in the questions below.
+
+You can try typing the commands in your own Terminal if you want to check.
 
 If you forgot how, check [The Terminal](/modules/terminal/)
 
-## What's in this folder?
+Cheat Sheet:
 
-You are already in a folder. What command lists the files and folders here? Assign that command to `command`.
+```bash
+pwd     # Acronym for "Print Working Directory".
+ls      # Abbreviation for "list" — lists the contents of a directory (folder)
+cd      # Acronym for "Change Directory" — change the "current" folder
+cd ..   # Change to the "parent" directory one level up
+cd ~    # Change to the "home" directory (often /Users/your-username)
+cd /    # Change to the "root" of the filesystem
+```
 
-<PyScriptEditor
-  kind="py-editor"
-  rows={8}
-  outputRows={1}
-  initialCode={`
-# List the files and folders in this folder
-command = "???"
-`}
-  verifyCode={`
-assert isinstance(command, str), "Assign command to a string"
-assert command.split() == ["ls"], "That is not the command that lists files in this folder"
-print("✓ Correct!")
-`}
-/>
+All of the questions below use this tree:
 
-## Go into a folder
+```
+/Users/ada                   ← home (~)
+├── Desktop
+└── Documents
+    └── GitHub
+        └── lmsc261-homework
+            └── ada-lovelace
+                └── assignment-4
+```
 
-You are in `lmsc261-homework`. Go into the folder named `ada-lovelace`.
+## Terminal Question 1
 
-<PyScriptEditor
-  kind="py-editor"
-  rows={8}
-  outputRows={1}
-  initialCode={`
-# Enter the ada-lovelace folder
-command = "???"
-`}
-  verifyCode={`
-assert isinstance(command, str), "Assign command to a string"
-parts = command.split()
-assert parts[:1] == ["cd"] and parts[1:] in (["ada-lovelace"], ["./ada-lovelace"]), (
-    "Use cd to enter the ada-lovelace folder"
-)
-print("✓ Correct!")
-`}
-/>
+Your current directory is:
 
-## Go up one folder
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/
+```
 
-You are in `ada-lovelace`. Go back to the parent folder (`lmsc261-homework`).
+**Q:** What command changes the directory to `assignment-4`?
 
-<PyScriptEditor
-  kind="py-editor"
-  rows={8}
-  outputRows={1}
-  initialCode={`
-# Go up one folder
-command = "???"
-`}
-  verifyCode={`
-assert isinstance(command, str), "Assign command to a string"
-assert command.split() == ["cd", ".."], "Use cd to go up one folder"
-print("✓ Correct!")
-`}
-/>
+1. `cd /ada-lovelace/assignment-4`
+2. `cd ada-lovelace/assignment-4`
+3. `cd ~/ada-lovelace/assignment-4`
+4. `cd assignment-4`
 
-**Test your knowledge:** Which of these *moves* you, and which one only *looks*? `ls`, `cd ada-lovelace`, `cd ..`
+<Toggle title="Answer">
 
-# uv Exercises
+**2.** `cd ada-lovelace/assignment-4` — a relative path from your current folder.
 
-`uv` is how this class creates a Python project, adds a library, and runs a file.
+Option 1 starts at the filesystem root (`/`), not from `lmsc261-homework`. Option 3 uses `~` (home), which is `/Users/ada`, not the homework repo. Option 4 skips the `ada-lovelace` folder.
 
-If you forgot how, check [Python Tooling](/modules/python-tooling/)
+</Toggle>
 
-## Start a project
+## Terminal Question 2
 
-Create a new project folder named `assignment-4`. Use `--no-package` so `uv` does not treat it as an installable package.
+Your current directory is:
 
-<PyScriptEditor
-  kind="py-editor"
-  rows={8}
-  outputRows={1}
-  initialCode={`
-# Create a project folder named assignment-4
-command = "???"
-`}
-  verifyCode={`
-assert isinstance(command, str), "Assign command to a string"
-parts = command.split()
-assert parts[:2] == ["uv", "init"], "Start with uv init"
-assert "--no-package" in parts, "Include the --no-package flag"
-rest = [p for p in parts[2:] if p != "--no-package"]
-assert rest == ["assignment-4"], "The project folder should be named assignment-4"
-print("✓ Correct!")
-`}
-/>
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/ada-lovelace
+```
 
-## Add a library
+**Q:** Which command sequence would take you to `/Users/ada/Documents/GitHub/`?
 
-You are **already inside** the project folder. Download and add the `pygame-ce` library.
+1. `cd ..` (do this three times)
+2. `cd ..` (do this twice)
+3. `cd ...` (do this twice)
+4. `cd .` (do this three times)
 
-<PyScriptEditor
-  kind="py-editor"
-  rows={8}
-  outputRows={1}
-  initialCode={`
-# Add pygame-ce to this project
-command = "???"
-`}
-  verifyCode={`
-assert isinstance(command, str), "Assign command to a string"
-assert command.split() == ["uv", "add", "pygame-ce"], (
-    "Use uv to add the pygame-ce library"
-)
-print("✓ Correct!")
-`}
-/>
+<Toggle title="Answer">
 
-## Run the program
+**2.** Run `cd ..` twice: up to `lmsc261-homework`, then up to `GitHub`.
 
-You are **already inside** the project folder. Run `main.py`.
+`...` is not valid shell syntax. `.` means “this directory,” so `cd .` does not move you.
 
-<PyScriptEditor
-  kind="py-editor"
-  rows={8}
-  outputRows={1}
-  initialCode={`
-# Run main.py
-command = "???"
-`}
-  verifyCode={`
-assert isinstance(command, str), "Assign command to a string"
-assert command.split() == ["uv", "run", "main.py"], (
-    "Use uv to run main.py"
-)
-print("✓ Correct!")
-`}
-/>
+</Toggle>
 
-## Put the steps in order
+## Terminal Question 3
 
-You are in your named homework folder. You want a new pygame project named `assignment-4`.
+**Q:** In the terminal, what do you type to show the contents of the current directory?
 
-Do not change the text of each command. Only change the **order**.
+<Toggle title="Answer">
 
-<PyScriptEditor
-  kind="py-editor"
-  rows={16}
-  outputRows={1}
-  initialCode={`
-# These four commands start a pygame project. Put them in the right order.
+```bash
+ls
+```
 
-a = "uv add pygame-ce"
-b = "uv init --no-package assignment-4"
-c = "uv run main.py"
-d = "cd assignment-4"
+</Toggle>
 
-steps = [???, ???, ???, ???]
-`}
-  verifyCode={`
-assert steps == [b, d, a, c], (
-    "Order: create the folder, enter it, add the library, then run the program"
-)
-print("✓ Correct!")
-`}
-/>
+## Terminal Question 4
 
-**Test your knowledge:** Why does `uv add` come *after* `cd assignment-4`? What goes wrong if you add the library in the parent folder?
+**Q:** The command `pwd` is an acronym. What does it stand for?
+
+<Toggle title="Answer">
+
+**Print Working Directory**
+
+</Toggle>
+
+## Terminal Question 5
+
+Your current directory is:
+
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/
+```
+
+**Q:** What sequence of commands would you use to enter the `ada-lovelace` homework directory, then create a new Python project named `quiz-1` with `--no-package`?
+
+<Toggle title="Answer">
+
+```bash
+cd ada-lovelace
+uv init quiz-1 --no-package
+```
+
+`uv init --no-package quiz-1` is also fine.
+
+</Toggle>
+
+After those commands, your tree looks like this:
+
+```
+/Users/ada                   ← home (~)
+├── Desktop
+└── Documents
+    └── GitHub
+        └── lmsc261-homework
+            └── ada-lovelace
+                ├── assignment-4
+                └── quiz-1
+                    ├── main.py
+                    ├── pyproject.toml
+                    └── README.md
+```
+
+## Terminal Question 6
+
+**Q:** After creating the project, what sequence of commands do you need to `cd`
+into the new project directory and run the generated `main.py` file?
+
+<Toggle title="Answer">
+
+```bash
+cd quiz-1
+uv run main.py
+```
+
+Run these from `ada-lovelace` (where you were after Question 5).
+
+</Toggle>
