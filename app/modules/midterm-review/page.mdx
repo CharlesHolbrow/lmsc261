@@ -36,9 +36,9 @@ Use the interactive snippets below to identify what topics to study.
     - `-`
     - `*`
     - `/`
-    - `%` (modulo operator)
+    - `%` (modulo)
     - `//` (integer division)
-  - Create f-strings (don't worry about number formatting)
+  - Create f-strings
 
 - Functions
   - Define
@@ -68,7 +68,7 @@ You should be able to figure out:
 - Animate circles
 
 
-# Exercises
+# Python Exercises
 
 {/*
   PyScriptEditor exercise notes (maintainers):
@@ -89,6 +89,9 @@ You should be able to figure out:
   - print vs return: starter uses print in the function body; verify `result`, not stdout.
   - Inside initialCode template strings, avoid unescaped backticks (they break the MDX literal).
   - verifyCode runs after the student’s run in the same worker; setup runs before each Run.
+  - Terminal/uv: answers are command strings. Do not put the command in the assert
+    message (students will copy it). Accept extra spaces; for uv init accept the
+    --no-package flag before or after the folder name.
 */}
 
 ## List Creation
@@ -602,3 +605,172 @@ assert result == 20, f"Expected result to be 20, got {result!r}. Did area return
 print("✓ Correct!")
 `}
 />
+
+# Terminal Exercises
+
+Type each answer as a **string**: the exact command you would type in Terminal.
+
+If you forgot how, check [The Terminal](/modules/terminal/)
+
+## What's in this folder?
+
+You are already in a folder. What command lists the files and folders here? Assign that command to `command`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+# List the files and folders in this folder
+command = "???"
+`}
+  verifyCode={`
+assert isinstance(command, str), "Assign command to a string"
+assert command.split() == ["ls"], "That is not the command that lists files in this folder"
+print("✓ Correct!")
+`}
+/>
+
+## Go into a folder
+
+You are in `lmsc261-homework`. Go into the folder named `ada-lovelace`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+# Enter the ada-lovelace folder
+command = "???"
+`}
+  verifyCode={`
+assert isinstance(command, str), "Assign command to a string"
+parts = command.split()
+assert parts[:1] == ["cd"] and parts[1:] in (["ada-lovelace"], ["./ada-lovelace"]), (
+    "Use cd to enter the ada-lovelace folder"
+)
+print("✓ Correct!")
+`}
+/>
+
+## Go up one folder
+
+You are in `ada-lovelace`. Go back to the parent folder (`lmsc261-homework`).
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+# Go up one folder
+command = "???"
+`}
+  verifyCode={`
+assert isinstance(command, str), "Assign command to a string"
+assert command.split() == ["cd", ".."], "Use cd to go up one folder"
+print("✓ Correct!")
+`}
+/>
+
+**Test your knowledge:** Which of these *moves* you, and which one only *looks*? `ls`, `cd ada-lovelace`, `cd ..`
+
+# uv Exercises
+
+`uv` is how this class creates a Python project, adds a library, and runs a file.
+
+If you forgot how, check [Python Tooling](/modules/python-tooling/)
+
+## Start a project
+
+Create a new project folder named `assignment-4`. Use `--no-package` so `uv` does not treat it as an installable package.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+# Create a project folder named assignment-4
+command = "???"
+`}
+  verifyCode={`
+assert isinstance(command, str), "Assign command to a string"
+parts = command.split()
+assert parts[:2] == ["uv", "init"], "Start with uv init"
+assert "--no-package" in parts, "Include the --no-package flag"
+rest = [p for p in parts[2:] if p != "--no-package"]
+assert rest == ["assignment-4"], "The project folder should be named assignment-4"
+print("✓ Correct!")
+`}
+/>
+
+## Add a library
+
+You are **already inside** the project folder. Download and add the `pygame-ce` library.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+# Add pygame-ce to this project
+command = "???"
+`}
+  verifyCode={`
+assert isinstance(command, str), "Assign command to a string"
+assert command.split() == ["uv", "add", "pygame-ce"], (
+    "Use uv to add the pygame-ce library"
+)
+print("✓ Correct!")
+`}
+/>
+
+## Run the program
+
+You are **already inside** the project folder. Run `main.py`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+# Run main.py
+command = "???"
+`}
+  verifyCode={`
+assert isinstance(command, str), "Assign command to a string"
+assert command.split() == ["uv", "run", "main.py"], (
+    "Use uv to run main.py"
+)
+print("✓ Correct!")
+`}
+/>
+
+## Put the steps in order
+
+You are in your named homework folder. You want a new pygame project named `assignment-4`.
+
+Do not change the text of each command. Only change the **order**.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={16}
+  outputRows={1}
+  initialCode={`
+# These four commands start a pygame project. Put them in the right order.
+
+a = "uv add pygame-ce"
+b = "uv init --no-package assignment-4"
+c = "uv run main.py"
+d = "cd assignment-4"
+
+steps = [???, ???, ???, ???]
+`}
+  verifyCode={`
+assert steps == [b, d, a, c], (
+    "Order: create the folder, enter it, add the library, then run the program"
+)
+print("✓ Correct!")
+`}
+/>
+
+**Test your knowledge:** Why does `uv add` come *after* `cd assignment-4`? What goes wrong if you add the library in the parent folder?
