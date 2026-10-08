@@ -1,22 +1,75 @@
 ---
-title: "LMSC-261 | pygame MIDI"
+title: "LMSC-261 | Pygame MIDI: Hands-On"
 ---
 
 import Image from "next/image"
 import IacImage from "./midi-studio-iac.jpg"
 
-# pygame MIDI
+# Pygame MIDI: Hands-On
 
-`pygame.midi` lets Python send and receive MIDI. The `pygame-midi` example below lists your devices and sends one note.
+In class: set up the `pygame-midi` project below, then extend it with the Part 2 prompts. When you are ready, open a **pull request** in the [homework repo](https://github.com/berklee-epd/lmsc261-homework).
 
-## macOS: virtual “To DAW” port
+You should already have read [Pygame](/modules/pygame/) and [Pygame: Animation](/modules/pygame-animation/).
+
+The folder with your name is yours all semester. Work **inside it**.
+
+`pygame.midi` lets Python send and receive MIDI. The starter code lists your MIDI devices, opens an output, and plays one note while a small pygame window runs.
+
+## Part 1
+
+### Goals
+
+1. Create a new branch for your work
+1. Create a new Python project folder with `uv` and add the `pygame-ce` library
+1. Open the project folder in Visual Studio Code
+1. Copy the example code into your project
+1. Set up a virtual MIDI port on macOS (optional but recommended) so you can hear notes in a DAW
+1. Verify that the code runs and MIDI reaches your output device
+
+### Steps
+
+1. In GitHub Desktop:
+    - checkout the `main` branch of the homework repo
+    - fetch/sync/pull the most recent changes
+    - create a new branch for your work, `pygame-midi-hands-on-<your-name>`
+1. Open the terminal (`⌘ + Space` → type `Terminal` → Enter)
+    - `cd` into the homework repo. The default path is:
+        ```bash
+        cd ~/Documents/GitHub/lmsc261-homework/
+        ```
+    - `cd` into your directory, replacing `<your-name>` below
+        ```bash
+        cd <your-name>
+        ```
+    - use `uv` to create a new project folder named `pygame-midi`
+        ```bash
+        uv init --no-package pygame-midi
+        cd pygame-midi
+        ```
+    - Download the `pygame-ce` library and add it to the project
+        ```bash
+        uv add pygame-ce
+        ```
+1. Open the `pygame-midi` folder in Visual Studio Code.
+    - File → Open Folder… → choose `pygame-midi`
+    - 🚨 **Do not open the parent homework folder!** 🚨
+    - **Note:** Opening the correct folder helps VS Code find the `pygame-ce` library
+1. Copy the [example code](#example-code) below into `main.py`.
+1. Run the project:
+    - Press the Run (▶) button in VS Code while `main.py` is open
+    - Or in the terminal, run `uv run main.py`
+1. Read the terminal output. Note each device `id`. Change `MIDI_OUT_DEVICE_ID` at the top of `main.py` to match the output you want (for example your IAC port or a hardware interface).
+
+If your project is set up correctly, you will see a small black window and a list of MIDI devices in the terminal. Middle C should play once when the program starts. When that works, continue to Part 2.
+
+### macOS: virtual “To DAW” port
 
 To hear notes in a DAW without hardware, use Apple’s **IAC Driver** (Inter-Application Communication). Your script sends MIDI **to** a port; the DAW receives **from** that same port.
 
 1. Open **Audio MIDI Setup** (`⌘ + Space`, type the name).
 2. **Window → Show MIDI Studio**, then double-click **IAC Driver**.
 3. Turn on **Device is online**, click **+** under **Ports**, and name a port (for example **To DAW**).
-4. In your DAW, set a MIDI track’s input to **IAC Driver → To DAW** (or your port name). Run `uv run python main.py` from the `pygame-midi` folder.
+4. In your DAW, set a MIDI track’s input to **IAC Driver → To DAW** (or your port name). Run `uv run main.py` from the `pygame-midi` folder.
 
 <Image
   src={IacImage}
@@ -24,7 +77,7 @@ To hear notes in a DAW without hardware, use Apple’s **IAC Driver** (Inter-App
   className="not-prose my-6 w-full max-w-2xl rounded border border-slate-200"
 />
 
-## Example code
+## <span id="example-code">Example code</span>
 
 ```python
 import pygame
@@ -148,17 +201,28 @@ if __name__ == "__main__":
     main()
 ```
 
+## Part 2
 
-## TODOs
+Keep the project from Part 1. Work through these prompts in order. Test after each change.
 
-At minimum
+At minimum:
 
-- send a midi note when the mouse goes down
+- Send a MIDI note when the mouse goes down
 
-Once that is working.
+Once that is working customize the application to your liking. Some ideas:
 
-- Send `note_on` when mouse goes down and `note_off` when mouse goes up
-- Choose pitch and velocity based on `(x,y)` coordinates of the mouse click
+- Send `note_on` when the mouse goes down and `note_off` when the mouse goes up
+- Choose pitch and velocity based on `(x, y)` coordinates of the mouse click
 - Try to make the ball fade out after clicking
-- Add multiple circles
+- Add multiple circles (store their positions, brightness in an array)
 - Make the circles bounce around the screen
+- Get MIDI *input* working. Create a visualiser.
+
+## Complete when
+
+Make a pull request with however far you got during class.
+
+## Resources
+
+- [Pygame MIDI Input/Output](https://pyga.me/docs/ref/midi.html) — Documentation for `pygame.midi`
+- [pygame-ce documentation](https://pyga.me/docs/)
