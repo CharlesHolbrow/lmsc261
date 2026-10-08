@@ -1,0 +1,164 @@
+---
+title: "LMSC-261 | pygame MIDI"
+---
+
+import Image from "next/image"
+import IacImage from "./midi-studio-iac.jpg"
+
+# pygame MIDI
+
+`pygame.midi` lets Python send and receive MIDI. The `pygame-midi` example below lists your devices and sends one note.
+
+## macOS: virtual “To DAW” port
+
+To hear notes in a DAW without hardware, use Apple’s **IAC Driver** (Inter-Application Communication). Your script sends MIDI **to** a port; the DAW receives **from** that same port.
+
+1. Open **Audio MIDI Setup** (`⌘ + Space`, type the name).
+2. **Window → Show MIDI Studio**, then double-click **IAC Driver**.
+3. Turn on **Device is online**, click **+** under **Ports**, and name a port (for example **To DAW**).
+4. In your DAW, set a MIDI track’s input to **IAC Driver → To DAW** (or your port name). Run `uv run python main.py` from the `pygame-midi` folder.
+
+<Image
+  src={IacImage}
+  alt="macOS Audio MIDI Setup with IAC Driver properties showing MIDI ports."
+  className="not-prose my-6 w-full max-w-2xl rounded border border-slate-200"
+/>
+
+## Example code
+
+```python
+import pygame
+import pygame.midi
+
+# Change this to pick a different MIDI output device
+MIDI_OUT_DEVICE_ID = 2
+
+# Screen dimensions
+WIDTH = 128
+HEIGHT = 128
+
+def print_midi_devices():
+    midi_device_count = pygame.midi.get_count()
+    print(f"\nFound {midi_device_count} MIDI devices:")
+    for device_id in range(midi_device_count):
+        # https://www.pygame.org/docs/ref/midi.html#pygame.midi.get_device_info
+        info = pygame.midi.get_device_info(device_id)
+
+        # Info is a tuple: (interf, name, is_input, is_output, opened)
+        # "destructure" the tuple into 5 variables
+        interf, name, is_input, is_output, opened = info
+
+        io_str = ''
+        if is_input and is_output:
+            io_str = 'input and output'
+        elif is_output:
+            io_str = 'output'
+        elif is_input:
+            io_str = 'input'
+        
+        open_str = 'closed'
+        if opened:
+            open_str = 'opened'
+
+        name_str = name.decode('utf-8')
+        print(f"id:{device_id}  ({io_str}, {open_str}) {name_str}")
+
+NOTE_0_OFF = pygame.USEREVENT
+note_off_events = list(range(NOTE_0_OFF, NOTE_0_OFF + 128))
+
+def schedule_note_off(midi_note_number: int, delay_ms: int):
+    note_name = pygame.midi.midi_to_ansi_note(midi_note_number)
+    print(f"Scheduling note off for {note_name} in {delay_ms}ms")
+    event_type = note_off_events[midi_note_number]
+    pygame.time.set_timer(event_type, delay_ms, loops=1)
+
+
+def setup_output_device(output_id: int):
+    info = pygame.midi.get_device_info(output_id)
+    if info is None:
+        print("\nDefault output device is not available.")
+        pygame.midi.quit()
+        return
+    interf, name, is_input, is_output, opened = info
+    print(f"\nUsing MIDI device: {name.decode('utf-8')}")
+    if not is_output:
+        print("This is not an output device. Exiting.")
+        pygame.midi.quit()
+        return
+
+    midi_out = pygame.midi.Output(output_id)
+    if midi_out is None:
+        print("Failed to open MIDI output device. Exiting.")
+        pygame.midi.quit()
+        return
+
+    return midi_out
+
+def play_note(midi_out: pygame.midi.Output, note: int, velocity: int, duration_ms: int):
+    midi_out.note_on(note, velocity)
+    schedule_note_off(note, duration_ms)
+
+def main():
+    pygame.init()
+    pygame.midi.init() # https://www.pygame.org/docs/ref/midi.html
+
+    print_midi_devices()
+
+    # Setup the midi output device used by our app. Verify it works
+    midi_out = setup_output_device(MIDI_OUT_DEVICE_ID)
+    note = 60  # Middle C
+    play_note(midi_out, note, 64, 1500)
+
+    # Setup our screen to display on
+    screen = pygame.display.set_mode((WIDTH, HEIGHT), vsync=1)
+
+    # Setup our game loop
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                print(f"mouse down button={event.button} pos={event.pos}")
+            elif event.type == pygame.MOUSEBUTTONUP:
+                print(f"mouse up button={event.button} pos={event.pos}")
+            elif NOTE_0_OFF <= event.type < NOTE_0_OFF + 128:
+                note_number = event.type - NOTE_0_OFF
+                midi_out.note_off(note_number)
+
+        # clear the screen to black
+        screen_color = (0, 0, 0)
+        screen.fill(screen_color)
+
+        # ...your per-frame update logic here...
+        mouse_pos = pygame.mouse.get_pos()
+        mouse_pressed = pygame.mouse.get_pressed()
+
+        # Send our updated screen to the display
+        pygame.display.flip()
+
+    # Teardown/cleanup after the game loop stops running
+    print("\nExiting...")
+    midi_out.close()
+    pygame.midi.quit()
+    pygame.quit()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+
+## TODOs
+
+At minimum
+
+- send a midi note when the mouse goes down
+
+Once that is working.
+
+- Send `note_on` when mouse goes down and `note_off` when mouse goes up
+- Choose pitch and velocity based on `(x,y)` coordinates of the mouse click
+- Try to make the ball fade out after clicking
+- Add multiple circles
+- Make the circles bounce around the screen
