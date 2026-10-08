@@ -58,18 +58,19 @@ The folder with your name is yours all semester. Work **inside it**.
 1. Run the project:
     - Press the Run (▶) button in VS Code while `main.py` is open
     - Or in the terminal, run `uv run main.py`
-1. Read the terminal output. Note each device `id`. Change `MIDI_OUT_DEVICE_ID` at the top of `main.py` to match the output you want (for example your IAC port or a hardware interface).
+1. Read the terminal output. Note each device `id`. Change `MIDI_OUT_DEVICE_ID` at the top of `main.py` to the **output** port you want Python to send to (for example an IAC port or a hardware interface).
 
-If your project is set up correctly, you will see a small black window and a list of MIDI devices in the terminal. Middle C should play once when the program starts. When that works, continue to Part 2.
+If your project is set up correctly, you will see a small black window and a list of MIDI devices in the terminal. To hear Middle C in a DAW, wire IAC to your DAW and a synth yourself—see the next section. When that works, continue to Part 2.
 
 ### macOS: virtual “To DAW” port
 
-To hear notes in a DAW without hardware, use Apple’s **IAC Driver** (Inter-Application Communication). Your script sends MIDI **to** a port; the DAW receives **from** that same port.
+To route MIDI into a DAW without hardware, use Apple’s **IAC Driver** (Inter-Application Communication). Python writes **to** an IAC port; your DAW must be set to read **from** that same port—two independent setups that have to match by name.
 
 1. Open **Audio MIDI Setup** (`⌘ + Space`, type the name).
 2. **Window → Show MIDI Studio**, then double-click **IAC Driver**.
 3. Turn on **Device is online**, click **+** under **Ports**, and name a port (for example **To DAW**).
-4. In your DAW, set a MIDI track’s input to **IAC Driver → To DAW** (or your port name). Run `uv run main.py` from the `pygame-midi` folder.
+4. In your DAW (on your own, before or after you run Python): add a MIDI track, arm it for recording or monitoring if your DAW requires that, and set the track’s **MIDI input** to **IAC Driver → To DAW** (or whatever you named the port).
+5. Set `MIDI_OUT_DEVICE_ID` in `main.py` to the IAC port’s `id` from the terminal list, then run `uv run main.py`.
 
 <Image
   src={IacImage}
