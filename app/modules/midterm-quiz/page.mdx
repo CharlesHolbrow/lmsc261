@@ -1,0 +1,221 @@
+---
+title: "LMSC-261 | Python Quiz"
+---
+
+# Python Quiz
+
+Name: ___________________________
+
+Write Python for each question.
+
+1. Create a list containing `2`, `4` and `6` in that order and assign it to a variable named `my_list`.
+
+```python
+my_list = ???
+```
+
+2. Create a list containing `7`, `8` and `"nine"` in that order and assign it to a variable named `my_list`.
+
+```python
+my_list = ???
+```
+
+3. What is the difference between `'nine'` and `"nine"`? Are they the same?
+
+
+4. Add a `9` onto the end of `my_list`.
+
+```python
+my_list = [100, 200, "three"]
+
+???
+```
+
+5. Change the third element of `my_list` to `"eight"`.
+
+```python
+my_list = [1, 2, 3, 4]
+
+???
+```
+
+6. Store the second element of `my_list` in a variable named `second`.
+
+```python
+my_list = [10, 20, 30]
+
+second = ???
+```
+
+7. These two patterns look similar, but the order of the pieces is different.
+
+- How many items? `len(my_list)`
+- Add to this list? `my_list.append(8)`
+
+The code below mixes up those patterns. Fix it so `my_list_length` is how many items are in `my_list`, and `my_list` ends with `8`.
+
+```python
+my_list = [5, 6, 7]
+my_list_length = my_list.len()  # Wrong!
+append(my_list, 8)              # Wrong!
+```
+
+8. Store how many items are in `other_list` in a variable named `count`.
+
+```python
+other_list = ["do", "re", "mi", "fa"]
+
+count = ???
+```
+
+9. Get the last element of `other_list`.
+
+```python
+other_list = [11, 22, 33]
+
+last_element = ???
+```
+
+10. Use a `for` loop to build a new list `copy` that contains the same items as `names`, in the same order. Start with `copy = []` and append each item inside the loop.
+
+```python
+names = ["Dee", "Eli", "Fay"]
+copy = []
+
+# ... your code here ...
+```
+
+11. Use a `for` loop to build a new list `doubled` where each item is twice the corresponding item in `my_list`. Start with `doubled = []` and `append` inside the loop.
+
+```python
+my_list = [3, 6, 9, 12]
+doubled = []
+
+# ... your code here ...
+```
+
+12. Multiply the second list element by `4`.
+
+```python
+my_list = [10, 20, 30, 40]
+
+answer = 4 * my_list[ ??? ]
+```
+
+13. Assign `12` to a variable named `measures`.
+
+```python
+measures = ???
+```
+
+14. The example below looks like it is saying that 2 equals 80. Obviously 2 is not 80.
+
+What will it print? What is it actually saying?
+
+```python
+a = 2
+b = 80
+a = b
+print(a)
+print(b)
+```
+
+
+15. Create a tuple containing `2`, `4` and `6` in that order and assign it to a variable named `my_tuple`.
+
+```python
+my_tuple = ???
+```
+
+16. Which of these values is a tuple? Assign that value to a variable named `pair`.
+
+```python
+a = [3, 6]
+b = (3, 6)
+c = "3, 6"
+
+pair = ???
+```
+
+17. What is the difference between `[3, 6]` and `(3, 6)`? How could you check with `type()`?
+
+
+18. Use `type()` to store the type of `value` in a variable named `value_type`.
+
+```python
+value = (10, 20, "thirty")
+
+value_type = ???
+```
+
+19. `//` is integer division (how many whole groups). `%` is remainder (what is left over).
+
+How many complete measures of `4` beats fit into `19` beats? Store that in `complete_measures`. Store the leftover beats in `leftover`.
+
+```python
+beats = 19
+beats_per_measure = 4
+
+complete_measures = ???
+leftover = ???
+```
+
+20. Assign the text `Hi` to a variable named `greeting`.
+
+```python
+greeting = ???
+```
+
+21. Use an f-string to put `name` into a greeting. `greeting` should be `Hello, Cy`.
+
+```python
+name = "Cy"
+
+greeting = ???
+```
+
+22. Build this sentence with an f-string: `Eli scored 88.0`
+
+```python
+name = "Eli"
+score = 88.0
+
+message = ???
+```
+
+23. Define a function named `triple` that takes one argument `n` and returns `n * 3`.
+
+```python
+# ... your code here ...
+```
+
+24. Define a function named `total_beats` that takes two arguments, `measures` and `beats_per_measure`, and returns their product.
+
+```python
+# ... your code here ...
+```
+
+25. You can pass a variable or a literal as an argument. Both of these calls return the same number:
+
+```python
+person = "Dee"
+
+from_variable = len(person)
+from_literal = len("Dee")
+```
+
+Do you understand the difference between `len(person)` and `len("Dee")`? Does `len` care which one you used?
+
+
+26. What is the difference between `print(len(my_list))`, `print(my_list_length)`, and `print(5)`? Each one can print a number. What is being passed as the argument in each case?
+
+
+27. `print` shows a value on the screen. `return` sends a value back to the caller so you can store it. Fix `area` so `result` is `21`, not `None`.
+
+```python
+def area(width, height):
+    print(width * height)  # This shows a number, but does not return it
+
+result = area(3, 7)
+print("result:", result)
+```

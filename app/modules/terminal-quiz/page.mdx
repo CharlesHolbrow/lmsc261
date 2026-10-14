@@ -1,0 +1,171 @@
+---
+title: "LMSC-261 | Terminal Quiz: Review"
+---
+
+import Toggle from "@/components/Toggle"
+
+{/*
+  Terminal exercise notes (maintainers):
+  - Q1 option 4 was a duplicate of option 2; replaced with `cd assignment-4` (wrong from lmsc261-homework).
+  - Q5–Q6 assume `uv init` is run from inside `ada-lovelace` after `cd ada-lovelace`.
+  - Accept `uv init --no-package quiz-1` as well as `uv init quiz-1 --no-package`.
+*/}
+
+# Terminal Quiz: Review
+
+The following topics are likely to be on the midterm.
+
+Use the questions below to identify what topics to study.
+
+- Terminal
+  - `pwd`
+  - `ls`
+  - `cd`
+    - relative paths
+    - `/` (root of the filesystem)
+    - `~` (home)
+    - `..` (parent directory)
+
+- uv
+  - `uv init` with `--no-package`
+  - `uv run`
+  - `uv add`
+
+You can try typing the commands in your own Terminal if you want to check.
+
+If you forgot how, check [The Terminal](/modules/terminal/) and [Python Tooling](/modules/python-tooling/).
+
+# Terminal Exercises
+
+All of the questions below use this tree:
+
+```
+/Users/ada                   ← home (~)
+├── Desktop
+└── Documents
+    └── GitHub
+        └── lmsc261-homework
+            └── ada-lovelace
+                └── assignment-4
+```
+
+## Terminal Question 1
+
+Your current directory is:
+
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/
+```
+
+**Q:** What command changes the directory to `assignment-4`?
+
+1. `cd /ada-lovelace/assignment-4`
+2. `cd ada-lovelace/assignment-4`
+3. `cd ~/ada-lovelace/assignment-4`
+4. `cd assignment-4`
+
+<Toggle title="Answer">
+
+**2.** `cd ada-lovelace/assignment-4` — a relative path from your current folder.
+
+Option 1 starts at the filesystem root (`/`), not from `lmsc261-homework`. Option 3 uses `~` (home), which is `/Users/ada`, not the homework repo. Option 4 skips the `ada-lovelace` folder.
+
+</Toggle>
+
+## Terminal Question 2
+
+Your current directory is:
+
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/ada-lovelace
+```
+
+**Q:** Which command sequence would take you to `/Users/ada/Documents/GitHub/`?
+
+1. `cd ..` (do this three times)
+2. `cd ..` (do this twice)
+3. `cd ...` (do this twice)
+4. `cd .` (do this three times)
+
+<Toggle title="Answer">
+
+**2.** Run `cd ..` twice: up to `lmsc261-homework`, then up to `GitHub`.
+
+`...` is not valid shell syntax. `.` means “this directory,” so `cd .` does not move you.
+
+</Toggle>
+
+## Terminal Question 3
+
+**Q:** In the terminal, what do you type to show the contents of the current directory?
+
+<Toggle title="Answer">
+
+```bash
+ls
+```
+
+</Toggle>
+
+## Terminal Question 4
+
+**Q:** The command `pwd` is an acronym. What does it stand for?
+
+<Toggle title="Answer">
+
+**Print Working Directory**
+
+</Toggle>
+
+## Terminal Question 5
+
+Your current directory is:
+
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/
+```
+
+**Q:** What sequence of commands would you use to enter the `ada-lovelace` homework directory, then create a new Python project named `quiz-1` with `--no-package`?
+
+<Toggle title="Answer">
+
+```bash
+cd ada-lovelace
+uv init quiz-1 --no-package
+```
+
+`uv init --no-package quiz-1` is also fine.
+
+</Toggle>
+
+After those commands, your tree looks like this:
+
+```
+/Users/ada                   ← home (~)
+├── Desktop
+└── Documents
+    └── GitHub
+        └── lmsc261-homework
+            └── ada-lovelace
+                ├── assignment-4
+                └── quiz-1
+                    ├── main.py
+                    ├── pyproject.toml
+                    └── README.md
+```
+
+## Terminal Question 6
+
+**Q:** After creating the project, what sequence of commands do you need to `cd`
+into the new project directory and run the generated `main.py` file?
+
+<Toggle title="Answer">
+
+```bash
+cd quiz-1
+uv run main.py
+```
+
+Run these from `ada-lovelace` (where you were after Question 5).
+
+</Toggle>
