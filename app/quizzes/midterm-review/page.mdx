@@ -1,0 +1,205 @@
+---
+title: "LMSC-261 | Quiz 1 Review"
+---
+
+import { PyScriptEditor } from "@/components/PyScriptEditor"
+
+# Quiz 1 Review
+
+These are the same questions as the midterm quiz. Click **Run** in each box. A check mark means the answer matches what the question asked for.
+
+Each box starts fresh. Questions 2–4 already have the list from question 1. Question 5 already has `class_names`. You do not need to recreate those.
+
+{/*
+  Same questions as app/quizzes/midterm/page.mdx.
+  Pre-built lists live in setup so the editor stays a one-line answer.
+  Do not put len() or index results in assert messages.
+  hello() is checked by capturing stdout for each call separately.
+*/}
+
+## 1. Create a list
+
+Create a list containing `2`, `4`, and `"five"` in that order and assign it to a variable named `my_list`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+my_list =
+`}
+  verifyCode={`
+assert my_list == [2, 4, "five"], f"Expected [2, 4, 'five'], got {my_list!r}"
+print("✓ Correct!")
+`}
+/>
+
+## 2. Append
+
+Add a `"hello"` onto the end of `my_list`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+my_list = [2, 4, "five"]
+`}
+  initialCode={`
+`}
+  verifyCode={`
+assert my_list[-1] == "hello", f"Expected last element to be 'hello', got {my_list[-1]!r}"
+assert len(my_list) == 4, f"Expected length 4, got {len(my_list)}"
+assert my_list[0] == 2 and my_list[1] == 4 and my_list[2] == "five"
+print("✓ Correct!")
+`}
+/>
+
+## 3. Change an element
+
+Change the third element of `my_list` to `"eight"`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+my_list = [2, 4, "five"]
+`}
+  initialCode={`
+`}
+  verifyCode={`
+assert my_list == [2, 4, "eight"], f"Expected 'eight' at index 2, got {my_list[2]!r}"
+print("✓ Correct!")
+`}
+/>
+
+## 4. Get an element
+
+Store the second element of `my_list` in a variable named `second`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+my_list = [2, 4, "five"]
+`}
+  initialCode={`
+`}
+  verifyCode={`
+assert second == my_list[1], f"second is {second!r}; it should be the second element of my_list"
+print("✓ Correct!")
+`}
+/>
+
+## 5. List length
+
+Get the length of a list named `class_names` (not `my_list`) and assign it to a variable named `list_length`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+class_names = ["Maya", "Noah", "Owen", "Priya", "Quinn"]
+`}
+  initialCode={`
+`}
+  verifyCode={`
+assert list_length == len(class_names), f"list_length is {list_length!r}; it should be how many items are in class_names"
+print("✓ Correct!")
+`}
+/>
+
+## 6. Loop
+
+Use a `for` loop over `names`. For each name, append it to `copy`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  outputRows={2}
+  initialCode={`
+names = ["Dee", "Eli", "Fay"]
+copy = []
+
+# Your code below:
+
+
+`}
+  verifyCode={`
+assert copy == names, f"copy is {copy!r}; it should contain the same items as names, in the same order"
+assert copy is not names, "copy should be a new list, not the same object as names"
+print("✓ Correct!")
+`}
+/>
+
+## 7. Tuple
+
+Create a tuple containing `2`, `4`, and `8` and assign it to a variable named `my_tuple`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+`}
+  verifyCode={`
+assert type(my_tuple) is tuple, f"Expected a tuple, got {type(my_tuple)}"
+assert my_tuple == (2, 4, 8), f"Expected (2, 4, 8), got {my_tuple!r}"
+print("✓ Correct!")
+`}
+/>
+
+## 8. Return a value
+
+Define a function named `triple` that **returns** three times the input parameter.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  initialCode={`
+`}
+  verifyCode={`
+assert triple(3) == 9, f"Expected triple(3) to be 9, got {triple(3)!r}"
+assert triple(0) == 0, f"Expected triple(0) to be 0, got {triple(0)!r}"
+assert triple(-2) == -6, f"Expected triple(-2) to be -6, got {triple(-2)!r}"
+print("✓ Correct!")
+`}
+/>
+
+## 9. Print from a function
+
+Define a function named `hello` that accepts a single input.
+
+- For the input `"alice"`, the function should **print** `hello alice!`.
+- For the input `"bob"`, the function should **print** `hello bob!`.
+- **Hint**: you may use f-string syntax: `f"{name}"`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={2}
+  initialCode={`
+`}
+  verifyCode={`
+import io
+import sys
+
+def _printed(name):
+    buf = io.StringIO()
+    old = sys.stdout
+    sys.stdout = buf
+    hello(name)
+    sys.stdout = old
+    return buf.getvalue().strip()
+
+alice = _printed("alice")
+assert alice == "hello alice!", f"hello('alice') printed {alice!r}"
+bob = _printed("bob")
+assert bob == "hello bob!", f"hello('bob') printed {bob!r}"
+print("✓ Correct!")
+`}
+/>
