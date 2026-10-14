@@ -32,17 +32,23 @@ export const proxy = auth((req) => {
     return NextResponse.redirect(signinUrl)
   }
 
+  // Quizzes are admin-only (layout also checks isAdmin)
+  if (pathname.startsWith("/quizzes") && !req.auth.user.isAdmin) {
+    return NextResponse.redirect(new URL("/", req.url))
+  }
+
   // Admin routes have additional page-level checks (isAdmin)
   return NextResponse.next()
 })
 
 // All course content requires enrollment (berklee-epd/lmsc261:* tag)
-// Note: /admin has additional isAdmin check at page level
+// Note: /admin and /quizzes have additional isAdmin checks
 export const config = {
   matcher: [
     "/admin/:path*",
     "/assignments/:path*",
     "/modules/:path*",
+    "/quizzes/:path*",
     "/syllabus/:path*",
     // Public routes (not in matcher):
     // - / (home)

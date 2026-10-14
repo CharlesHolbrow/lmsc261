@@ -17,6 +17,10 @@ const navLinks: NavLink[] = [
   { href: "/assignments", label: "Assignments" },
 ];
 
+const adminNavLinks: NavLink[] = [
+  { href: "/quizzes", label: "Quizzes" },
+];
+
 interface NavigationProps {
   variant?: "top" | "sidebar" | "footer";
   showBackLink?: boolean;
@@ -29,11 +33,14 @@ export default function Navigation({
   const pathname = usePathname();
   const { data: session, status } = useSession();
   const isHome = pathname === "/";
+  const links = session?.user?.isAdmin
+    ? [...navLinks, ...adminNavLinks]
+    : navLinks;
 
   if (variant === "sidebar") {
     return (
       <nav className="flex flex-col gap-1 py-4">
-        {navLinks.map((link) => {
+        {links.map((link) => {
           const isActive = pathname === link.href;
           return (
             <Link
@@ -64,7 +71,7 @@ export default function Navigation({
               ← Back to Home
             </Link>
           )}
-          {navLinks
+          {links
             .filter((link) => link.href !== "/" && link.href !== pathname)
             .map((link) => (
               <Link
@@ -92,7 +99,7 @@ export default function Navigation({
             lmsc261.vercel.app
           </Link>
           <div className="flex items-center gap-6">
-            {navLinks
+            {links
               .filter((link) => link.href !== "/")
               .map((link) => {
                 const isActive = pathname === link.href;

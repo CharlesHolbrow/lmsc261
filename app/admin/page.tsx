@@ -157,6 +157,9 @@ export default async function AdminPage() {
         <Link href="/" className="text-gray-500 hover:text-gray-900">
           ← Back to Home
         </Link>
+        <Link href="/quizzes" className="text-gray-500 hover:text-gray-900">
+          Quizzes
+        </Link>
         <Link href="/admin/debug" className="text-gray-500 hover:text-gray-900">
           Debug Info
         </Link>
