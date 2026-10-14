@@ -120,14 +120,14 @@ def print_midi_devices():
 NOTE_0_OFF = pygame.USEREVENT
 note_off_events = list(range(NOTE_0_OFF, NOTE_0_OFF + 128))
 
-def schedule_note_off(midi_note_number: int, delay_ms: int):
+def schedule_note_off(midi_note_number, delay_ms):
     note_name = pygame.midi.midi_to_ansi_note(midi_note_number)
     print(f"Scheduling note off for {note_name} in {delay_ms}ms")
     event_type = note_off_events[midi_note_number]
     pygame.time.set_timer(event_type, delay_ms, loops=1)
 
 
-def setup_output_device(output_id: int):
+def setup_output_device(output_id):
     info = pygame.midi.get_device_info(output_id)
     if info is None:
         print("\nDefault output device is not available.")
@@ -148,7 +148,7 @@ def setup_output_device(output_id: int):
 
     return midi_out
 
-def play_note(midi_out: pygame.midi.Output, note: int, velocity: int, duration_ms: int):
+def play_note(midi_out, note, velocity, duration_ms):
     midi_out.note_on(note, velocity)
     schedule_note_off(note, duration_ms)
 
