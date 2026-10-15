@@ -1,0 +1,204 @@
+---
+title: "LMSC-261 | Midterm Project"
+---
+
+# Midterm Project
+
+Due dates:
+
+- **Thursday, October 22, 5:00 PM**: Progress check-in. Open the PR before class, then present in class.
+- **Thursday, October 29, 5:00 PM**: Final due. Update the same PR before class, then present in class.
+
+Make an interesting creative project in Python. Use an existing "hands-on" or assignment from class as a starting point, and develop it into work that is yours.
+
+Work **inside** your named folder. Turn it in with **one pull request** that you update between the two dates.
+
+## Choose a project
+
+Choose one of the following options:
+
+- Compose with Python, then produce a track
+- Interactive instrument and visualizer
+- Animation or game
+- Your own idea
+
+### Option 1: Compose with Python, then produce a track
+
+Write a composition entirely in Python and save it as a MIDI file. Open that file in a DAW, or another workflow you already use, and produce a finished audio track.
+
+**Starting Point:** [MIDI Chords](/assignments/midi-chords/). That assignment uses [MIDIUtil](/modules/midiutil/) to write a `.mid` file. The notes at the bottom of the page — rhythm, dynamics, sections — are the kinds of control a piece needs.
+
+If you go this route, compose something _for_ the medium. Do something that takes unique advantage of Python and could not easily be made in a DAW. For inspiration, listen to [Conlon Nancarrow, Study for Player Piano No. 21 (Canon X)](https://www.youtube.com/watch?v=f2gVhBxwRqg). Nancarrow created music that could _only_ be played by a player piano.
+
+Turn in the Python code, the `.mid` file, and a link to the finished audio.
+
+### Option 2: Interactive instrument and visualizer
+
+Build something you can play, with a picture that responds.
+
+**Starting Point:** [Pygame MIDI](/modules/pygame-midi-hands-on/) or [Pygame Audio](/modules/pygame-audio-hands-on/).
+
+Add your own changes until the result is a new instrument: a new way to play, or a new mapping from gesture to sound. Ideas include:
+
+- Animate the circles so they move at different speeds and play sounds when they bounce off a surface or collide with each other.
+- Use a completely different drawing approach from simple circles with an `x=pitch` `y=gain` mapping. Make it as beautiful and responsive as you can.
+- Create a sequencer for writing interactive musical scores. For example, you could connect the circles with lines like a constellation, and then have a playhead that moves along the lines.
+
+For inspiration, read parts 1 and 2 of Golan Levin's Thesis: [Painterly Interfaces for
+Audiovisual Performance](https://acg.media.mit.edu/people/golan/thesis/thesis300.pdf)
+
+### Option 3: Animation or game
+
+Make an animation or a game.
+
+**Starting Point:** The [Pygame tutorials](https://www.pygame.org/docs/#tutorials-reference-label) in the official documentation, and the [Pygame](/modules/pygame/), [Pygame: Hands-On](/modules/pygame-hands-on/), and [Pygame: Animation](/modules/pygame-animation/) modules from our class.
+
+Look at [Zach Lieberman's sketches](https://www.instagram.com/zach.lieberman/). He posts a small visual program almost every day. Yours can be one sketch that you push until it holds together.
+
+### Option 4: Your own idea
+
+**Starting Point:** Your own proposal. Email [cholbrow@berklee.edu](mailto:cholbrow@berklee.edu) with what you want to make and how Python is involved. Do this before the progress check-in. If you have not heard back by October 22, use one of the options above so you have something to show.
+
+## Progress check-in
+
+**Thursday, October 22**, in class.
+
+Open the pull request before class. Start every README heading. You will add to these same headings for the final.
+
+Plug your laptop into the projector. Show whatever runs. Then walk through what you started:
+
+- **What I am making:** the piece you are building.
+- **What I achieved:** what already works, or `Not finished yet`.
+- **What is/was difficult:** where you are stuck so far. Minimum 3 sentences.
+- **What I learned:** what you can explain so far. Minimum 3 sentences.
+- **What I want to do next:** the next step.
+- **How I used AI:** what you have used so far, or `None`.
+
+A program that does not run yet is fine if you can point at the stuck part.
+
+## Final
+
+**Thursday, October 29, 5:00 PM.** Push the finished work to the same pull request. Add to the same README headings. Do not start a new file.
+
+- **What I achieved:** what the finished piece does, and a link to the audio or how to run the program.
+- **What is/was difficult** and **What I learned:** at least 3 sentences each.
+- **How I used AI:** what was written with AI, or `None`.
+- **What I want to do next:** what you would do if you kept going.
+
+Present in class that evening. Plug your laptop into the projector. You must 1) show your work and 2) explain what you learned.
+
+## Steps
+
+1. Using [GitHub Desktop](https://desktop.github.com/), open the [homework repo](https://github.com/berklee-epd/lmsc261-homework)
+2. **Pull/Sync** the latest (do this before the PR)
+   - Current Branch → `main`
+   - Fetch origin → Pull origin
+3. Make a **branch** named `your-name-midterm`
+   - Example: `ada-lovelace-midterm`
+4. In **your** folder, create `midterm` with `uv`:
+
+   ```bash
+   uv init --no-package midterm
+   cd midterm
+   ```
+
+   From inside `midterm`, add the libraries for your starting point.
+
+   MIDI composition:
+
+   ```bash
+   uv add MIDIUtil
+   ```
+
+   Pygame:
+
+   ```bash
+   uv add pygame-ce numpy
+   ```
+
+   Add any other library you import the same way.
+
+5. Open that `midterm` folder in [Visual Studio Code](https://code.visualstudio.com/)
+   - File → Open Folder… → choose `midterm`
+   - 🚨 Open `midterm`, not the parent homework folder. 🚨
+6. Copy the README template below. Start every heading before October 22. Add to the same headings before October 29.
+7. **Commit** in GitHub Desktop. Do not commit `.venv`.
+8. **Push**
+9. Click **Create Pull Request**
+10. Title: `Your Name Midterm`
+11. **🚨 Do not click Merge 🚨**
+
+Keep committing to this branch. Do not open a second PR for the final.
+
+## README.md
+
+You will document your work in a README.md file.
+
+- This project allows AI use, but does not require it.
+- If you use a lot of <span className="text-purple-600 font-bold">AI</span>, you will learn <span className="text-red-600 font-bold">VERY</span> different things than if you write the code <span className="text-blue-600 font-bold">by hand</span>. Either way, you must <span className="text-teal-600 font-bold">document what you learned</span>.
+- **If you use AI for code generation**, explain in detail what you learned. What tools did you use? What prompting strategies worked well? What did the tools give you control over, and what was hard?
+- **If you do not use AI**, you should be able to explain the code that you wrote if asked.
+- Your documentation represents a significant portion of your grade. Make sure to leave time to complete it.
+- Your grade **is not** based on the complexity of your project.
+
+```markdown
+# Midterm Project
+
+## What I am making
+
+_Replace this with your answer._
+
+## What I achieved
+
+_Replace this with your answer._
+
+## How to run/access the work
+
+_Replace this with your answer, for example `uv run main.py` or provide a URL_
+
+## What is/was difficult
+
+_Replace this with your answer. Minimum 2-3 sentences._
+
+## What I learned
+
+_Replace this with your answer. Minimum 2-3 sentences._
+
+## What I want to do next
+
+_Replace this with your answer._
+
+## How I used AI
+
+_Replace this with your answer._
+```
+
+## Large files
+
+Commit code and `.mid` files. Do not commit audio, video, or other large files. Put those on Google Drive, link them from the README, and share them with [cholbrow@berklee.edu](mailto:cholbrow@berklee.edu).
+
+## Done when
+
+```
+your-name/
+└── midterm/
+    ├── README.md
+    └── (your code, and a .mid file if you wrote one)
+```
+
+The PR is open on GitHub. You did **not** merge it. You presented on October 22 and October 29.
+
+## Grading
+
+| Requirement                                                                                                                                              |  Points |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------: |
+| Correct folder (`midterm` only); one branch; PR open and not merged                                                                                      |      10 |
+| Progress README, in the PR before class on October 22, has every heading started                                                                         |      10 |
+| **Progress presentation:** laptop on the projector; you arrived ready to present and gave a concise, clear walkthrough of the README                     |      10 |
+| Your work shows non-trivial effort beyond the scope of a standard weekly assignment                                                                      |      20 |
+| A concrete result: a produced track, a playable instrument, a visual piece, or the idea you got approved                                                 |      20 |
+| Final README is thorough and complete, and renders correctly on GitHub. The work is linked or runnable.                                                  |      20 |
+| **Final presentation:** you arrived ready to present and gave a concise, clear presentation. You must 1) show your work and 2) explain what you learned. |      10 |
+| **Total**                                                                                                                                                | **100** |
+
+Do not work on `main`. Do not merge the PR. Change only files in your folder. Do not commit `.venv`.

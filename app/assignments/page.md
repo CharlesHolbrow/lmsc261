@@ -8,3 +8,4 @@ title: "LMSC-261 | Assignments"
 1. [Basic Chords](/assignments/basic-chords/)
 1. [MIDI Chords](/assignments/midi-chords/)
 1. [Pygame Trails](/assignments/pygame-trails/)
+1. [Midterm Project](/assignments/midterm/)
