@@ -1,0 +1,104 @@
+---
+title: "LMSC-261 | Pygame Audio"
+---
+
+# Pygame Audio
+
+**Due:** Thursday October 22, 5:00 PM
+
+Clone the course repo, copy `assignment-5` into your folder in the homework repo, run `uv sync`, then open that copy in Visual Studio Code and run it. Then study the code, make one change and confirm it works, explain that change, and write two questions in the README. Turn it in with a **pull request**.
+
+You already have access to the [course repo](https://github.com/berklee-epd/lmsc261). The starter project lives there as `assignment-5`. Copy it into the folder with your name in the [homework repo](https://github.com/berklee-epd/lmsc261-homework), and do the rest of your work in that copy.
+
+Work **inside** your named folder.
+
+This project is a pygame window that plays a pitched sample of `c4.wav`.
+
+## Part 1
+
+### Goals
+
+1. Clone the course repo
+1. Copy `assignment-5` into the folder with your name in the homework repo
+1. Run `uv sync` in that copy, so `.venv` exists before Visual Studio Code opens
+1. Open that copy in Visual Studio Code
+1. Run the project
+
+### Steps
+
+1. In GitHub Desktop, clone [berklee-epd/lmsc261](https://github.com/berklee-epd/lmsc261). You already have access.
+    - File → Clone repository…
+    - Choose the **URL** tab
+    - Paste `https://github.com/berklee-epd/lmsc261`
+    - Clone
+1. In the homework repo, pull `main`, then make a branch named `your-name-assignment-5`.
+    - Example: `ada-lovelace-assignment-5`
+1. Copy the `assignment-5` folder from the course repo into the folder with your name in the homework repo. The result should be `lmsc261-homework/<your-name>/assignment-5`.
+1. In the terminal, `cd` into that copy and create the virtual environment before you open Visual Studio Code:
+    ```bash
+    cd ~/Documents/GitHub/lmsc261-homework/<your-name>/assignment-5
+    uv sync
+    ```
+    `uv sync` creates `.venv`. Visual Studio Code can only find this project's Python environment after that folder exists.
+1. Open that copy in Visual Studio Code.
+    - File → Open Folder… → choose `assignment-5` inside your named homework folder
+    - 🚨 **Do not open the copy in the course repo, or the parent homework folder.** 🚨
+    - If Visual Studio Code asks you to select a Python interpreter, choose the one inside `.venv`
+1. Run the project: `uv run main.py`, or open `main.py` and press the Run (▶) button.
+
+If the folder is open correctly, the Explorer shows `main.py`, `audio.py`, `c4.wav`, and `README.md`.
+
+Part 1 is finished when the project is running.
+
+## Part 2
+
+Study `main.py` and `audio.py` in your homework copy. Make one change to the program. Changing the color or the size of the dots is enough.
+
+Run the project again and confirm you can see or hear that change. Do this before you write the questions.
+
+Then, in that copy's `README.md`, replace the prompt under **What I changed** with an explanation of the change. Replace the two prompts under **Questions** with questions about things you do not understand.
+
+Name the function, variable, or line you are asking about, so we can talk about it in class.
+
+Part 2 is finished when you have confirmed the change works, explained it in the README, and written those two questions.
+
+## Submit
+
+1. **Commit** in GitHub Desktop. Do not commit `.venv`.
+1. **Push** (upload) to GitHub
+1. Click **Create Pull Request**
+1. Title: `Your Name Homework 5`
+1. **🚨 Do not click Merge 🚨**
+
+## Done when
+
+```
+your-name/
+└── assignment-5/
+    ├── main.py
+    ├── audio.py
+    ├── c4.wav
+    ├── pyproject.toml
+    ├── uv.lock
+    └── README.md
+```
+
+Your PR is open on GitHub. You did **not** merge it.
+
+## Grading
+
+| Requirement                                                     |  Points |
+| --------------------------------------------------------------- | ------: |
+| Correct folder/files only (`assignment-5`); PR open, not merged |      20 |
+| Project runs and plays the sample, and has at least one change  |      20 |
+| README explains what you changed in the code                    |      20 |
+| Question 1 names a function, variable, or line                  |      20 |
+| Question 2 names a function, variable, or line                  |      20 |
+| **Total**                                                       | **100** |
+
+Do not work on `main`. Do not merge the PR. Change only files in your folder. Do not commit `.venv`.
+
+## Resources
+
+- [Pygame mixer](https://pyga.me/docs/ref/mixer.html) — Documentation for `pygame.mixer`
+- [pygame-ce documentation](https://pyga.me/docs/)
