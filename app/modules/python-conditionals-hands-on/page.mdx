@@ -1,0 +1,251 @@
+---
+title: "LMSC-261 | Python Conditionals Hands-On"
+---
+
+import { PyScriptEditor } from "@/components/PyScriptEditor"
+
+# Python Conditionals Hands-On
+
+In class: work through the editors below, then put a Python file in the [homework repo](https://github.com/berklee-epd/lmsc261-homework) and open a **pull request**.
+
+You should already have read [Python Conditionals](/modules/python-conditionals/). If you forgot how to write a function, see [Python Functions](/modules/python-functions/).
+
+The folder with your name is yours all semester. Work **inside it**.
+
+Each editor checks your answer when you press **Run**.
+
+## Part 1: A True / False value
+
+<Goal>Return <code>True</code> when <code>button</code> is <code>1</code>, and <code>False</code> otherwise.</Goal>
+
+Pygame uses `1` for a left click, so use a comparison rather than a hardcoded `True`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  initialCode={`
+def is_left_click(button):
+    # Return True when button is 1
+
+    return ???
+`}
+  verifyCode={`
+assert is_left_click(1) is True, "Left click (button 1) should return True"
+assert is_left_click(3) is False, "Button 3 should return False"
+assert is_left_click(0) is False, "Button 0 should return False"
+print("✓ Correct!")
+`}
+/>
+
+## Part 2: `if` / `else`
+
+<Goal>Return <code>False</code> when the event is <code>"QUIT"</code>, and <code>True</code> otherwise.</Goal>
+
+This is the pygame `running` flag. Quit closes the window, and every other event keeps the loop going.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  outputRows={1}
+  initialCode={`
+def still_running(event_type):
+    # Return False for QUIT, True for everything else
+
+    # ... your code here ...
+`}
+  verifyCode={`
+assert still_running("QUIT") is False, "QUIT should return False"
+assert still_running("MOUSEBUTTONDOWN") is True, "MOUSEBUTTONDOWN should return True"
+assert still_running("SOUND_DONE") is True, "SOUND_DONE should return True"
+print("✓ Correct!")
+`}
+/>
+
+## Part 3: `elif`
+
+<Goal>Return the matching message for each event type, or <code>"other"</code> if none match.</Goal>
+
+Use `if` / `elif` / `else`, the same shape as the pygame event loop.
+
+| `event_type` | return |
+| --- | --- |
+| `"QUIT"` | `"close"` |
+| `"MOUSEBUTTONDOWN"` | `"click"` |
+| `"MOUSEBUTTONUP"` | `"release"` |
+| `"SOUND_DONE"` | `"sound finished"` |
+| anything else | `"other"` |
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={16}
+  outputRows={1}
+  initialCode={`
+def describe(event_type):
+    # Return the message for this event type
+
+    # ... your code here ...
+`}
+  verifyCode={`
+assert describe("QUIT") == "close", "QUIT should return close"
+assert describe("MOUSEBUTTONDOWN") == "click", "MOUSEBUTTONDOWN should return click"
+assert describe("MOUSEBUTTONUP") == "release", "MOUSEBUTTONUP should return release"
+assert describe("SOUND_DONE") == "sound finished", "SOUND_DONE should return sound finished"
+assert describe("KEYDOWN") == "other", "Unknown events should return other"
+print("✓ Correct!")
+`}
+/>
+
+## Part 4: `if` vs `elif`
+
+<Goal>Fix <code>tempo</code> so a fast BPM is labeled <code>"fast"</code>, not <code>"medium"</code>.</Goal>
+
+Run this as-is first and you will see `tempo(150)` print `medium`. Change one `if` to `elif` so only the first matching label is used.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={14}
+  outputRows={2}
+  initialCode={`
+def tempo(bpm):
+    speed = "slow"
+    if bpm > 140:
+        speed = "fast"
+    if bpm >= 100:
+        speed = "medium"
+    return speed
+
+print(tempo(150))
+print(tempo(120))
+print(tempo(80))
+`}
+  verifyCode={`
+assert tempo(150) == "fast", "150 BPM should be fast. Did both ifs still run?"
+assert tempo(120) == "medium", "120 BPM should be medium"
+assert tempo(80) == "slow", "80 BPM should be slow"
+print("✓ Correct!")
+`}
+/>
+
+## Part 5: Nested `if`
+
+<Goal>Return <code>True</code> only for a left click (<code>button == 1</code>) on <code>"MOUSEBUTTONDOWN"</code>.</Goal>
+
+A right click, or a left click on some other event, should return `False`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={14}
+  outputRows={1}
+  initialCode={`
+def should_play(event_type, button):
+    # Play only on left-click mouse down
+
+    # ... your code here ...
+`}
+  verifyCode={`
+assert should_play("MOUSEBUTTONDOWN", 1) is True, "Left click on mouse down should play"
+assert should_play("MOUSEBUTTONDOWN", 3) is False, "Right click should not play"
+assert should_play("MOUSEBUTTONUP", 1) is False, "Mouse up should not play"
+assert should_play("QUIT", 1) is False, "QUIT should not play"
+print("✓ Correct!")
+`}
+/>
+
+You can write this with a nested `if` or with `and`.
+
+## Part 6: `and`
+
+<Goal>Return <code>True</code> when <code>x</code> is inside the window: <code>0</code> or greater, and less than <code>width</code>.</Goal>
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  initialCode={`
+def inside_window(x, width):
+    # Return True when x is in range for this window
+
+    return ???
+`}
+  verifyCode={`
+assert inside_window(0, 680) is True, "x = 0 is inside"
+assert inside_window(200, 680) is True, "x = 200 is inside"
+assert inside_window(680, 680) is False, "x = width is just outside"
+assert inside_window(-1, 680) is False, "negative x is outside"
+print("✓ Correct!")
+`}
+/>
+
+## Part 7: Open a pull request
+
+<Goal>Return <code>True</code> when <code>channel</code> is a mixer channel, and <code>False</code> when it is <code>None</code>.</Goal>
+
+Do not compare `channel` to a specific number. The starter does not know which channel it will get, only whether `play` succeeded.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  initialCode={`
+def got_channel(channel):
+    # Return True if play gave us a channel
+
+    return ???
+`}
+  verifyCode={`
+assert got_channel(None) is False, "None means no free channel"
+assert got_channel(3) is True, "A channel object/id should count as true"
+assert got_channel(7) is True, "Any real channel should count as true"
+print("✓ Correct!")
+`}
+/>
+
+When you have working functions, copy them into a **pull request**. Submit however far you got during class.
+
+Work **inside** your named folder. The directory name is **`hands-on-3`**.
+
+### Goals
+
+1. Make a new branch in the homework repository
+2. Add a Python file in your folder, for example `lmsc261-homework/your-name/hands-on-3/main.py`
+3. Paste your working editor code into `main.py` and run it
+4. Open a pull request
+
+### Steps
+
+1. Open the homework repo in [GitHub Desktop](https://desktop.github.com/)
+2. Switch to **`main`**
+   - Current Branch → `main`
+3. **Fetch or Pull Sync** the latest version of the main branch
+   - Fetch origin → Pull origin
+4. Make a **branch** named `your-name-hands-on-3`
+   - Current Branch → New Branch
+   - Example: `ada-lovelace-hands-on-3`
+5. Open the `lmsc261-homework` folder in [Visual Studio Code](https://code.visualstudio.com/)
+   - File → Open Folder… → choose `lmsc261-homework`
+   - Or in GitHub Desktop: Repository → Open in Visual Studio Code
+6. In **your** folder, make a new directory called `hands-on-3`
+7. Put a `main.py` in it. Copy your working functions from the editors above. Add a few `print` calls so you can see the results when you run the file.
+8. **Run** `main.py` in VS Code
+   - Open the file, then click the ▶ play button in the top-right
+   - Output appears in a panel at the bottom
+9. **Commit** in GitHub Desktop — short message, then Commit
+10. **Push** (upload) to GitHub
+11. Click **Create Pull Request**
+12. Title: `Your Name Hands-On 3`
+13. Create the PR, but 🚨 do not click **`Merge`** 🚨
+
+### Done when you have added
+
+```
+your-name/
+└── hands-on-3/
+    └── main.py
+```
+
+Your PR is open on GitHub. You did **not** merge it.
+
+Do not work on `main`. Do not merge the PR. Change only files in your folder.
+
+Finished early? Keep working on the [Midterm](/assignments/midterm/).
