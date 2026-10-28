@@ -80,35 +80,9 @@ print(note_count)  # 4
 chord[1] = "Eb"
 ```
 
-## Dictionaries
+## <span id="dictionaries">Dictionaries</span>
 
-Dictionaries store **key-value pairs**. They're everywhere in Python: configuration, data records, and more.
-
-```python
-# Create a dictionary
-person1 = {
-    "name": "Alice",
-    "age": 25,
-    "instrument": "piano",
-    "score": 95.5
-}
-
-person2 = {
-    "name": "Bob",
-    "age": 30,
-    "instrument": "guitar",
-    "score": 85.0
-}
-
-# Access values
-print(person1["name"])  # "Alice"
-
-# Add or update
-person1["instrument"] = "piano"
-person1["age"] = 26
-```
-
-You look a value up by its **key**, not by position. If these chords were in song order, a list would be right. A dictionary is right when you want "what notes are in Am?"
+A **dictionary** looks a value up by **key**, not by position. A list is right when chords are in song order. A dictionary is right when you want "what notes are in Am?"
 
 ```python
 chords = {
@@ -116,17 +90,9 @@ chords = {
     "G": ["G", "B", "D"],
     "Am": ["A", "C", "E"],
 }
-
-# Test yourself:
-test0 = chords["Am"]
-print(f"test0 = {test0}")  # What will this print?
-
-test1 = chords["E"]
-print(f"test1 = {test1}")  # What will this print?
-
-test2 = chords["am"]
-print(f"test2 = {test2}")  # What will this print?
 ```
+
+[Python Dictionaries](/modules/python-dictionaries/) covers creating, looking up, missing keys, and looping.
 
 ## <span id="loops">Loops</span>
 

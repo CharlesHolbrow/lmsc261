@@ -11,7 +11,7 @@ import { PyScriptEditor } from "@/components/PyScriptEditor"
 
 # Python Conditionals
 
-The pygame [examples](/assignments/pygame-audio/) use a `for` loop like this:
+The [Pygame Audio](/assignments/pygame-audio/) starter uses a `for` loop like this:
 
 ```python
 ...
@@ -30,7 +30,7 @@ You need two ideas before this code will make sense: **comparison operators** an
 
 The editors below run in the browser. Press **Run**, or **⌘+Enter** / **Ctrl+Enter**.
 
-## Comparison Operators
+## Comparison operators
 
 A comparison operator takes a value on the left and a value on the right. The result is `True` or `False`.
 
@@ -110,7 +110,7 @@ print(event_type == "SOUND_DONE")
 `}
 />
 
-## Conditional Statements
+## Conditional statements
 
 `if` / `elif` / `else` are conditional statements, also called **branching**. They use those `True`/`False` answers to choose which lines run.
 
@@ -246,8 +246,8 @@ These operators let you ask more than one question in a single `if`.
 
 <PyScriptEditor
   kind="mpy-editor"
-  rows={12}
-  outputRows={3}
+  rows={14}
+  outputRows={4}
   initialCode={`
 event_type = "MOUSEBUTTONDOWN"
 button = 1
@@ -260,7 +260,10 @@ if event_type == "MOUSEBUTTONDOWN" and button == 1:
 if x >= 0 and x < WIDTH:
     print("inside the window")
 
-if not event_type == "QUIT":
+if event_type == "MOUSEBUTTONDOWN" or event_type == "MOUSEBUTTONUP":
+    print("mouse event")
+
+if not (event_type == "QUIT"):
     print("not quitting")
 `}
 />

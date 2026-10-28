@@ -1,0 +1,240 @@
+---
+title: "LMSC-261 | Python Dictionaries"
+---
+
+import { PyScriptEditor } from "@/components/PyScriptEditor"
+
+# Python Dictionaries
+
+In [Basic Chords](/assignments/basic-chords/) you stored chords as numbered variables and lists: `chord_1`, `chord_2`, `chord_3`. That is the right shape when the chords are in song order.
+
+A **dictionary** is the type that answers a different question: *what notes are in Am?*
+
+[Python Basics](/modules/python/#dictionaries) mentioned dictionaries in passing, but we skipped the details.
+
+The editors below run in the browser. Press **Run**, or **⌘+Enter** / **Ctrl+Enter**.
+
+## Create
+
+A dictionary is a set of **key-value pairs**. You write it with curly braces `{}`. Each key sits to the left of a colon, and its value sits to the right.
+
+Lists use square brackets and a position: `chord[0]`. Dictionaries use curly braces and a **name**.
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={12}
+  outputRows={1}
+  initialCode={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+
+print(chords)
+`}
+/>
+
+The keys are chord names. The values are lists of notes.
+
+## Get by key
+
+Look a value up with square brackets, the same way you index a list. The difference is what goes inside: a **key**, not a position.
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={14}
+  outputRows={2}
+  initialCode={`
+chord = ["C", "E", "G"]
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+
+print(chord[0])
+print(chords["Am"])
+`}
+/>
+
+`chord[0]` means “the first item.” `chords["Am"]` means “the notes named Am.”
+
+## Add or change
+
+Assignment uses the same syntax for a new key and for an existing one.
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={16}
+  outputRows={2}
+  initialCode={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+
+chords["F"] = ["F", "A", "C"]
+chords["C"] = ["C", "E", "G", "B"]
+
+print(chords["F"])
+print(chords["C"])
+`}
+/>
+
+`"F"` was not in the dictionary, so that line adds it. `"C"` was already there, so that line replaces the triad with a seventh.
+
+## Missing keys
+
+The lookup has to match a key exactly.
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={14}
+  outputRows={1}
+  initialCode={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+
+print(chords["Am"])
+`}
+/>
+
+That prints the A minor triad. Now change `"Am"` to `"E"` and run again. Then try `"am"`.
+
+`"E"` is a note inside some of the lists, not a chord name in this dictionary. `"am"` is a different string from `"Am"`. Both are a `KeyError`.
+
+## `in`
+
+Check whether a key exists before you look it up. This uses the `if` you just practiced in [Python Conditionals](/modules/python-conditionals/).
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={16}
+  outputRows={3}
+  initialCode={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+
+print("Am" in chords)
+print("E" in chords)
+
+name = "Am"
+if name in chords:
+    print(chords[name])
+else:
+    print("not a chord name")
+`}
+/>
+
+Change `name` to `"E"` or `"am"` and run again. The `if` skips the lookup when the key is missing, so there is no `KeyError`.
+
+`in` on a dictionary asks about **keys**, not about notes inside the lists.
+
+## `for` over a dictionary
+
+A `for` loop over a list walks the items. A `for` loop over a dictionary walks the **keys**.
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={16}
+  outputRows={6}
+  initialCode={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+
+for name in chords:
+    print(name)
+    print(chords[name])
+`}
+/>
+
+`name` is `"C"`, then `"G"`, then `"Am"`. Use that key to get the notes: `chords[name]`.
+
+## Dict of lists
+
+After a lookup, the value is still a list, so you can loop it.
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={14}
+  outputRows={3}
+  initialCode={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+
+for note in chords["G"]:
+    print(note)
+`}
+/>
+
+That is the payoff: look the chord up by name, then walk its notes.
+
+## `len`
+
+`len(chords)` is how many **keys** are in the dictionary. `len(chords["C"])` is how many **notes** are in that one chord.
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={14}
+  outputRows={2}
+  initialCode={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+
+print(len(chords))
+print(len(chords["C"]))
+`}
+/>
+
+Three chord names. Three notes in C major. Add `"F"` and run again: the first number grows, the second does not.
+
+## Dictionaries as arguments
+
+Functions can take a dictionary as a parameter, the same way they take a list.
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={18}
+  outputRows={2}
+  initialCode={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+
+def notes_for(chords, name):
+    if name in chords:
+        return chords[name]
+    return []
+
+print(notes_for(chords, "Am"))
+print(notes_for(chords, "Dm"))
+`}
+/>
+
+`"Am"` is a key, so the function returns that list. `"Dm"` is not, so it returns an empty list instead of crashing.
+
+## Resources
+
+- [LearnPython.org Dictionaries](https://www.learnpython.org/en/Dictionaries) Free interactive exercises on creating, looking up, and updating dictionaries.
+- [Python Basics: Dictionaries](/modules/python/#dictionaries) The short version from earlier in the semester.
+
+Practice next: [Python Dictionaries: Hands-On](/modules/python-dictionaries-hands-on/).

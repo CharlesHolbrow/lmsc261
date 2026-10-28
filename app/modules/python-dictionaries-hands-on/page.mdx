@@ -1,0 +1,221 @@
+---
+title: "LMSC-261 | Python Dictionaries Hands-On"
+---
+
+import { PyScriptEditor } from "@/components/PyScriptEditor"
+
+# Python Dictionaries Hands-On
+
+In class: work through the editors below.
+
+Each editor checks your answer when you press **Run**.
+
+You should already have read [Python Dictionaries](/modules/python-dictionaries/).
+
+## Part 1: Create
+
+<Goal>Create a dictionary named <code>chords</code> with keys <code>"C"</code>, <code>"G"</code>, and <code>"Am"</code>.</Goal>
+
+The values are lists of note names:
+
+| key | notes |
+| --- | --- |
+| `"C"` | `["C", "E", "G"]` |
+| `"G"` | `["G", "B", "D"]` |
+| `"Am"` | `["A", "C", "E"]` |
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  outputRows={1}
+  initialCode={`
+# Create a dictionary of those three chords
+chords = ???
+`}
+  verifyCode={`
+expected = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+assert chords == expected, f"chords is {chords!r}; it should map C, G, and Am to their notes"
+print("✓ Correct!")
+`}
+/>
+
+## Part 2: Get by key
+
+<Goal>Look up <code>"G"</code> in <code>chords</code> and store the result in a variable named <code>notes</code>.</Goal>
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  setup={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+`}
+  initialCode={`
+# Get the notes for G
+notes = ???
+`}
+  verifyCode={`
+assert notes == chords["G"], "notes should be the value stored under the key G"
+print("✓ Correct!")
+`}
+/>
+
+## Part 3: Add a key
+
+<Goal>Add F major to <code>chords</code>: key <code>"F"</code>, notes <code>["F", "A", "C"]</code>.</Goal>
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  setup={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+`}
+  initialCode={`
+# Add F major to chords
+
+# ... your code here ...
+`}
+  verifyCode={`
+assert "F" in chords, "chords should have a key named F"
+assert chords["F"] == ["F", "A", "C"], "F should map to the notes of F major"
+assert "C" in chords and "G" in chords and "Am" in chords, "Keep the chords that were already there"
+print("✓ Correct!")
+`}
+/>
+
+## Part 4: Missing keys
+
+<Goal>Return the notes when <code>name</code> is in <code>chords</code>, and an empty list otherwise.</Goal>
+
+Run this as-is first. `lookup(chords, "Dm")` raises a `KeyError`. Use `in` so a missing name returns `[]` instead of crashing.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={14}
+  outputRows={1}
+  setup={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+`}
+  initialCode={`
+def lookup(chords, name):
+    return chords[name]
+
+print(lookup(chords, "Am"))
+print(lookup(chords, "Dm"))
+`}
+  verifyCode={`
+assert lookup(chords, "Am") == chords["Am"], "Am is a key; return its notes"
+assert lookup(chords, "C") == chords["C"], "C is a key; return its notes"
+assert lookup(chords, "Dm") == [], "A missing name should return an empty list"
+assert lookup(chords, "am") == [], "Keys are case-sensitive; am is not Am"
+print("✓ Correct!")
+`}
+/>
+
+## Part 5: Loop the keys
+
+<Goal>Use a <code>for</code> loop over <code>chords</code>. For each key, append it to <code>names</code>.</Goal>
+
+Start with `names = []` and append inside the loop. A `for` loop over a dictionary walks the keys.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={14}
+  outputRows={2}
+  setup={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+`}
+  initialCode={`
+names = []
+
+# Loop over chords and append each key to names
+
+# ... your code here ...
+`}
+  verifyCode={`
+assert names == list(chords), "names should contain the chord names, in the same order"
+assert names is not chords, "names should be a new list, not the dictionary itself"
+print("✓ Correct!")
+`}
+/>
+
+## Part 6: Loop the notes
+
+<Goal>Look up the chord named <code>name</code>, then loop its notes and append each one to <code>copy</code>.</Goal>
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={14}
+  outputRows={2}
+  setup={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+`}
+  initialCode={`
+name = "G"
+copy = []
+
+# Loop over the notes of that chord and append each to copy
+
+# ... your code here ...
+`}
+  verifyCode={`
+assert copy == chords[name], "copy should contain the same notes as that chord, in the same order"
+assert copy is not chords[name], "copy should be a new list, not the same object as the value in chords"
+print("✓ Correct!")
+`}
+/>
+
+## Part 7: A function
+
+<Goal>Define <code>notes_for</code> so it returns the notes for <code>name</code>, or an empty list if that name is missing.</Goal>
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={14}
+  outputRows={1}
+  setup={`
+chords = {
+    "C": ["C", "E", "G"],
+    "G": ["G", "B", "D"],
+    "Am": ["A", "C", "E"],
+}
+`}
+  initialCode={`
+def notes_for(chords, name):
+    # Return the notes for name, or [] if the name is missing
+
+    # ... your code here ...
+`}
+  verifyCode={`
+assert notes_for(chords, "G") == chords["G"], "G is a key; return its notes"
+assert notes_for(chords, "Am") == chords["Am"], "Am is a key; return its notes"
+assert notes_for(chords, "Dm") == [], "A missing name should return an empty list"
+assert notes_for(chords, "am") == [], "Keys are case-sensitive; am is not Am"
+print("✓ Correct!")
+`}
+/>
