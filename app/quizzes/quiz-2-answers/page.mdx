@@ -1,0 +1,213 @@
+---
+title: "LMSC-261 | Quiz 2 Answers"
+---
+
+import { PyScriptEditor } from "@/components/PyScriptEditor"
+
+# Quiz 2 Answers
+
+These are the same questions as Quiz 2. Terminal answers are below. For the Python questions, click **Run** in each box. A check mark means the answer matches what the question asked for.
+
+Each Python box starts fresh. Questions 8–9 already have the dictionary from question 7. You do not need to recreate it.
+
+{/*
+  Same questions as app/quizzes/quiz-2/page.mdx.
+  Q6 starter is the broken two-if version from the worksheet; change the
+  second if to elif.
+  Do not put expected values in assert messages for expressions.
+  uv init: accept --no-package before or after the folder name.
+*/}
+
+Questions 1–3 use this tree:
+
+```
+/Users/ada                   ← home (~)
+├── Desktop
+└── Documents
+    └── GitHub
+        └── lmsc261-homework
+            └── ada-lovelace
+                └── assignment-5
+```
+
+## 1. `pwd`
+
+Your current directory is:
+
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/ada-lovelace/assignment-5
+```
+
+What command prints that path?
+
+```bash
+pwd
+```
+
+## 2. `cd`
+
+Your current directory is:
+
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/ada-lovelace
+```
+
+What command changes the directory to `assignment-5`?
+
+```bash
+cd assignment-5
+```
+
+## 3. `uv init`
+
+Your current directory is:
+
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/ada-lovelace
+```
+
+What command creates a new Python project named `sampler` with `--no-package`?
+
+```bash
+uv init sampler --no-package
+```
+
+`uv init --no-package sampler` is also fine.
+
+## 4. Comparison
+
+Return `True` when `button` is `1`, and `False` otherwise.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+def is_left(button):
+
+`}
+  verifyCode={`
+assert is_left(1) is True, "button 1 should return True"
+assert is_left(3) is False, "button 3 should return False"
+assert is_left(0) is False, "button 0 should return False"
+print("✓ Correct!")
+`}
+/>
+
+## 5. `if` / `else`
+
+Return `"stop"` when `event_type` is `"QUIT"`, and `"go"` otherwise.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  outputRows={1}
+  initialCode={`
+def action(event_type):
+
+`}
+  verifyCode={`
+assert action("QUIT") == "stop", "QUIT should return stop"
+assert action("MOUSEBUTTONDOWN") == "go", "MOUSEBUTTONDOWN should return go"
+assert action("SOUND_DONE") == "go", "SOUND_DONE should return go"
+print("✓ Correct!")
+`}
+/>
+
+## 6. `if` vs `elif`
+
+Fix `tempo` so a fast BPM is labeled `"presto"`, not `"allegro"`. Change one `if` to `elif`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={14}
+  outputRows={1}
+  initialCode={`
+def tempo(bpm):
+    speed = "andante"
+    if bpm > 168:
+        speed = "presto"
+    if bpm >= 120:
+        speed = "allegro"
+    return speed
+`}
+  verifyCode={`
+assert tempo(180) == "presto", "180 should be presto. Did both ifs still run?"
+assert tempo(140) == "allegro", "140 should be allegro"
+assert tempo(88) == "andante", "88 should be andante"
+print("✓ Correct!")
+`}
+/>
+
+## 7. Create a dictionary
+
+Create a dictionary containing those two chords and assign it to a variable named `chords`.
+
+| key | notes |
+| --- | --- |
+| `"F"` | `["F", "A", "C"]` |
+| `"Bb"` | `["Bb", "D", "F"]` |
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  initialCode={`
+chords =
+`}
+  verifyCode={`
+expected = {
+    "F": ["F", "A", "C"],
+    "Bb": ["Bb", "D", "F"],
+}
+assert chords == expected, f"chords is {chords!r}; it should map F and Bb to their notes"
+print("✓ Correct!")
+`}
+/>
+
+## 8. Get by key
+
+Look up `"Bb"` in `chords` and store the result in a variable named `notes`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+chords = {
+    "F": ["F", "A", "C"],
+    "Bb": ["Bb", "D", "F"],
+}
+`}
+  initialCode={`
+notes =
+`}
+  verifyCode={`
+assert notes == chords["Bb"], "notes should be the value stored under the key Bb"
+print("✓ Correct!")
+`}
+/>
+
+## 9. Add a key
+
+Add G minor to `chords`: key `"Gm"`, notes `["G", "Bb", "D"]`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+chords = {
+    "F": ["F", "A", "C"],
+    "Bb": ["Bb", "D", "F"],
+}
+`}
+  initialCode={`
+`}
+  verifyCode={`
+assert "Gm" in chords, "chords should have a key named Gm"
+assert chords["Gm"] == ["G", "Bb", "D"], "Gm should map to the notes of G minor"
+assert "F" in chords and "Bb" in chords, "Keep the chords that were already there"
+print("✓ Correct!")
+`}
+/>

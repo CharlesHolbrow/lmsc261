@@ -1,0 +1,473 @@
+---
+title: "LMSC-261 | Quiz 2: Review"
+---
+
+import Toggle from "@/components/Toggle"
+import { PyScriptEditor } from "@/components/PyScriptEditor"
+
+{/*
+  Quiz 2 review (maintainers):
+  - Terminal tree uses assignment-5 so answers are not the same as terminal-quiz.
+  - uv init: accept --no-package before or after the folder name.
+  - Python drills use different names/numbers than quizzes/quiz-2 and the
+    conditionals/dictionaries hands-on pages.
+  - Placeholders: ??? for a single slot. # ... your code here ... for a block.
+  - Do not put expected values in assert messages for expressions (len, in, ==).
+*/}
+
+# Quiz 2: Review
+
+The following topics are likely to be on the next quiz.
+
+Use the questions below to identify what topics to study.
+
+- Terminal
+  - `pwd`
+  - `cd`
+    - relative paths
+    - `/` (root of the filesystem)
+    - `~` (home)
+    - `..` (parent directory)
+  - `uv init` with `--no-package`
+
+- Conditionals
+  - `==` compares, `=` assigns
+  - `if` / `elif` / `else`
+  - first match vs separate `if` statements
+  - `and`
+
+- Dictionaries
+  - Create
+  - Look up by key
+  - Add a key
+  - `in` (keys, not values)
+  - `for` over keys
+  - `len`
+
+If you forgot how, check [The Terminal](/modules/terminal/), [Python Tooling](/modules/python-tooling/), [Python Conditionals](/modules/python-conditionals/), and [Python Dictionaries](/modules/python-dictionaries/).
+
+# Terminal Exercises
+
+You can try typing the commands in your own Terminal if you want to check.
+
+All of the questions below use this tree:
+
+```
+/Users/ada                   ← home (~)
+├── Desktop
+└── Documents
+    └── GitHub
+        └── lmsc261-homework
+            └── ada-lovelace
+                └── assignment-5
+```
+
+## Terminal Question 1
+
+**Q:** The command `pwd` is an acronym. What does it stand for?
+
+<Toggle title="Answer">
+
+**Print Working Directory**
+
+</Toggle>
+
+## Terminal Question 2
+
+Your current directory is:
+
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/ada-lovelace/assignment-5
+```
+
+**Q:** You type `pwd`. What does it print?
+
+<Toggle title="Answer">
+
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/ada-lovelace/assignment-5
+```
+
+`pwd` prints the full path of the folder you are in now.
+
+</Toggle>
+
+## Terminal Question 3
+
+Your current directory is:
+
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/
+```
+
+**Q:** What command changes the directory to `assignment-5`?
+
+1. `cd /ada-lovelace/assignment-5`
+2. `cd ada-lovelace/assignment-5`
+3. `cd ~/ada-lovelace/assignment-5`
+4. `cd assignment-5`
+
+<Toggle title="Answer">
+
+**2.** `cd ada-lovelace/assignment-5` — a relative path from your current folder.
+
+Option 1 starts at the filesystem root (`/`), not from `lmsc261-homework`. Option 3 uses `~` (home), which is `/Users/ada`, not the homework repo. Option 4 skips the `ada-lovelace` folder.
+
+</Toggle>
+
+## Terminal Question 4
+
+Your current directory is:
+
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/ada-lovelace/assignment-5
+```
+
+**Q:** Which command sequence would take you to `/Users/ada/Documents/GitHub/`?
+
+1. `cd ..` (do this twice)
+2. `cd ..` (do this three times)
+3. `cd ...` (do this three times)
+4. `cd .` (do this three times)
+
+<Toggle title="Answer">
+
+**2.** Run `cd ..` three times: up to `ada-lovelace`, then `lmsc261-homework`, then `GitHub`.
+
+`...` is not valid shell syntax. `.` means “this directory,” so `cd .` does not move you.
+
+</Toggle>
+
+## Terminal Question 5
+
+Your current directory is:
+
+```
+/Users/ada/Documents/GitHub/lmsc261-homework/ada-lovelace
+```
+
+**Q:** What command creates a new Python project named `quiz-2` with `--no-package`?
+
+<Toggle title="Answer">
+
+```bash
+uv init quiz-2 --no-package
+```
+
+`uv init --no-package quiz-2` is also fine. You are already inside `ada-lovelace`, so you do not need `cd` first.
+
+</Toggle>
+
+# Conditionals Exercises
+
+The editors below check your answer when you press **Run**.
+
+## Comparison
+
+Return `True` when `velocity` is greater than `100`, and `False` otherwise.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+def is_loud(velocity):
+    # Return True when velocity is greater than 100
+
+    return ???
+`}
+  verifyCode={`
+assert is_loud(127) is True, "127 is greater than 100"
+assert is_loud(100) is False, "100 is not greater than 100"
+assert is_loud(40) is False, "40 is not greater than 100"
+print("✓ Correct!")
+`}
+/>
+
+`=` assigns. `==` compares. Use `>` here, not `=`.
+
+## `if` / `else`
+
+Return `"on"` when `velocity` is greater than `0`, and `"off"` otherwise.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  outputRows={1}
+  initialCode={`
+def note_state(velocity):
+    # Return "on" or "off"
+
+    # ... your code here ...
+`}
+  verifyCode={`
+assert note_state(80) == "on", "A positive velocity is on"
+assert note_state(1) == "on", "1 is still on"
+assert note_state(0) == "off", "0 is off"
+print("✓ Correct!")
+`}
+/>
+
+## `elif`
+
+Return the matching label, or `"ffff"` if none of the earlier checks match.
+
+| `velocity` | return |
+| --- | --- |
+| `0` | `"silent"` |
+| less than `40` | `"pp"` |
+| less than `80` | `"mp"` |
+| less than `100` | `"mf"` |
+| anything else | `"ffff"` |
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={16}
+  outputRows={1}
+  initialCode={`
+def dynamics(velocity):
+    # Return the label for this velocity
+
+    # ... your code here ...
+`}
+  verifyCode={`
+assert dynamics(0) == "silent", "0 should be silent"
+assert dynamics(20) == "pp", "20 should be pp"
+assert dynamics(60) == "mp", "60 should be mp"
+assert dynamics(90) == "mf", "90 should be mf"
+assert dynamics(120) == "ffff", "120 should be ffff"
+print("✓ Correct!")
+`}
+/>
+
+## `if` vs `elif`
+
+Fix `accent` so a high velocity is labeled `"accent"`, not `"normal"`.
+
+Run this as-is first and you will see `accent(120)` print `normal`. Change one `if` to `elif` so only the first matching label is used.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={14}
+  outputRows={2}
+  initialCode={`
+def accent(velocity):
+    mark = "ghost"
+    if velocity > 100:
+        mark = "accent"
+    if velocity >= 40:
+        mark = "normal"
+    return mark
+
+print(accent(120))
+print(accent(80))
+print(accent(20))
+`}
+  verifyCode={`
+assert accent(120) == "accent", "120 should be accent. Did both ifs still run?"
+assert accent(80) == "normal", "80 should be normal"
+assert accent(20) == "ghost", "20 should be ghost"
+print("✓ Correct!")
+`}
+/>
+
+## `and`
+
+Return `True` when `x` is inside the window: `0` or greater, **and** less than `width`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  initialCode={`
+def inside(x, width):
+    # Return True when x is in range for this window
+
+    return ???
+`}
+  verifyCode={`
+assert inside(0, 800) is True, "x = 0 is inside"
+assert inside(400, 800) is True, "x = 400 is inside"
+assert inside(800, 800) is False, "x = width is just outside"
+assert inside(-2, 800) is False, "negative x is outside"
+print("✓ Correct!")
+`}
+/>
+
+# Dictionaries Exercises
+
+## Create
+
+Create a dictionary named `chords` with keys `"Em"`, `"D"`, and `"A"`.
+
+| key | notes |
+| --- | --- |
+| `"Em"` | `["E", "G", "B"]` |
+| `"D"` | `["D", "F#", "A"]` |
+| `"A"` | `["A", "C#", "E"]` |
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  outputRows={1}
+  initialCode={`
+# Create a dictionary of those three chords
+chords = ???
+`}
+  verifyCode={`
+expected = {
+    "Em": ["E", "G", "B"],
+    "D": ["D", "F#", "A"],
+    "A": ["A", "C#", "E"],
+}
+assert chords == expected, f"chords is {chords!r}; it should map Em, D, and A to their notes"
+print("✓ Correct!")
+`}
+/>
+
+## Get by key
+
+Look up `"D"` in `chords` and store the result in a variable named `notes`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={8}
+  outputRows={1}
+  setup={`
+chords = {
+    "Em": ["E", "G", "B"],
+    "D": ["D", "F#", "A"],
+    "A": ["A", "C#", "E"],
+}
+`}
+  initialCode={`
+# Get the notes for D
+notes = ???
+`}
+  verifyCode={`
+assert notes == chords["D"], "notes should be the value stored under the key D"
+print("✓ Correct!")
+`}
+/>
+
+## Add a key
+
+Add G major to `chords`: key `"G"`, notes `["G", "B", "D"]`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  setup={`
+chords = {
+    "Em": ["E", "G", "B"],
+    "D": ["D", "F#", "A"],
+    "A": ["A", "C#", "E"],
+}
+`}
+  initialCode={`
+# Add G major to chords
+
+# ... your code here ...
+`}
+  verifyCode={`
+assert "G" in chords, "chords should have a key named G"
+assert chords["G"] == ["G", "B", "D"], "G should map to the notes of G major"
+assert "Em" in chords and "D" in chords and "A" in chords, "Keep the chords that were already there"
+print("✓ Correct!")
+`}
+/>
+
+## `in`
+
+Return the notes when `name` is in `chords`, and an empty list otherwise.
+
+Run this as-is first. `lookup(chords, "C")` raises a `KeyError`. Use `in` so a missing name returns `[]` instead of crashing.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={14}
+  outputRows={1}
+  setup={`
+chords = {
+    "Em": ["E", "G", "B"],
+    "D": ["D", "F#", "A"],
+    "A": ["A", "C#", "E"],
+}
+`}
+  initialCode={`
+def lookup(chords, name):
+    return chords[name]
+
+print(lookup(chords, "Em"))
+print(lookup(chords, "C"))
+`}
+  verifyCode={`
+assert lookup(chords, "Em") == chords["Em"], "Em is a key; return its notes"
+assert lookup(chords, "A") == chords["A"], "A is a key; return its notes"
+assert lookup(chords, "C") == [], "A missing name should return an empty list"
+assert lookup(chords, "em") == [], "Keys are case-sensitive; em is not Em"
+print("✓ Correct!")
+`}
+/>
+
+`in` on a dictionary asks about **keys**, not about notes inside the lists.
+
+## Loop the keys
+
+Use a `for` loop over `chords`. For each key, append it to `names`.
+
+Start with `names = []` and append inside the loop. A `for` loop over a dictionary walks the keys.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={14}
+  outputRows={2}
+  setup={`
+chords = {
+    "Em": ["E", "G", "B"],
+    "D": ["D", "F#", "A"],
+    "A": ["A", "C#", "E"],
+}
+`}
+  initialCode={`
+names = []
+
+# Loop over chords and append each key to names
+
+# ... your code here ...
+`}
+  verifyCode={`
+assert names == list(chords), "names should contain the chord names, in the same order"
+assert names is not chords, "names should be a new list, not the dictionary itself"
+print("✓ Correct!")
+`}
+/>
+
+## `len`
+
+Store how many **keys** are in `chords` in a variable named `count`. Store how many **notes** are in the Em chord in a variable named `note_count`.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  setup={`
+chords = {
+    "Em": ["E", "G", "B"],
+    "D": ["D", "F#", "A"],
+    "A": ["A", "C#", "E"],
+}
+`}
+  initialCode={`
+# How many chord names? How many notes in Em?
+
+count = ???
+note_count = ???
+`}
+  verifyCode={`
+assert count == len(chords), "count should be how many keys are in chords"
+assert note_count == len(chords["Em"]), "note_count should be how many notes are in the Em chord"
+print("✓ Correct!")
+`}
+/>
