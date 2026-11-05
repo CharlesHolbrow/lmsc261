@@ -2,87 +2,184 @@
 title: "LMSC-261 | Python Classes"
 ---
 
+import { PyScriptEditor } from "@/components/PyScriptEditor"
+
 # Python Classes
 
-Classes bundle **data** and **functions** together. The `__init__` method runs when you create an instance, and `self` refers to that instance.
+You have already used classes. In [MIDIUtil](/modules/midiutil/) you wrote:
 
 ```python
-class Vector:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def add(self, other):
-       return Vector(self.x + other.x, self.y + other.y)
-
-
-a = Vector(1, 2)
-b = Vector(3, 4)
-print("a.x =", a.x)
-print("a.y =", a.y)
-print("a.add(b) =", a.add(b))
+midi = MIDIFile(1)
+midi.addNote(0, 0, pitch=60, time=0, duration=1, volume=100)
 ```
 
-# Python Operator Overloading
-
-Python lets you define certain "dunder" (double underscore) methods which have
-special meaning. The `__repr__` method is used to define the string
-representation of the object.
+In [Pygame Audio](/assignments/pygame-audio/) you wrote:
 
 ```python
-class Vector:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def __repr__(self):
-        return f"({self.x}, {self.y})"
-
-a = Vector(1, 2)
-b = Vector(3, 4)
-
-print("a =", a)
-print("b =", b)
-
-## Test yourself: Overload the `+` operator with the __add__ dunder method
-# print("a + b =", a + b)
+sampler = audio.Sampler("c4.wav")
+sampler.play(60)
 ```
 
-**Callable class instances:** You can make your class instances operate like a function with `__call__`.
+A **class** connects **data** with the **functions** that operate on that data. In the `MIDIFile` example:
+
+- **data**: A sequence of MIDI events
+- **functions**:  [`addNote`](https://midiutil.readthedocs.io/en/1.2.1/class.html#midiutil.MidiFile.MIDIFile.addNote), [`addControllerEvent`](https://midiutil.readthedocs.io/en/1.2.1/class.html#midiutil.MidiFile.MIDIFile.addControllerEvent), etc
+
+## Add attributes
+
+This is the simplest possible class is just \`pass\` (do nothing)
+
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={10}
+  outputRows={1}
+  initialCode={`
+class Note:
+    pass
+
+# Create an instance of the class
+c4 = Note()
+
+# Add data with a dot. 
+c4.pitch = 60
+print(c4.pitch)
+`}
+/>
+
+`Note()` makes one object, also called an **instance**.
+
+`pitch` is an "attribute". Sometimes people also call it a "property"
+
+Change `60` to `64` and run again. `c4.pitch` is data that lives on this one object.
+
+## Two objects, two sets of data
+
+Each instance has its own attributes.
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={14}
+  outputRows={2}
+  initialCode={`
+class Note:
+    pass
+
+c4 = Note()
+c4.pitch = 60
+
+a4 = Note()
+a4.pitch = 69
+
+print(c4.pitch)
+print(a4.pitch)
+`}
+/>
+
+`c4` and `a4` are both instances of `Note`. Changing one does not change the other.
+
+Change `a4.pitch` to `72` and run again. `c4.pitch` stays `60`.
+
+## Methods
+
+A function inside a class is a **method**. The first parameter is `self`. When you call it with a dot, Python fills in `self` with the object on the left.
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={14}
+  outputRows={1}
+  initialCode={`
+class Note:
+    def describe(self):
+        print(f"pitch {self.pitch}")
+
+c4 = Note()
+c4.pitch = 60
+c4.describe()
+`}
+/>
+
+`c4.describe()` runs `describe` with `self` set to `c4`. You do not write `c4` inside the parentheses.
+
+Change `c4.pitch` and run again. `self.pitch` is whatever pitch lives on that object.
+
+## `__init__`
+
+Setting `c4.pitch = 60` after you create the object works, but it is easy to forget. `__init__` runs when you make an instance. That is the place to set the attributes.
+
+The name is "init" with two underscores on each side. People say "dunder init" (double underscore).
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={16}
+  outputRows={2}
+  initialCode={`
+class Note:
+    def __init__(self, pitch):
+        self.pitch = pitch
+
+    def describe(self):
+        print(f"pitch {self.pitch}")
+
+c4 = Note(60)
+a4 = Note(69)
+c4.describe()
+a4.describe()
+`}
+/>
+
+`Note(60)` calls `__init__`. `self` is the new object. `pitch` is `60`. The body stores that on the object: `self.pitch = pitch`.
+
+That is why `MIDIFile(1)` and `Sampler("c4.wav")` take arguments. Those arguments go to `__init__`.
+
+Change `60` to `72` and run again.
+
+## A method that changes the object's data
+
+Methods can also **change** the attributes on `self`. That is the payoff of bundling: the function already knows which object's data to update.
+
+<PyScriptEditor
+  kind="mpy-editor"
+  rows={18}
+  outputRows={2}
+  initialCode={`
+class Note:
+    def __init__(self, pitch):
+        self.pitch = pitch
+
+    def transpose(self, semitones):
+        self.pitch = self.pitch + semitones
+
+c4 = Note(60)
+a4 = Note(69)
+c4.transpose(2)
+print(c4.pitch)
+print(a4.pitch)
+`}
+/>
+
+`c4` moved up two semitones, from 60 to 62. `a4` stayed at 69. `transpose` changed only the object before the dot.
+
+Change the `2` to `-12` (down an octave) and run again.
+
+## Look back
 
 ```python
-class Multiplier:
-    def __init__(self, factor):
-        self.factor = factor
-
-    def __call__(self, x):
-        return x * self.factor
-
-# You can now execute the __call__ method with `obj(...)` instead of `obj.__call__(...)`
-
-double = Multiplier(2)
-print(double(5))   # 10
-print(double(21))  # 42
-
-triple = Multiplier(3)
-print(triple(2))
-print(triple(3))
+midi = MIDIFile(1)
+midi.addNote(0, 0, pitch=60, time=0, duration=1, volume=100)
 ```
 
-**Attribute interception:** You can also intercept attribute access with `__getattr__` and `__setattr__`.
+`MIDIFile` is a class. `MIDIFile(1)` runs `__init__` and gives you an instance named `midi`. `midi.addNote(...)` is a method. The notes are data on `midi`. `addNote` is a function that operates on that data.
 
 ```python
-class Tracked:
-    def __setattr__(self, name, value):
-        print(f"Setting {name} = {value}")
-
-obj = Tracked()
-obj.x = 10  # prints "Setting x = 10"
-
-
-# Test yourself: Make a storage object class that stashes and retrieves values
-# from a self.dict when assigned and retrieved.
-#
-# obj.a = 10
-# print(obj.data['a']) # Should print 10
+sampler = audio.Sampler("c4.wav")
+sampler.play(60)
 ```
+
+Same shape. The wav lives on `sampler`. `play` uses it.
+
+## Resources
+
+- [LearnPython.org Classes and Objects](https://www.learnpython.org/en/Classes_and_Objects) Free interactive exercises on creating classes, using `self`, and writing methods.
+
+Practice next: [Python Classes: Hands-On](/modules/python-classes-hands-on/).

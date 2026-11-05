@@ -1,0 +1,182 @@
+---
+title: "LMSC-261 | Python Classes Hands-On"
+---
+
+import { PyScriptEditor } from "@/components/PyScriptEditor"
+
+# Python Classes Hands-On
+
+In class: work through the editors below.
+
+Each editor checks your answer when you press **Run**.
+
+You should already have read [Python Classes](/modules/python-classes/).
+
+## Part 1: Add an attribute
+
+<Goal>Set <code>n.pitch</code> to <code>72</code>.</Goal>
+
+`Note()` makes an empty object. Attach a pitch to it with a dot.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={10}
+  outputRows={1}
+  initialCode={`
+class Note:
+    pass
+
+n = Note()
+
+# Set n.pitch to 72
+
+# ... your code here ...
+`}
+  verifyCode={`
+assert hasattr(n, "pitch"), "n should have a pitch attribute"
+assert n.pitch == 72, "n.pitch should be 72"
+print("✓ Correct!")
+`}
+/>
+
+## Part 2: Two instances
+
+<Goal>Set <code>g4.pitch</code> to <code>67</code> and <code>d4.pitch</code> to <code>62</code>.</Goal>
+
+Each instance keeps its own data. Setting one pitch should not change the other.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={14}
+  outputRows={1}
+  initialCode={`
+class Note:
+    pass
+
+g4 = Note()
+d4 = Note()
+
+# Set g4.pitch to 67 and d4.pitch to 62
+
+# ... your code here ...
+`}
+  verifyCode={`
+assert g4.pitch == 67, "g4.pitch should be 67"
+assert d4.pitch == 62, "d4.pitch should be 62"
+assert g4 is not d4, "g4 and d4 should be two different objects"
+print("✓ Correct!")
+`}
+/>
+
+## Part 3: Add `self`
+
+<Goal>Add <code>self</code> so <code>n.describe()</code> can run.</Goal>
+
+Run this as-is first. `n.describe()` raises a `TypeError` because Python passes the object automatically, and `describe` is not ready to receive it. Add `self` as the first parameter.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  outputRows={1}
+  initialCode={`
+class Note:
+    def describe():
+        print("a note")
+
+n = Note()
+n.describe()
+`}
+  verifyCode={`
+n = Note()
+n.describe()
+print("✓ Correct!")
+`}
+/>
+
+`n.describe()` passes `n` in as the first argument. The parameter that receives it is named `self`.
+
+## Part 4: Use `self.pitch`
+
+<Goal>Return a string that includes the pitch, in the form <code>MIDI 64</code>.</Goal>
+
+`self.pitch` is the pitch on the object you called the method on. Use an f-string.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={14}
+  outputRows={1}
+  initialCode={`
+class Note:
+    def describe(self):
+        # Return "MIDI " followed by the pitch
+
+        return ???
+`}
+  verifyCode={`
+n = Note()
+n.pitch = 64
+assert n.describe() == "MIDI 64", "describe should use self.pitch, not a hardcoded string"
+n.pitch = 71
+assert n.describe() == "MIDI 71", "When the pitch changes, describe should change too"
+print("✓ Correct!")
+`}
+/>
+
+## Part 5: `__init__`
+
+<Goal>Store the <code>pitch</code> argument on the instance inside <code>{"__init__"}</code>.</Goal>
+
+`Note(67)` should set `pitch` for you, so you do not have to write `n.pitch = 67` afterwards.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={12}
+  outputRows={1}
+  initialCode={`
+class Note:
+    def __init__(self, pitch):
+        # Store pitch on the instance
+
+        # ... your code here ...
+`}
+  verifyCode={`
+n = Note(67)
+assert n.pitch == 67, "Note(67) should store that pitch on the instance"
+other = Note(55)
+assert other.pitch == 55, "Note(55) should store 55"
+assert n.pitch == 67, "Each instance keeps its own pitch"
+print("✓ Correct!")
+`}
+/>
+
+## Part 6: Change the object's data
+
+<Goal>Write <code>transpose</code> so it adds <code>semitones</code> to <code>self.pitch</code>.</Goal>
+
+Calling `transpose` on one note should not change a different note.
+
+<PyScriptEditor
+  kind="py-editor"
+  rows={16}
+  outputRows={1}
+  initialCode={`
+class Note:
+    def __init__(self, pitch):
+        self.pitch = pitch
+
+    def transpose(self, semitones):
+        # Change self.pitch
+
+        # ... your code here ...
+`}
+  verifyCode={`
+low = Note(55)
+high = Note(67)
+low.transpose(7)
+assert low.pitch == 62, "transpose should add semitones to this note's pitch"
+assert high.pitch == 67, "transpose should change only the object you called it on"
+low.transpose(-2)
+assert low.pitch == 60, "transpose should work more than once, including with negative semitones"
+print("✓ Correct!")
+`}
+/>

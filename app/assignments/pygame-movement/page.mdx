@@ -1,0 +1,116 @@
+---
+title: "LMSC-261 | Pygame Movement"
+---
+
+# Pygame Movement
+
+**Due:** Thursday November 12, 5:00 PM
+
+Make a pygame scene with an object you can move with the arrow keys. Turn it in with a **pull request**.
+
+There is no starter code for this assignment. Up to now you have copied code and changed parts of it. This time you write the program yourself, so you own every line of it.
+
+Work **inside** your named folder.
+
+## Where to learn it
+
+One way to do this is to follow the first 90 minutes of Clear Code's [Master Python by making 5 games](https://www.youtube.com/watch?v=8OMghdHP-zs).
+
+You can also build on what you already know from [Pygame](/modules/pygame/), [Pygame: Hands-On](/modules/pygame-hands-on/), [Pygame: Animation](/modules/pygame-animation/), and [Python Classes](/modules/python-classes/).
+
+## Steps
+
+1. Using [GitHub Desktop](https://desktop.github.com/), open the [homework repo](https://github.com/berklee-epd/lmsc261-homework)
+1. **Pull/Sync** the latest (do this before every new PR)
+   - Current Branch → `main`
+   - Fetch origin → Pull origin
+1. Make a **branch** named `your-name-assignment-6`
+   - Example: `ada-lovelace-assignment-6`
+1. In the terminal, `cd` into **your** folder in the homework repo, then set up the project:
+
+   ```bash
+   uv init --no-package assignment-6
+   cd assignment-6
+   uv add pygame-ce
+   ```
+
+1. Open the `assignment-6` folder in [Visual Studio Code](https://code.visualstudio.com/)
+   - File → Open Folder… → choose `assignment-6`
+   - 🚨 **Do not open the parent homework folder!** 🚨
+1. Write your program in `main.py`. Run it with the Run (▶) button or `uv run main.py`.
+
+## Requirements
+
+- A pygame window opens and stays open until you close it.
+- There is at least one object on screen. A shape or an image is fine.
+- The arrow keys move the object. All four directions should work.
+- The background is cleared every frame, so the object does not leave a smear.
+
+After that, make it yours. For example, keep the object on screen, add a second object, or change how it looks when it moves. Further additions are optional.
+
+## README.md
+
+Copy this into the `README.md` in your `assignment-6` folder. Fill in every heading.
+
+```markdown
+# Assignment 6: Pygame Movement
+
+## What I made
+
+**your answer here**
+
+## How the arrow keys move the object
+
+**your answer here**
+
+## What I still don't understand
+
+**your answer here**
+
+## AI
+
+**your answer here**
+```
+
+Under **How the arrow keys move the object**, explain in your own words which lines read the keys and which lines change the position. Name the variables. Under **AI**, it must be extremely clear what (if anything) was written with AI. If you used none, write `None`. AI can help you add complexity, but you do not get extra points for a more elaborate program. The goal is to demonstrate what you learned.
+
+## Submit
+
+1. **Commit** in GitHub Desktop. Do not commit `.venv`.
+1. **Push** (upload) to GitHub
+1. Click **Create Pull Request**
+1. Title: `Your Name Homework 6`
+1. **🚨 Do not click Merge 🚨**
+
+## Done when
+
+```
+your-name/
+└── assignment-6/
+    ├── main.py
+    ├── pyproject.toml
+    ├── uv.lock
+    ├── README.md
+    └── (any images or other files your program uses)
+```
+
+Your PR is open on GitHub. You did **not** merge it.
+
+## Grading
+
+| Requirement                                                                                      |  Points |
+| ------------------------------------------------------------------------------------------------ | ------: |
+| Correct folder/files only (`assignment-6`); PR open, not merged                                  |      20 |
+| Program runs and opens a pygame window with at least one object                                  |      20 |
+| Arrow keys move the object in all four directions; background cleared each frame                 |      25 |
+| README explains how the arrow keys move the object, naming the variables                         |      20 |
+| README headings filled in; AI heading is explicit (`None` OK)                                    |      15 |
+| **Total**                                                                                        | **100** |
+
+Do not work on `main`. Do not merge the PR. Change only files in your folder. Do not commit `.venv`.
+
+## Resources
+
+- [Master Python by making 5 games](https://www.youtube.com/watch?v=8OMghdHP-zs) — Clear Code's pygame tutorial. The first 90 minutes cover this assignment.
+- [pygame.key](https://pyga.me/docs/ref/key.html) — Documentation for reading the keyboard
+- [pygame-ce documentation](https://pyga.me/docs/)
