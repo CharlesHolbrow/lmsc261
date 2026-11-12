@@ -1,0 +1,107 @@
+---
+title: "LMSC-261 | Python Synth"
+---
+
+# Python Synth
+
+In class: generate a sine wave with **numpy** and write it to a `.wav` file.
+
+This page is the class demo. It is not the homework. There is nothing to turn in from this folder.
+
+## Set up a project
+
+`cd` to where you want to store your project. For this class that will
+look like `cd ~/Documents/GitHub/lmsc261-homework/your-name`.
+
+Then create a new project and move into it.
+
+```bash
+uv init --no-package python-synth
+cd python-synth
+uv run main.py
+```
+
+`uv init` makes a project folder with a starter `main.py`. `uv run main.py`
+should print `Hello from python-synth!`
+
+Add the libraries we need:
+
+```bash
+uv add numpy soundfile matplotlib ipykernel
+```
+
+- **numpy** — arrays, including `np.linspace`
+- **soundfile** — write a `.wav` file
+- **matplotlib** — plot the waveform
+- **ipykernel** — lets VS Code Interactive run this project's Python
+
+## Open in VS Code
+
+<div className="text-xl font-bold text-center text-teal-600 my-8">
+<div>
+🚨 Open the folder created by <code>uv init</code> in Visual Studio Code 🚨
+</div>
+<div>
+...or Interactive will not find this project's Python.
+</div>
+</div>
+
+Use **File → Open Folder…** and choose `python-synth` — not the parent homework folder.
+
+If Visual Studio Code asks you to select a Python interpreter, choose the one inside `.venv`.
+
+You need the [Jupyter extension](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) for Interactive mode. That is the same extension as [Python Notebooks](/modules/python-notebooks/).
+
+## VS Code Interactive
+
+VS Code Interactive is a Python session in a side window. You run pieces of `main.py` called **cells**. The session keeps your variables until you restart it.
+
+A cell starts with `# %%`. Everything until the next `# %%` is one cell.
+
+Click **Run Cell** above a `# %%` line, or use the keyboard:
+
+| Key | Action |
+| --- | --- |
+| **Shift+Enter** | Run this cell, move to the next |
+| **Control+Enter** | Run this cell, stay here |
+
+On a Mac, Control+Enter is not Command+Enter. Command+Enter does not run the cell.
+
+After a cell runs, the **Variables** button in the Interactive toolbar lists names in scope (`t`, `samples`, and so on).
+
+## The sine
+
+Replace the starter `main.py` with this. Run each cell with Shift+Enter.
+
+```python
+# %%
+import numpy as np
+import soundfile
+import matplotlib.pyplot as plt
+from IPython.display import Audio, display
+
+sample_rate = 44100
+frequency = 440
+
+t = np.linspace(0, 1, sample_rate, endpoint=False)
+samples = np.sin(2 * np.pi * frequency * t)
+
+soundfile.write("sine.wav", samples, sample_rate)
+display(Audio(samples, rate=sample_rate))
+
+# %%
+plt.plot(t, samples)
+plt.xlim(0, 0.01)
+plt.show()
+```
+
+The first cell writes `sine.wav` and plays it. The second cell plots the wave. Because Interactive keeps variables, the plot cell can use `t` and `samples` from the first cell.
+
+## Resources
+
+- [numpy.linspace](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html)
+- [numpy.sin](https://numpy.org/doc/stable/reference/generated/numpy.sin.html)
+- [soundfile](https://python-soundfile.readthedocs.io/)
+- [matplotlib.pyplot](https://matplotlib.org/stable/api/pyplot_summary.html)
+
+Homework: [Python Synth Melody](/assignments/python-synth/).

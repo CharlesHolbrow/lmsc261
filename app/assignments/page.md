@@ -11,3 +11,4 @@ title: "LMSC-261 | Assignments"
 1. [Pygame Audio](/assignments/pygame-audio/)
 1. [Midterm Project](/assignments/midterm/)
 1. [Pygame Movement](/assignments/pygame-movement/)
+1. [Python Synth Melody](/assignments/python-synth/)

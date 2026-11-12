@@ -1,0 +1,123 @@
+---
+title: "LMSC-261 | Python Synth Melody"
+---
+
+# Python Synth Melody
+
+**Due:** Thursday November 19, 5:00 PM
+
+Do what we did in [Python Synth](/modules/python-synth/), then take it one step further: write a **melody** of at least **six different notes**, joined with **`np.concat`**. Turn it in with a **pull request**.
+
+Finish the [Python Synth](/modules/python-synth/) module first. That page is the in-class demo. This homework is a new project in `assignment-7`. Do not turn in the `python-synth` folder from class.
+
+Work **inside** your named folder.
+
+## Steps
+
+1. Using [GitHub Desktop](https://desktop.github.com/), open the [homework repo](https://github.com/berklee-epd/lmsc261-homework)
+1. **Pull/Sync** the latest (do this before every new PR)
+   - Current Branch → `main`
+   - Fetch origin → Pull origin
+1. Make a **branch** named `your-name-assignment-7`
+   - Example: `ada-lovelace-assignment-7`
+1. In the terminal, `cd` into **your** folder in the homework repo, then set up the project the same way as class:
+
+   ```bash
+   uv init --no-package assignment-7
+   cd assignment-7
+   uv run main.py
+   uv add numpy soundfile matplotlib ipykernel
+   ```
+
+1. Open the `assignment-7` folder in [Visual Studio Code](https://code.visualstudio.com/)
+   - File → Open Folder… → choose `assignment-7`
+   - 🚨 **Do not open the parent homework folder!** 🚨
+   - If Visual Studio Code asks you to select a Python interpreter, choose the one inside `.venv`
+1. Start from the class `main.py` on the [Python Synth](/modules/python-synth/) page. Run it in **Interactive** (Shift+Enter on each `# %%` cell) and confirm you still get one sine and a plot.
+1. Change the program so it plays a melody. Use `np.concat` to join the notes.
+1. Run the cells again and listen. You should hear at least six different pitches in a row.
+
+## Requirements
+
+- Start from the class demo: numpy sine, write a `.wav` file, play it in Interactive, plot it.
+- The wav is a **melody**, not one long note.
+- At least **six different notes** (six different frequencies).
+- Join the note arrays with **`np.concat`**. That is the point of this assignment.
+
+Each note is its own array, the same way class made `samples`. `np.concat` lines those arrays up in time:
+
+```python
+samples = np.concat([note1, note2, note3, note4, note5, note6])
+```
+
+Make six notes at different frequencies, then concat them. You can keep each note one second, or shorten `t` so the melody moves faster.
+
+The plot can stay. You may need a larger `xlim` than `0.01` if you want to see more than one note.
+
+## README.md
+
+Copy this into the `README.md` in your `assignment-7` folder. Fill in every heading.
+
+```markdown
+# Assignment 7: Python Synth Melody
+
+## What I made
+
+**your answer here**
+
+## How np.concat joins the notes
+
+**your answer here**
+
+## What I still don't understand
+
+**your answer here**
+
+## AI
+
+**your answer here**
+```
+
+Under **How np.concat joins the notes**, explain in your own words what you pass in and what comes out. Name the variables. Under **AI**, it must be extremely clear what (if anything) was written with AI. If you used none, write `None`. AI can help you add complexity, but you do not get extra points for a more elaborate program. The goal is to demonstrate what you learned.
+
+## Submit
+
+1. **Commit** in GitHub Desktop. Do not commit `.venv`. Do not commit `.wav` files.
+1. **Push** (upload) to GitHub
+1. Click **Create Pull Request**
+1. Title: `Your Name Homework 7`
+1. **🚨 Do not click Merge 🚨**
+
+## Done when
+
+```
+your-name/
+└── assignment-7/
+    ├── main.py
+    ├── pyproject.toml
+    ├── uv.lock
+    └── README.md
+```
+
+Your PR is open on GitHub. You did **not** merge it.
+
+## Grading
+
+| Requirement                                                              |  Points |
+| ------------------------------------------------------------------------ | ------: |
+| Correct folder/files only (`assignment-7`); PR open, not merged          |      20 |
+| Program runs and writes a wav of sine-wave audio                         |      20 |
+| Melody has at least six different notes                                  |      25 |
+| README explains how `np.concat` joins the notes, naming the variables    |      20 |
+| README headings filled in; AI heading is explicit (`None` OK)            |      15 |
+| **Total**                                                                | **100** |
+
+Do not work on `main`. Do not merge the PR. Change only files in your folder. Do not commit `.venv`.
+
+## Resources
+
+- [Python Synth](/modules/python-synth/) — the in-class demo this assignment extends
+- [numpy.concat](https://numpy.org/doc/stable/reference/generated/numpy.concat.html)
+- [numpy.linspace](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html)
+- [numpy.sin](https://numpy.org/doc/stable/reference/generated/numpy.sin.html)
+- [soundfile](https://python-soundfile.readthedocs.io/)
